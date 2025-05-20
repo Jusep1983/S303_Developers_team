@@ -1,5 +1,7 @@
 package entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import observer.Observable;
 import observer.Observer;
 import entities.Player;
@@ -9,14 +11,17 @@ import java.util.List;
 
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
+    @Setter@Getter
     String newsletter;
-    List<Player> allPlayers = EscapeRoom.getInstance.getAllPlayers();
+    List<Player> allPlayers;  //EscapeRoom.getInstance.getAllPlayers();
+
+    public Newsletter(List<Player> allPlayers){
+        this.allPlayers = allPlayers;
+    }
 
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
-
-
     }
 
     @Override
