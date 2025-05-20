@@ -1,5 +1,6 @@
 package entities;
 
+import entities.enums.Difficulty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,8 +11,8 @@ import java.util.List;
 public class Room {
 
     String name;
-    enum difficulty {EASY, MEDIUM, HARD}
     int price;
+    Difficulty difficulty;
     List<Decoration> decorations;
     List<Clue> clues;
 
