@@ -1,4 +1,4 @@
-package entities.database;
+package database;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;

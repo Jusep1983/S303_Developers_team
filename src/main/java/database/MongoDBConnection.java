@@ -1,4 +1,4 @@
-package entities.database;
+package database;
 
 import com.mongodb.MongoException;
 import com.mongodb.client.*;
