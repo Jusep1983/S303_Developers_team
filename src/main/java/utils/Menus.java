@@ -20,6 +20,7 @@ public class Menus {
                 9.  Unsubscribe players
                 10. Generate certificate
                 0.  Exit
+                Enter a valid option number:
                 """, 0, 10);
     }
 

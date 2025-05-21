@@ -14,8 +14,8 @@ public class EscapeRoomManager {
 
     public void addRoom() {}
     public void editRoom() {}
-    public int getInventoryValue() {}
-    public int getClueCount() {}
-    public int getDecorationCount() {}
-    public int getRoomCount() {}
+    public int getInventoryValue() {return 0;}
+    public int getClueCount() {return 0;}
+    public int getDecorationCount() {return 0;}
+    public int getRoomCount() {return 0;}
 }

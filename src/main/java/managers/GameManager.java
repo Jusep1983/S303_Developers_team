@@ -9,6 +9,7 @@ public class GameManager {
     }
 
     public boolean resolveEnigma() {
+        return true;
     }
 
     public void giveCertificate() {
