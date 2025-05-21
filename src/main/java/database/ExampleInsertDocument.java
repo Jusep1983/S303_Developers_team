@@ -27,7 +27,8 @@ public class ExampleInsertDocument {
             // Obtener la colección (la crea si no existe)
             MongoCollection<Document> roomsCollection = database.getCollection("rooms");
 
-            Document roomDoc = new Document("name", "sala espacio")
+            Document roomDoc = new Document("_id", new ObjectId())
+                    .append("name", "sala espacio")
                     .append("decorations", Arrays.asList(
                             //Los documentos embebidos mongo no les genera id, por lo tanto, es generado manual
                             new Document("_id", new ObjectId()).append("name", "cuchara").append("material", "plástico"),
