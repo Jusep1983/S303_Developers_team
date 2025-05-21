@@ -10,16 +10,17 @@ public class MongoDBConnection {
     private MongoDBConnection() {
     }
 
-    public static MongoClient getInstance() {
+    public static MongoDatabase getInstance() {
         if (mongoClient == null) {
             try {
                 mongoClient = MongoClients.create("mongodb://localhost:27017");
+                // Añadir validacion de conexion
             } catch (MongoException e) {
                 System.out.println("Error creating MongoDB client: " + e.getMessage());
                 return null;
             }
         }
-        return mongoClient;
+        return mongoClient.getDatabase("escapeRoom");
     }
 
 }
