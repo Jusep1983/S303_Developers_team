@@ -8,10 +8,10 @@ import entities.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter@Setter
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
-    @Setter@Getter
+
     String newsletter;
     List<Player> allPlayers;  //EscapeRoom.getInstance.getAllPlayers();
 
@@ -30,21 +30,24 @@ public class Newsletter implements Observable {
     }
 
     @Override
-    public void notifyObserver(Observer observer) {
-            observer.update(newsletter);
-    }
+    public void notifyObservers() {
 
-    public void notifyAllPlayers(String newsletter){
-
-        for (Player p :allPlayers){
-            p.update(newsletter);
+        for(Observer observer : observers){
+            observer.update(this.newsletter);
         }
     }
 
-    public void notifySubscribed(String newsletter){
-        for(Player p : allPlayers ){
-            if (p.isSubscribed()){
-                p.update(newsletter);
+    public void notifyAllPlayers(){
+
+        for (Player player :allPlayers){
+            player.update(this.newsletter);
+        }
+    }
+
+    public void notifySubscribed(){
+        for(Player player : allPlayers ){
+            if (player.isSubscribed()){
+                player.update(this.newsletter);
             }
         }
     }
