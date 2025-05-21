@@ -12,9 +12,10 @@ import java.util.List;
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
 
-    String newsletter;
+    String lastNews;
     List<Player> allPlayers;  //EscapeRoom.getInstance.getAllPlayers();
 
+    public Newsletter(){}
     public Newsletter(List<Player> allPlayers){
         this.allPlayers = allPlayers;
     }
@@ -31,23 +32,22 @@ public class Newsletter implements Observable {
 
     @Override
     public void notifyObservers() {
-
         for(Observer observer : observers){
-            observer.update(this.newsletter);
+            observer.update(this.lastNews);
         }
     }
 
     public void notifyAllPlayers(){
 
         for (Player player :allPlayers){
-            player.update(this.newsletter);
+            player.update(this.lastNews);
         }
     }
 
     public void notifySubscribed(){
         for(Player player : allPlayers ){
             if (player.isSubscribed()){
-                player.update(this.newsletter);
+                player.update(this.lastNews);
             }
         }
     }
