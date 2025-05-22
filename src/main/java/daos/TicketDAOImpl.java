@@ -46,7 +46,6 @@ public class TicketDAOImpl implements TicketDAO {
 
     public Ticket documentToTicket(Document doc) {
         return new Ticket(
-                doc.getObjectId("_id"),
                 doc.getInteger("price")
         );
     }

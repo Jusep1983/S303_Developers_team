@@ -15,6 +15,12 @@ public class Player implements Observer {
     private String email;
     private boolean isSubscribed;
 
+    public Player(String name, String email) {
+        this.id = new ObjectId();
+        this.name = name;
+        this.email = email;
+        this.isSubscribed = true;
+    }
 
     @Override
     public void update(String message) {
