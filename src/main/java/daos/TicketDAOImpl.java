@@ -2,6 +2,7 @@ package daos;
 
 import com.mongodb.client.MongoCollection;
 import daos.interfaces.TicketDAO;
+import database.MongoDBConnection;
 import entities.Ticket;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -11,7 +12,7 @@ public class TicketDAOImpl implements TicketDAO {
     private final MongoCollection<Document> escapeRoomCollection;
 
     public TicketDAOImpl() {
-        escapeRoomCollection = MongoDBConnection.getEscapeRoomConnection();
+        escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
     }
 
     @Override
@@ -28,8 +29,8 @@ public class TicketDAOImpl implements TicketDAO {
     }
 
     @Override
-    public void delete(Ticket ticket) {
-        escapeRoomCollection.deleteOne(new Document("_id", ticket.getId()));
+    public void deleteById(ObjectId id) {
+        escapeRoomCollection.deleteOne(new Document("_id", id));
     }
 
     @Override
