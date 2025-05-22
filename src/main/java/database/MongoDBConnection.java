@@ -1,30 +1,38 @@
 package database;
 
-import com.mongodb.MongoException;
+import com.mongodb.MongoSecurityException;
+import com.mongodb.MongoTimeoutException;
 import com.mongodb.client.*;
 import org.bson.Document;
 
-// The connection instance to Mongo DB is made through a singleton
 public class MongoDBConnection {
     private static MongoDatabase database;
     private static MongoClient mongoClient;
 
-    private MongoDBConnection() {
+    static {
+        try {
+            mongoClient = MongoClients.create("mongodb://localhost:27017");
+            database = mongoClient.getDatabase("miBaseDeDatos");
+        } catch (MongoTimeoutException e) {
+            System.err.println("No se pudo conectar a MongoDB: tiempo de espera agotado.");
+            e.printStackTrace();
+        } catch (MongoSecurityException e) {
+            System.err.println("Error de autenticación con MongoDB.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Error inesperado al conectar con MongoDB.");
+            e.printStackTrace();
+        }
     }
 
     public static MongoDatabase getInstance() {
-        if (database == null) {
-            try {
-                mongoClient = MongoClients.create("mongodb://localhost:27017");
-                Document ping = new Document("ping", 1);
-                mongoClient.getDatabase("EscapeRoom").runCommand(ping);
-                return mongoClient.getDatabase("EscapeRoom");
-            } catch (MongoException e) {
-                System.out.println("Error creating MongoDB client: " + e.getMessage());
-                return null;
-            }
-        }
         return database;
+    }
+
+    public static void close() {
+        if (mongoClient != null) {
+            mongoClient.close();
+        }
     }
 
     public static MongoCollection<Document> getPlayersCollection() {
