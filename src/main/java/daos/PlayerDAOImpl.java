@@ -1,7 +1,6 @@
 package daos;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import daos.interfaces.PlayerDAO;
 import database.MongoDBConnection;
 import entities.Player;
@@ -12,14 +11,10 @@ import java.util.List;
 
 public class PlayerDAOImpl implements PlayerDAO {
 
-    private final MongoCollection<Document> playersMongoCollection;
+    private final MongoCollection<Document> playersCollection;
 
     public PlayerDAOImpl() {
-        MongoDatabase database = MongoDBConnection.getInstance();
-        if (database == null) {
-            throw new IllegalStateException("No se pudo obtener la base de datos MongoDB");
-        }
-        playersMongoCollection = database.getCollection("players");
+        playersCollection = MongoDBConnection.getPlayersCollection();
     }
 
     @Override
@@ -29,19 +24,19 @@ public class PlayerDAOImpl implements PlayerDAO {
                 .append("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed());
-        playersMongoCollection.insertOne(doc);
+        playersCollection.insertOne(doc);
     }
 
     @Override
     public Player findById(String id) {
-        Document doc = playersMongoCollection.find(new Document("_id", id)).first();
+        Document doc = playersCollection.find(new Document("_id", id)).first();
         return doc != null ? documentToPlayer(doc) : null;
     }
 
     @Override
     public List<Player> findAll() {
         List<Player> players = new ArrayList<>();
-        for (Document doc : playersMongoCollection.find()) {
+        for (Document doc : playersCollection.find()) {
             players.add(documentToPlayer(doc));
         }
         return players;
@@ -52,13 +47,13 @@ public class PlayerDAOImpl implements PlayerDAO {
         Document updated = new Document("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed());
-        playersMongoCollection.updateOne(new Document("_id", player.getId()),
+        playersCollection.updateOne(new Document("_id", player.getId()),
                 new Document("$set", updated));
     }
 
     @Override
     public void delete(Player player) {
-        playersMongoCollection.deleteOne(new Document("_id", player.getId()));
+        playersCollection.deleteOne(new Document("_id", player.getId()));
     }
 
     private Player documentToPlayer(Document doc) {
