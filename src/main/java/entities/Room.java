@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class Room {
 
+    String id;
     String name;
     int price;
     Difficulty difficulty;
