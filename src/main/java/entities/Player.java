@@ -6,6 +6,7 @@ import observer.Observer;
 @Data
 @AllArgsConstructor
 public class Player implements Observer {
+
     private String id;
     private String name;
     private String email;
