@@ -10,5 +10,4 @@ public interface TicketDAO {
     void deleteById(ObjectId id);
     void getPrice(ObjectId id);
     int count();
-
 }

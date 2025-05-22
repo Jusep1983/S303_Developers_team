@@ -56,12 +56,12 @@ public class PlayerDAOImpl implements PlayerDAO {
         playersCollection.deleteOne(new Document("_id", player.getId()));
     }
 
-    private Player documentToPlayer(Document document) {
+    private Player documentToPlayer(Document doc) {
         return new Player(
-                document.getObjectId("_id"),
-                document.getString("name"),
-                document.getString("email"),
-                document.getBoolean("isSubscribed")
+                doc.getObjectId("_id"),
+                doc.getString("name"),
+                doc.getString("email"),
+                doc.getBoolean("isSubscribed")
         );
     }
 }
