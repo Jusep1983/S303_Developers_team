@@ -7,14 +7,19 @@ import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
 @Data
-@AllArgsConstructor
 public class Decoration {
-
     @BsonId
     private ObjectId id;
     private int price;
     private String name;
     private Material material;
+
+    public Decoration(int price, String name, Material material) {
+        this.id = new ObjectId();
+        this.price = price;
+        this.name = name;
+        this.material = material;
+    }
 
     @Getter
     public enum Material {
