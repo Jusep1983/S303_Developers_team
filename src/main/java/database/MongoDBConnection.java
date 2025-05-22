@@ -12,7 +12,7 @@ public class MongoDBConnection {
     static {
         try {
             mongoClient = MongoClients.create("mongodb://localhost:27017");
-            database = mongoClient.getDatabase("miBaseDeDatos");
+            database = mongoClient.getDatabase("EscapeRoom");
         } catch (MongoTimeoutException e) {
             System.err.println("No se pudo conectar a MongoDB: tiempo de espera agotado.");
             e.printStackTrace();
