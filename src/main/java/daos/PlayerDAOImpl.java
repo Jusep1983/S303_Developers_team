@@ -26,7 +26,7 @@ public class PlayerDAOImpl implements PlayerDAO {
     @Override
     public void save(Player player) {
         Document doc = new Document(
-                "_id", new ObjectId(player.getId()))
+                "_id", player.getId())
                 .append("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed());
@@ -53,7 +53,7 @@ public class PlayerDAOImpl implements PlayerDAO {
         Document updated = new Document("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed());
-        playersMongoCollection.updateOne(new Document("_id", new ObjectId(player.getId())),
+        playersMongoCollection.updateOne(new Document("_id", player.getId()),
                 new Document("$set", updated));
     }
 
@@ -64,7 +64,7 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     private Player documentToPlayer(Document document) {
         return new Player(
-                document.getObjectId("_id").toHexString(),
+                document.getObjectId("_id"),
                 document.getString("name"),
                 document.getString("email"),
                 document.getBoolean("isSubscribed")
