@@ -13,15 +13,15 @@ import java.util.ArrayList;
 public class ApplicationLauncher {
 
     public static void run() {
-
         // TODO: se implementará la carga de datos de la base de datos
         MongoDatabase database = MongoDBConnection.getInstance();
 
-        MongoCollection<Document> roomsCollection = database.getCollection("rooms");
-        MongoCollection<Document> playersCollection = database.getCollection("players");
 
-        ArrayList<Document> roomList = roomsCollection.find().into(new ArrayList<>());
-        ArrayList<Document> playerList = playersCollection.find().into(new ArrayList<>());
+//        MongoCollection<Document> roomsCollection = database.getCollection("rooms");
+//        MongoCollection<Document> playersCollection = database.getCollection("players");
+
+//        ArrayList<Document> roomList = roomsCollection.find().into(new ArrayList<>());
+//        ArrayList<Document> playerList = playersCollection.find().into(new ArrayList<>());
 
         boolean exit = false;
 

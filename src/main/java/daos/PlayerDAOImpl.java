@@ -16,8 +16,10 @@ public class PlayerDAOImpl implements PlayerDAO {
     private final MongoCollection<Document> playersMongoCollection;
 
     public PlayerDAOImpl() {
-        // Implementar metodo que devuelva la base de datos en MongoDBConnection
-        MongoDatabase database = MongoDBConnection.getDatabase();
+        MongoDatabase database = MongoDBConnection.getInstance();
+        if (database == null) {
+            throw new IllegalStateException("No se pudo obtener la base de datos MongoDB");
+        }
         playersMongoCollection = database.getCollection("players");
     }
 
