@@ -3,6 +3,8 @@ package entities;
 import entities.enums.Difficulty;
 import lombok.Builder;
 import lombok.Data;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -10,11 +12,12 @@ import java.util.List;
 @Builder
 public class Room {
 
-    String id;
-    String name;
-    int price;
-    Difficulty difficulty;
-    List<Decoration> decorations;
-    List<Clue> clues;
+    @BsonId
+    private ObjectId id;
+    private String name;
+    private int price;
+    private Difficulty difficulty;
+    private List<Decoration> decorations;
+    private List<Clue> clues;
 
 }

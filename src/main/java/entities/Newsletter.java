@@ -12,8 +12,8 @@ import java.util.List;
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
 
-    String lastNews;
-    List<Player> allPlayers;  //EscapeRoom.getInstance.getAllPlayers();
+    private String lastNews;
+    private List<Player> allPlayers;  //EscapeRoom.getInstance.getAllPlayers();
 
     public Newsletter(){}
     public Newsletter(List<Player> allPlayers){
