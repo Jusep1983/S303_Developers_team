@@ -72,6 +72,7 @@ public class ApplicationLauncher {
                     break;
                 case 0:
                     exit = true;
+                    MongoDBConnection.close();
                     System.out.println("Exiting Escape Room App. Bye!");
                     break;
                 default:
