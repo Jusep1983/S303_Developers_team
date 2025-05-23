@@ -13,4 +13,19 @@ public class Clue {
     private int price;
     private String name;
     private Theme theme;
+
+    public Clue(int price, String name, Theme theme){
+        this.id = new ObjectId();
+        this.price = price;
+        this.name = name;
+        this.theme = theme;
+    }
+
+    public Clue(ObjectId id, int price, String name, Theme theme){
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.theme = theme;
+
+    }
 }
