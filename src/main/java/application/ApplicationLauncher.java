@@ -2,6 +2,7 @@ package application;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import database.InitialDataLoader;
 import database.MongoDBConnection;
 
 import org.bson.Document;
@@ -16,6 +17,8 @@ public class ApplicationLauncher {
         // TODO: se implementará la carga de datos de la base de datos
         MongoDatabase database = MongoDBConnection.getInstance();
 
+        String jsonFilePath = "src/main/java/database/datas/rooms.json";
+        InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, jsonFilePath);
 
 //        MongoCollection<Document> roomsCollection = database.getCollection("rooms");
 //        MongoCollection<Document> playersCollection = database.getCollection("players");

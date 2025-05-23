@@ -1,0 +1,85 @@
+[
+  {
+    "name" : "Misterios de Egipto",
+    "price" : 2500,
+    "difficulty" : "EASY",
+    "decorations" : [
+      {
+        "price": 25,
+        "name" : "Estatua de Anubis",
+        "material" : "WOOD"
+      },
+      {
+        "price" : 25,
+        "name" : "Papiro de Ramses"
+      }
+    ],
+    "clues" : [{
+      "name" : "Clave de la vida",
+      "price" : 50,
+      "theme" : "SYMBOL"
+    },
+      {"name": "Puzzle del sarcófago",
+        "price": 150,
+        "theme": "PUZZLE"}
+
+    ]
+},
+  { "name": "El robo del siglo",
+  "price": 3200,
+  "difficulty": "MEDIUM",
+  "decorations": [
+  {
+    "name": "Caja fuerte antigua",
+    "price": 800,
+    "material": "METAL"
+  },
+  {
+    "name": "Cuadro con alarma láser",
+    "price": 500,
+    "material": "PLASTIC"
+  }
+],
+  "clues": [
+  {
+    "name": "Código bancario",
+    "price": 120,
+    "theme": "PASSWORD"
+  },
+  {
+    "name": "Llave escondida en el plano",
+    "price": 140,
+    "theme": "PUZZLE"
+  }
+]
+  },
+  {
+    "name": "Misión Estelar",
+    "price": 3700,
+    "difficulty": "MEDIUM",
+    "decorations": [
+      {
+        "name": "Módulo de control con botones LED",
+        "price": 700,
+        "material": "PLASTIC"
+      },
+      {
+        "name": "Ventana con vista a galaxias",
+        "price": 500,
+        "material": "GLASS"
+      }
+    ],
+    "clues": [
+      {
+        "name": "Códigos estelares",
+        "price": 200,
+        "theme": "PASSWORD"
+      },
+      {
+        "name": "Puzzle de alineación de planetas",
+        "price": 180,
+        "theme": "PUZZLE"
+      }
+    ]
+  }
+]
