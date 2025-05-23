@@ -5,6 +5,7 @@ import daos.interfaces.PlayerDAO;
 import database.MongoDBConnection;
 import entities.Player;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public Player findById(String id) {
+    public Player findById(ObjectId id) {
         Document doc = playersCollection.find(new Document("_id", id)).first();
         return doc != null ? documentToPlayer(doc) : null;
     }
@@ -47,8 +48,7 @@ public class PlayerDAOImpl implements PlayerDAO {
         Document updated = new Document("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed());
-        playersCollection.updateOne(new Document("_id", player.getId()),
-                new Document("$set", updated));
+        playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
 
     @Override

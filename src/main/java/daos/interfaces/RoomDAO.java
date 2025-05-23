@@ -1,0 +1,15 @@
+package daos.interfaces;
+
+import entities.Room;
+import org.bson.types.ObjectId;
+
+import java.util.List;
+
+public interface RoomDAO {
+
+    void save(Room room);
+    Room findById(ObjectId id);
+    List<Room> findAll();
+    void update(Room room);
+    void delete(Room room);
+}
