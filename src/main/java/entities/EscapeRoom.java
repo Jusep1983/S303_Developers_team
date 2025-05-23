@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+
 public class EscapeRoom {
 
     private static EscapeRoom escapeRoom;
