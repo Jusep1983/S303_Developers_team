@@ -18,7 +18,6 @@ public class ApplicationLauncher {
         MongoDatabase database = MongoDBConnection.getInstance();
 
         String jsonFilePath = "src/main/java/database/datas/rooms.json";
-
         InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, jsonFilePath);
 
 //        MongoCollection<Document> roomsCollection = database.getCollection("rooms");
