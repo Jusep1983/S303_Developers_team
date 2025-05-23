@@ -8,10 +8,10 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 public class DecorationDAOImpl implements DecorationDAO {
-    private final MongoCollection<Document> roomMongoCollection;
+    private final MongoCollection<Document> escapeRoomCollection;
 
     public DecorationDAOImpl() {
-        roomMongoCollection = MongoDBConnection.getEscapeRoomCollection();
+        escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
     }
 
     @Override
@@ -25,15 +25,16 @@ public class DecorationDAOImpl implements DecorationDAO {
                 .append("price", decoration.getPrice())
                 .append("material", decoration.getMaterial().name());
 
-        roomMongoCollection.updateOne(
+        escapeRoomCollection.updateOne(
                 new Document("_id", roomId),
                 new Document("$push", new Document("decorations", decorationDoc))
         );
+
     }
 
     @Override
     public void deleteDecoration(ObjectId roomId, Decoration decoration) {
-        roomMongoCollection.updateOne(
+        escapeRoomCollection.updateOne(
                 new Document("_id", roomId),
                 new Document("$pull", new Document("decorations",
                         new Document("_id", decoration.getId())))
