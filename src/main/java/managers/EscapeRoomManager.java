@@ -69,14 +69,12 @@ public class EscapeRoomManager {
         return totalDecorations;
     }
 
-    // Quizás el metodo addRoom debería ir en RoomManager
+    // Quizás los metodos addRoom() y editRoom() debería ir en RoomManager
     public void addRoom(Document roomDoc) {
         this.escapeRoomCollection.insertOne(roomDoc);
     }
-
     public void editRoom() {
     }
-
 
     public void showAllAssets() {
         try (MongoCursor<Document> cursor = escapeRoomCollection.find().iterator()) {
