@@ -1,15 +1,10 @@
 package application;
 
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
-
-import org.bson.Document;
+import managers.EscapeRoomManager;
 import utils.Menus;
-
-import java.util.ArrayList;
-
 
 public class ApplicationLauncher {
 
@@ -19,12 +14,7 @@ public class ApplicationLauncher {
 
         String jsonFilePath = "src/main/java/database/datas/rooms.json";
         InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, jsonFilePath);
-
-//        MongoCollection<Document> roomsCollection = database.getCollection("rooms");
-//        MongoCollection<Document> playersCollection = database.getCollection("players");
-
-//        ArrayList<Document> roomList = roomsCollection.find().into(new ArrayList<>());
-//        ArrayList<Document> playerList = playersCollection.find().into(new ArrayList<>());
+        EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
 
         boolean exit = false;
 
@@ -33,10 +23,13 @@ public class ApplicationLauncher {
                 case 1:
                     // TODO: mostrar inventario
                     System.out.println(">> Showing total inventory...");
+                    escapeRoomManager.showAllAssets();
+                    System.out.println(escapeRoomManager.getInventoryCount());
                     break;
                 case 2:
                     // TODO: calcular valor total
                     System.out.println(">> Calculating inventory value...");
+                    System.out.println("The total value of all escape room assets is €" + escapeRoomManager.getInventoryValue());
                     break;
                 case 3:
                     // TODO: lógica para añadir sala
