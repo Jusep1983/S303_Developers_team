@@ -6,6 +6,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import database.MongoDBConnection;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Map;
@@ -69,11 +70,22 @@ public class EscapeRoomManager {
         return totalDecorations;
     }
 
-    // Quizás los metodos addRoom() y editRoom() debería ir en RoomManager
+    // Quizás los metodos addRoom() y editRoom() debería ir en RoomDAO o RoomManager
     public void addRoom(Document roomDoc) {
         this.escapeRoomCollection.insertOne(roomDoc);
     }
-    public void editRoom() {
+
+    public void editRoom(Document roomDoc) {
+        ObjectId roomId = roomDoc.getObjectId("_id");
+        Document updateFields = new Document()
+                .append("name", roomDoc.getString("name"))
+                .append("price", roomDoc.getInteger("price"))
+                .append("difficulty", roomDoc.getString("difficulty"));
+
+        escapeRoomCollection.updateOne(
+                new Document("_id", roomId),
+                new Document("$set", updateFields)
+        );
     }
 
     public void showAllAssets() {
