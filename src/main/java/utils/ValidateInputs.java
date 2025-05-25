@@ -3,6 +3,7 @@ package utils;
 import exceptions.EmptyInputException;
 import exceptions.ValueOutOfRangeException;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -77,6 +78,18 @@ public class ValidateInputs {
             } catch (EmptyInputException | NoSuchElementException | IllegalStateException |
                      ValueOutOfRangeException e) {
                 System.out.println("Error, " + e.getMessage());
+            }
+        }
+    }
+
+    public static <T extends Enum<T>> T validateEnum(Class<T> enumClass, String message) {
+        while (true) {
+            try {
+                System.out.print(message);
+                String input = readInput().toUpperCase();
+                return Enum.valueOf(enumClass, input);
+            } catch (IllegalArgumentException | NoSuchElementException | IllegalStateException e) {
+                System.out.println("Error, please enter a valid value: " + Arrays.toString(enumClass.getEnumConstants()));
             }
         }
     }

@@ -1,43 +1,42 @@
 package application;
 
 import com.mongodb.client.MongoDatabase;
+import daos.RoomDAOImpl;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
 import managers.EscapeRoomManager;
+import managers.RoomManager;
 import utils.Menus;
 
 public class ApplicationLauncher {
 
     public static void run() {
-        // TODO: se implementará la carga de datos de la base de datos
         MongoDatabase database = MongoDBConnection.getInstance();
-
         String jsonFilePath = "src/main/java/database/datas/rooms.json";
         InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, jsonFilePath);
         EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
-
+        RoomManager roomManager = new RoomManager();
+        RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
         boolean exit = false;
 
         while (!exit) {
             switch (Menus.mainMenuOptions()) {
                 case 1:
-                    // TODO: mostrar inventario
-                    System.out.println(">> Showing total inventory...");
+                    System.out.println(">> Total inventory: ");
                     escapeRoomManager.showAllAssets();
                     System.out.println(escapeRoomManager.getInventoryCount());
                     break;
                 case 2:
-                    // TODO: calcular valor total
-                    System.out.println(">> Calculating inventory value...");
-                    System.out.println("The total value of all escape room assets is €" + escapeRoomManager.getInventoryValue());
+                    System.out.println(">> The total value of all escape room assets is €"
+                                       + escapeRoomManager.getInventoryValue()
+                    );
                     break;
                 case 3:
-                    // TODO: lógica para añadir sala
-                    System.out.println(">> Adding new room...");
+                    roomDAOImpl.save(RoomManager.createRoom());
+                    System.out.println(">> New room '" + RoomManager.createRoom().getName() + "' successfully added");
                     break;
                 case 4:
-                    // TODO: lógica para eliminar sala
-                    System.out.println(">> Deleting room...");
+                    roomManager.deleteRoomByUserSelection();
                     break;
                 case 5:
                     // TODO: añadir o quitar pista/decoración
