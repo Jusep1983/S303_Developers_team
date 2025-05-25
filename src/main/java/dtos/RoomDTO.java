@@ -18,5 +18,6 @@ public class RoomDTO {
     public String getName() {
         return name;
     }
+
 }
 

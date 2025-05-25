@@ -1,5 +1,8 @@
 package utils;
 
+import database.MongoDBConnection;
+import managers.RoomManager;
+
 public class Menus {
     // Menu provisional
     public static int mainMenuOptions() {
@@ -20,8 +23,49 @@ public class Menus {
                 9.  Unsubscribe players
                 10. Generate certificate
                 0.  Exit
-                Enter a valid option number:
+                Please enter a valid option number (0–10):
                 """, 0, 10);
     }
+
+    public static int subMenuEditOptions() {
+        return ValidateInputs.validateIntegerBetweenOnRange("""
+                
+                EDITOR SUBMENU
+                1. Add Clue
+                2. Delete Clue
+                3. Add Decoration
+                4. Delete Decoration
+                0. Return to the Main Menú
+                Please enter a valid option number (0–4):
+                """, 0, 4);
+    }
+
+    public static void subMenuEditManager(RoomManager roomManager) {
+        boolean exit = false;
+        do {
+            switch (subMenuEditOptions()) {
+                case 1:
+                    roomManager.addClueToRoom();
+                    break;
+                case 2:
+                    roomManager.deleteClueFromRoom();
+                    break;
+                case 3:
+                    roomManager.addDecorationToRoom();
+                    break;
+                case 4:
+                    roomManager.deleteDecorationFromRoom();
+                    break;
+                case 0:
+                    exit = true;
+                    System.out.println("Going back...");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        } while (!exit);
+    }
+
 
 }

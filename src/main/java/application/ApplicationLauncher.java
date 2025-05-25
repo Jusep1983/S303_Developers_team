@@ -4,6 +4,7 @@ import com.mongodb.client.MongoDatabase;
 import daos.RoomDAOImpl;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
+import entities.Room;
 import managers.EscapeRoomManager;
 import managers.RoomManager;
 import utils.Menus;
@@ -32,14 +33,16 @@ public class ApplicationLauncher {
                     );
                     break;
                 case 3:
-                    roomDAOImpl.save(RoomManager.createRoom());
-                    System.out.println(">> New room '" + RoomManager.createRoom().getName() + "' successfully added");
+                    Room newRoom = RoomManager.createRoom();
+                    roomDAOImpl.save(newRoom);
+                    System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
                     break;
                 case 4:
                     roomManager.deleteRoomByUserSelection();
                     break;
                 case 5:
                     // TODO: añadir o quitar pista/decoración
+                    Menus.subMenuEditManager(roomManager);
                     System.out.println(">> Editing room...");
                     break;
                 case 6:
