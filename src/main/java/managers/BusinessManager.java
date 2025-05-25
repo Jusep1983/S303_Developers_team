@@ -19,7 +19,7 @@ public class BusinessManager {
     @Getter
     public int totalSales;
 
-    private void sellTicket(Room room, Player player) {
+    private void sellTicket(Player player) {
         //TODO decidir cómo se calcula el precio del ticket (en base a la dificultad¿?)
         Ticket ticket = new Ticket(20);
         player.addTicket(ticket);
@@ -44,7 +44,8 @@ public class BusinessManager {
         } else {
             RoomDTO roomDTO = rooms.get(roomChoice - 1);
             Room room = roomDAO.findById(roomDTO.getId());
-            sellTicket(room, player);
+            sellTicket(player);
+            TicketPrinter.printTicket(player, room);
         }
     }
 
