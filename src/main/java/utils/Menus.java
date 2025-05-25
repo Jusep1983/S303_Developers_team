@@ -92,7 +92,8 @@ public class Menus {
                     break;
                 case 10:
                     // TODO: decidir cómo se da certificado
-                    // CertificatePrinter.printCertificate(player, room);
+                    // CertificatePrinter printer = new CertificatePrinter();
+                    // printer.printCertificate(player, room);
                     break;
                 case 0:
                     exit = true;
