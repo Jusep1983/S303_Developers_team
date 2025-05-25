@@ -1,6 +1,11 @@
 package utils;
 
+import daos.RoomDAOImpl;
 import database.MongoDBConnection;
+import entities.Player;
+import entities.Room;
+import managers.BusinessManager;
+import managers.EscapeRoomManager;
 import managers.RoomManager;
 
 public class Menus {
@@ -14,7 +19,7 @@ public class Menus {
                 2.  Show total inventory value €
                 3.  Add room
                 4.  Delete room
-                5.  Edit room (add/del clue and decoration)
+                5.  Edit room (add/del clue or decoration)
                 ---Business options-----
                 6.  Generate tickets (elegir sala, ++€ totalSales)
                 7.  Show total sales
@@ -38,6 +43,65 @@ public class Menus {
                 0. Return to the Main Menú
                 Please enter a valid option number (0–4):
                 """, 0, 4);
+    }
+
+    public static void mainMenuManager(EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl, BusinessManager businessManager) {
+        boolean exit = false;
+
+        while (!exit) {
+            switch (Menus.mainMenuOptions()) {
+                case 1:
+                    System.out.println(">> Total inventory: ");
+                    escapeRoomManager.showAllAssets();
+                    System.out.println(escapeRoomManager.getInventoryCount());
+                    break;
+                case 2:
+                    System.out.println(">> The total value of all escape room assets is €"
+                            + escapeRoomManager.getInventoryValue()
+                    );
+                    break;
+                case 3:
+                    Room newRoom = RoomManager.createRoom();
+                    roomDAOImpl.save(newRoom);
+                    System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
+                    break;
+                case 4:
+                    roomManager.deleteRoomByUserSelection();
+                    break;
+                case 5:
+                    // TODO: añadir o quitar pista/decoración
+                    subMenuEditManager(roomManager);
+                    System.out.println(">> Editing room...");
+                    break;
+                case 6:
+                    Player player = businessManager.createPlayer();
+                    businessManager.processSale(player);
+                    System.out.println(">> Generating ticket...");
+                    break;
+                case 7:
+                    System.out.println(">> Total sales: " + businessManager.getTotalSales());
+                    break;
+                case 8:
+                    // TODO: mostrar/gestionar notificaciones
+                    System.out.println(">> Opening notifications panel...");
+                    break;
+                case 9:
+                    // TODO: eliminar jugadores
+                    System.out.println(">> Unsubscribing players...");
+                    break;
+                case 10:
+                    // TODO: crear certificado
+                    System.out.println(">> Generating certificate...");
+                    break;
+                case 0:
+                    exit = true;
+                    MongoDBConnection.close();
+                    System.out.println("Exiting Escape Room App. Bye!");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
     }
 
     public static void subMenuEditManager(RoomManager roomManager) {

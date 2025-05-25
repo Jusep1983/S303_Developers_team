@@ -4,6 +4,7 @@ import com.mongodb.client.MongoCollection;
 import daos.interfaces.PlayerDAO;
 import database.MongoDBConnection;
 import entities.Player;
+import entities.Ticket;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -57,11 +58,13 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     private Player documentToPlayer(Document doc) {
-        return new Player(
+        Player player = new Player(
                 doc.getObjectId("_id"),
                 doc.getString("name"),
-                doc.getString("email"),
-                doc.getBoolean("isSubscribed")
+                doc.getString("email")
         );
+        player.setSubscribed(doc.getBoolean("isSubscribed"));
+        player.setTicketsBought(doc.getList("ticketsBought", Ticket.class));
+        return player;
     }
 }
