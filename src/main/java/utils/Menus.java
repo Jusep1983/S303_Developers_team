@@ -5,6 +5,7 @@ import database.MongoDBConnection;
 import entities.Player;
 import entities.Room;
 import managers.BusinessManager;
+import managers.CertificatePrinter;
 import managers.EscapeRoomManager;
 import managers.RoomManager;
 
@@ -90,8 +91,9 @@ public class Menus {
                     System.out.println(">> Unsubscribing players...");
                     break;
                 case 10:
-                    // TODO: crear certificado
-                    System.out.println(">> Generating certificate...");
+                    // TODO: decidir cómo se da certificado
+                    // CertificatePrinter printer = new CertificatePrinter();
+                    // printer.printCertificate(player, room);
                     break;
                 case 0:
                     exit = true;
