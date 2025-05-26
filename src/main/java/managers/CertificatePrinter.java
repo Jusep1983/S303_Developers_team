@@ -1,5 +1,6 @@
 package managers;
 
+import dtos.RoomDTO;
 import entities.Player;
 import entities.Room;
 
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CertificatePrinter {
 
-    public void printCertificate(Player player, Room room) {
+    public void printCertificate(Player player, RoomDTO room) {
         LocalDateTime completionTime = LocalDateTime.now();
         String certificate = generateCertificateText(player, room, completionTime);
 
@@ -21,7 +22,7 @@ public class CertificatePrinter {
         saveCertificateToFile(player, room, certificate);
     }
 
-    private String generateCertificateText(Player player, Room room, LocalDateTime completionTime) {
+    private String generateCertificateText(Player player, RoomDTO room, LocalDateTime completionTime) {
         return """
                 ----------------------------------------
                       ESCAPE ROOM COMPLETION CERTIFICATE
@@ -43,7 +44,7 @@ public class CertificatePrinter {
         );
     }
 
-    private void saveCertificateToFile(Player player, Room room, String content) {
+    private void saveCertificateToFile(Player player, RoomDTO room, String content) {
         String filename = "certificate_" + player.getName().replaceAll(" ", "_") + "_" + room.getName().replaceAll(" ", "_") + ".txt";
         try {
             Files.writeString(Path.of("certificates/" + filename), content);

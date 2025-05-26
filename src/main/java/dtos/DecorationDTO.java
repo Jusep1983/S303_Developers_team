@@ -1,7 +1,9 @@
 package dtos;
 
+import lombok.Data;
 import org.bson.types.ObjectId;
 
+@Data
 public class DecorationDTO {
     private final ObjectId id;
     private final String name;
@@ -10,13 +12,4 @@ public class DecorationDTO {
         this.id = id;
         this.name = name;
     }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
 }

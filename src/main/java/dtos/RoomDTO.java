@@ -1,8 +1,10 @@
 package dtos;
 
 import entities.enums.Difficulty;
+import lombok.Data;
 import org.bson.types.ObjectId;
 
+@Data
 public class RoomDTO {
     private final ObjectId id;
     private final String name;
@@ -13,16 +15,5 @@ public class RoomDTO {
         this.name = name;
         this.difficulty = difficulty;
     }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Difficulty getDifficulty() {return difficulty;}
-
 }
 
