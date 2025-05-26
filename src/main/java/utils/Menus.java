@@ -4,10 +4,7 @@ import daos.RoomDAOImpl;
 import database.MongoDBConnection;
 import entities.Player;
 import entities.Room;
-import managers.BusinessManager;
-import managers.CertificatePrinter;
-import managers.EscapeRoomManager;
-import managers.RoomManager;
+import managers.*;
 
 public class Menus {
     // Menu provisional
@@ -46,7 +43,11 @@ public class Menus {
                 """, 0, 4);
     }
 
-    public static void mainMenuManager(EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl, BusinessManager businessManager) {
+    public static void mainMenuManager(
+            EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl,
+            BusinessManager businessManager, ClueManager clueManager, DecorationManager decorationManager
+    ) {
+
         boolean exit = false;
 
         while (!exit) {
@@ -58,7 +59,7 @@ public class Menus {
                     break;
                 case 2:
                     System.out.println(">> The total value of all escape room assets is €"
-                            + escapeRoomManager.getInventoryValue()
+                                       + escapeRoomManager.getInventoryValue()
                     );
                     break;
                 case 3:
@@ -70,7 +71,7 @@ public class Menus {
                     roomManager.deleteRoomByUserSelection();
                     break;
                 case 5:
-                    subMenuEditManager(roomManager);
+                    subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
                     // TODO: decidir flujo de creación jugador/venta ticket ¿?
@@ -104,21 +105,21 @@ public class Menus {
         }
     }
 
-    public static void subMenuEditManager(RoomManager roomManager) {
+    public static void subMenuEditManager(ClueManager clueManager, DecorationManager decorationManager) {
         boolean exit = false;
         do {
             switch (subMenuEditOptions()) {
                 case 1:
-                    roomManager.addClueToRoom();
+                    clueManager.addClueToRoom();
                     break;
                 case 2:
-                    roomManager.deleteClueFromRoom();
+                    clueManager.deleteClueFromRoom();
                     break;
                 case 3:
-                    roomManager.addDecorationToRoom();
+                    decorationManager.addDecorationToRoom();
                     break;
                 case 4:
-                    roomManager.deleteDecorationFromRoom();
+                    decorationManager.deleteDecorationFromRoom();
                     break;
                 case 0:
                     exit = true;
