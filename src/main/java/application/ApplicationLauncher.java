@@ -15,6 +15,7 @@ public class ApplicationLauncher {
         InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, jsonFilePath);
 
         // No sería mejor intentar hacer esto de otra forma ¿?
+        // Aqui hay que darle una vuelta a esta forma de plantearlo...
         EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
         RoomManager roomManager = new RoomManager();
         RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
