@@ -114,14 +114,14 @@ public class RoomManager {
         List<RoomDTO> rooms = new ArrayList<>();
         try (MongoCursor<Document> cursor = escapeRoomCollection
                 .find()
-                .projection(Projections.include("name"))
+                .projection(Projections.include("name", "difficulty"))
                 .iterator()) {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
                 rooms.add(new RoomDTO(
                         doc.getObjectId("_id"),
                         doc.getString("name"),
-                        Difficulty.valueOf(doc.getString("difficulty").toUpperCase())));
+                        Difficulty.valueOf(doc.getString("difficulty"))));
             }
         } catch (MongoException e) {
             System.out.println("Database error: " + e.getMessage());

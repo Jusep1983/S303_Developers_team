@@ -49,4 +49,8 @@ public class TicketDAOImpl implements TicketDAO {
                 doc.getInteger("price")
         );
     }
+
+    public static Document ticketToDocument(Ticket ticket) {
+        return new Document("_id", ticket.getId()).append("price", ticket.getPrice());
+    }
 }
