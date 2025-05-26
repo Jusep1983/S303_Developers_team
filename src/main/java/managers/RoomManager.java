@@ -118,7 +118,10 @@ public class RoomManager {
                 .iterator()) {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
-                rooms.add(new RoomDTO(doc.getObjectId("_id"), doc.getString("name")));
+                rooms.add(new RoomDTO(
+                        doc.getObjectId("_id"),
+                        doc.getString("name"),
+                        Difficulty.valueOf(doc.getString("difficulty").toUpperCase())));
             }
         } catch (MongoException e) {
             System.out.println("Database error: " + e.getMessage());
