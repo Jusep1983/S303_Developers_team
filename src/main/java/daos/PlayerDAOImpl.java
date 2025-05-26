@@ -46,10 +46,11 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     @Override
     public void update(Player player) {
-        Document updated = new Document("name", player.getName())
+        List<Document> ticketDocs = player.getTicketsBought().stream().map(TicketDAOImpl::ticketToDocument).toList();
+        Document updated = new Document("$set", new Document("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed())
-                .append("boughtTickets", player.getTicketsBought());
+                .append("boughtTickets", ticketDocs));
         playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
 
