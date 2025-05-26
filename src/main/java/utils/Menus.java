@@ -74,6 +74,7 @@ public class Menus {
                     System.out.println(">> Editing room...");
                     break;
                 case 6:
+                    // TODO: decidir flujo de creación jugador/venta ticket ¿?
                     Player player = businessManager.createPlayer();
                     businessManager.processSale(player);
                     System.out.println(">> Generating ticket...");

@@ -6,6 +6,7 @@ import dtos.RoomDTO;
 import entities.Player;
 import entities.Room;
 import entities.Ticket;
+import entities.enums.Difficulty;
 import lombok.Getter;
 import utils.ValidateInputs;
 
@@ -19,9 +20,9 @@ public class BusinessManager {
     @Getter
     public int totalSales;
 
-    private void sellTicket(Player player) {
-        //TODO decidir cómo se calcula el precio del ticket (en base a la dificultad¿?)
-        Ticket ticket = new Ticket(20);
+    private void sellTicket(Room room, Player player) {
+        Difficulty difficulty = room.getDifficulty();
+        Ticket ticket = new Ticket(difficulty.getPriceByDifficulty());
         player.addTicket(ticket);
         playerDAO.update(player);
         totalSales += ticket.getPrice();
@@ -44,7 +45,7 @@ public class BusinessManager {
         } else {
             RoomDTO roomDTO = rooms.get(roomChoice - 1);
             Room room = roomDAO.findById(roomDTO.getId());
-            sellTicket(player);
+            sellTicket(room, player);
             TicketPrinter.printTicket(player, room);
         }
     }
