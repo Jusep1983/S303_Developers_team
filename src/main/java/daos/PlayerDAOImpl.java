@@ -48,7 +48,8 @@ public class PlayerDAOImpl implements PlayerDAO {
     public void update(Player player) {
         Document updated = new Document("name", player.getName())
                 .append("email", player.getEmail())
-                .append("isSubscribed", player.isSubscribed());
+                .append("isSubscribed", player.isSubscribed())
+                .append("boughtTickets", player.getTicketsBought());
         playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
 

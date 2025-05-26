@@ -7,6 +7,7 @@ import database.MongoDBConnection;
 import managers.BusinessManager;
 import managers.EscapeRoomManager;
 import managers.RoomManager;
+import managers.TicketPrinter;
 import utils.Menus;
 
 public class ApplicationLauncher {

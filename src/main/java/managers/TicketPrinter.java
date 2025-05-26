@@ -1,7 +1,7 @@
 package managers;
 
+import dtos.RoomDTO;
 import entities.Player;
-import entities.Room;
 import entities.enums.Difficulty;
 
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class TicketPrinter {
 
-    public static void printTicket(Player player, Room room) {
+    public static void printTicket(Player player, RoomDTO room) {
 
         Difficulty difficulty = room.getDifficulty();
         int durationMinutes = difficulty.getDurationMinutes();

@@ -20,7 +20,7 @@ public class BusinessManager {
     @Getter
     public int totalSales;
 
-    private void sellTicket(Room room, Player player) {
+    private void sellTicket(RoomDTO room, Player player) {
         Difficulty difficulty = room.getDifficulty();
         Ticket ticket = new Ticket(difficulty.getPriceByDifficulty());
         player.addTicket(ticket);
@@ -43,8 +43,7 @@ public class BusinessManager {
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {
-            RoomDTO roomDTO = rooms.get(roomChoice - 1);
-            Room room = roomDAO.findById(roomDTO.getId());
+            RoomDTO room = rooms.get(roomChoice - 1);
             sellTicket(room, player);
             TicketPrinter.printTicket(player, room);
         }
