@@ -1,12 +1,8 @@
 package managers;
 
-import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Projections;
 import daos.PlayerDAOImpl;
 import database.MongoDBConnection;
-import dtos.PlayerDTO;
 import dtos.RoomDTO;
 import entities.Player;
 import entities.Ticket;
@@ -15,13 +11,12 @@ import lombok.Getter;
 import org.bson.Document;
 import utils.ValidateInputs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessManager {
 
     PlayerDAOImpl playerDAO = new PlayerDAOImpl();
-    MongoCollection<Document> playersCollection = MongoDBConnection.getPlayersCollection();
+    // MongoCollection<Document> playersCollection = MongoDBConnection.getPlayersCollection();
     RoomManager roomManager = new RoomManager();
     @Getter
     public int totalSales;
