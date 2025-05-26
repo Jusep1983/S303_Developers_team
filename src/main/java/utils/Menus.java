@@ -22,7 +22,7 @@ public class Menus {
                 4.  Delete room
                 5.  Edit room (add/del clue or decoration)
                 ---Business options-----
-                6.  Generate tickets (elegir sala, ++€ totalSales)
+                6.  Venta tickets (elegir sala, ++€ totalSales)
                 7.  Show total sales
                 ---Users options--------
                 8.  Notifications
@@ -74,7 +74,7 @@ public class Menus {
                     break;
                 case 6:
                     // TODO: decidir flujo de creación jugador/venta ticket ¿?
-                    Player player = businessManager.createPlayer();
+                    Player player = businessManager.selectPlayer();
                     businessManager.processSale(player);
                     break;
                 case 7:

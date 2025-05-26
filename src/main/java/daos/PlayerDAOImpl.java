@@ -3,6 +3,7 @@ package daos;
 import com.mongodb.client.MongoCollection;
 import daos.interfaces.PlayerDAO;
 import database.MongoDBConnection;
+import dtos.PlayerDTO;
 import entities.Player;
 import entities.Ticket;
 import org.bson.Document;
