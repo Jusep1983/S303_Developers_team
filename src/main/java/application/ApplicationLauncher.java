@@ -4,10 +4,7 @@ import com.mongodb.client.MongoDatabase;
 import daos.RoomDAOImpl;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
-import managers.BusinessManager;
-import managers.EscapeRoomManager;
-import managers.RoomManager;
-import managers.TicketPrinter;
+import managers.*;
 import utils.Menus;
 
 public class ApplicationLauncher {
@@ -22,7 +19,7 @@ public class ApplicationLauncher {
         RoomManager roomManager = new RoomManager();
         RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
         BusinessManager businessManager = new BusinessManager();
-
-        Menus.mainMenuManager(escapeRoomManager, roomManager, roomDAOImpl, businessManager);
+        ClueManager clueManager = new ClueManager(roomManager);
+        Menus.mainMenuManager(escapeRoomManager, roomManager, roomDAOImpl, businessManager, clueManager);
     }
 }
