@@ -43,7 +43,11 @@ public class Menus {
                 """, 0, 4);
     }
 
-    public static void mainMenuManager(EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl, BusinessManager businessManager,ClueManager clueManager) {
+    public static void mainMenuManager(
+            EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl,
+            BusinessManager businessManager, ClueManager clueManager, DecorationManager decorationManager
+    ) {
+
         boolean exit = false;
 
         while (!exit) {
@@ -55,7 +59,7 @@ public class Menus {
                     break;
                 case 2:
                     System.out.println(">> The total value of all escape room assets is €"
-                            + escapeRoomManager.getInventoryValue()
+                                       + escapeRoomManager.getInventoryValue()
                     );
                     break;
                 case 3:
@@ -67,7 +71,7 @@ public class Menus {
                     roomManager.deleteRoomByUserSelection();
                     break;
                 case 5:
-                    subMenuEditManager(roomManager, clueManager);
+                    subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
                     // TODO: decidir flujo de creación jugador/venta ticket ¿?
@@ -101,7 +105,7 @@ public class Menus {
         }
     }
 
-    public static void subMenuEditManager(RoomManager roomManager, ClueManager clueManager) {
+    public static void subMenuEditManager(ClueManager clueManager, DecorationManager decorationManager) {
         boolean exit = false;
         do {
             switch (subMenuEditOptions()) {
@@ -112,10 +116,10 @@ public class Menus {
                     clueManager.deleteClueFromRoom();
                     break;
                 case 3:
-                    roomManager.addDecorationToRoom();
+                    decorationManager.addDecorationToRoom();
                     break;
                 case 4:
-                    roomManager.deleteDecorationFromRoom();
+                    decorationManager.deleteDecorationFromRoom();
                     break;
                 case 0:
                     exit = true;

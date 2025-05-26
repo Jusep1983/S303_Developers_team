@@ -20,6 +20,7 @@ public class ApplicationLauncher {
         RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
         BusinessManager businessManager = new BusinessManager();
         ClueManager clueManager = new ClueManager(roomManager);
-        Menus.mainMenuManager(escapeRoomManager, roomManager, roomDAOImpl, businessManager, clueManager);
+        DecorationManager decorationManager = new DecorationManager(roomManager);
+        Menus.mainMenuManager(escapeRoomManager, roomManager, roomDAOImpl, businessManager, clueManager, decorationManager);
     }
 }
