@@ -26,6 +26,13 @@ public class Player implements Observer {
         this.isSubscribed = true;
         this.ticketsBought = new ArrayList<>();
     }
+    public Player(String name, String email, boolean isSubscribed) {
+        this.id = new ObjectId();
+        this.name = name;
+        this.email = email;
+        this.isSubscribed = isSubscribed;
+        this.ticketsBought = new ArrayList<>();
+    }
 
     public Player(ObjectId id, String name, String email) {
         this.id = id;
@@ -41,6 +48,6 @@ public class Player implements Observer {
 
     @Override
     public void update(String message) {
-        System.out.println("New message from DreamTeam Escape-Room :" + message);
+        System.out.println("Hello " + this.getName() + ". You have a new message :" + message);
     }
 }

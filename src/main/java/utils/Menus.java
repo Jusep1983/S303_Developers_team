@@ -4,10 +4,10 @@ import daos.RoomDAOImpl;
 import database.MongoDBConnection;
 import entities.Player;
 import entities.Room;
-import managers.BusinessManager;
-import managers.CertificatePrinter;
-import managers.EscapeRoomManager;
-import managers.RoomManager;
+import managers.*;
+import managers.NewsletterManager;
+import entities.Newsletter;
+
 
 public class Menus {
     // Menu provisional
@@ -46,7 +46,7 @@ public class Menus {
                 """, 0, 4);
     }
 
-    public static void mainMenuManager(EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl, BusinessManager businessManager) {
+    public static void mainMenuManager(EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl, BusinessManager businessManager, Newsletter newsletter) {
         boolean exit = false;
 
         while (!exit) {
@@ -82,7 +82,9 @@ public class Menus {
                     break;
                 case 8:
                     // TODO: mostrar/gestionar notificaciones
-                    System.out.println(">> Opening notifications panel...");
+                    NewsletterManager newsletterManager = new NewsletterManager();
+                    newsletterManager.notificationMenuManager();
+
                     break;
                 case 9:
                     // TODO: eliminar jugadores
@@ -129,6 +131,17 @@ public class Menus {
                     break;
             }
         } while (!exit);
+    }
+
+    public static int notificationMenuOptions() {
+        return ValidateInputs.validateIntegerBetweenOnRange("""
+           
+           Choose an option :
+            1. Send notification to all players
+            2. Send notification to subscribed players
+            0. Back
+            
+            """, 0, 2);
     }
 
 

@@ -112,7 +112,7 @@ public class TestNewsletter {
         private String lastMessage;
 
         public TestPlayer(String name, String email, boolean isSubscribed){
-            super(name, email, isSubscribed);
+            super( name, email, isSubscribed);
         }
 
         @Override
