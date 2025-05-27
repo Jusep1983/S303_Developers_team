@@ -2,7 +2,6 @@ package managers;
 
 import dtos.RoomDTO;
 import entities.Player;
-import entities.Room;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +17,6 @@ public class CertificatePrinter {
 
         System.out.println(certificate);
 
-        // Optionally: Save to file
         saveCertificateToFile(player, room, certificate);
     }
 
@@ -46,8 +44,11 @@ public class CertificatePrinter {
 
     private void saveCertificateToFile(Player player, RoomDTO room, String content) {
         String filename = "certificate_" + player.getName().replaceAll(" ", "_") + "_" + room.getName().replaceAll(" ", "_") + ".txt";
+        Path directory = Path.of("certificates");
+        Path filePath = directory.resolve(filename);
         try {
-            Files.writeString(Path.of("certificates/" + filename), content);
+            Files.createDirectories(directory);
+            Files.writeString(filePath, content);
             System.out.println("Certificate saved as " + filename);
         } catch (IOException e) {
             System.err.println("Failed to save certificate: " + e.getMessage());

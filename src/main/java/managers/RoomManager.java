@@ -47,7 +47,7 @@ public class RoomManager {
 
     public void deleteRoomByUserSelection() {
         List<RoomDTO> rooms = getAllRoomsDTO();
-        int choice = ChosenDTORoom("delete");
+        int choice = chooseRoom("delete");
         if (choice == 0) {
             System.out.println("Going back...");
         } else {
@@ -71,7 +71,7 @@ public class RoomManager {
         }
     }
 
-    public int ChosenDTORoom(String action) {
+    public int chooseRoom(String action) {
         List<RoomDTO> rooms = getAllRoomsDTO();
         if (rooms.isEmpty()) {
             System.out.println("There are no registered rooms");
@@ -85,6 +85,17 @@ public class RoomManager {
                     "Choose the room you want to " + action + ": ", 0, rooms.size()
             );
         }
+    }
+
+    public RoomDTO getRoomDTO(String action) {
+        List<RoomDTO> rooms = getAllRoomsDTO();
+        int roomChoice = chooseRoom(action);
+        if (roomChoice == 0) {
+            System.out.println("Going back...");
+        } else {
+            return rooms.get(roomChoice - 1);
+        }
+        return getRoomDTO(action);
     }
 
     public List<RoomDTO> getAllRoomsDTO() {
