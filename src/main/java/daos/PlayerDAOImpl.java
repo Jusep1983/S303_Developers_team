@@ -46,7 +46,7 @@ public class PlayerDAOImpl implements PlayerDAO {
         Document updated = new Document("$set", new Document("name", player.getName())
                 .append("email", player.getEmail())
                 .append("isSubscribed", player.isSubscribed())
-                .append("boughtTickets", ticketDocs));
+                .append("ticketsBought", ticketDocs));
         playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
 
@@ -58,7 +58,14 @@ public class PlayerDAOImpl implements PlayerDAO {
         );
         player.setSubscribed(doc.getBoolean("isSubscribed"));
 
-        player.setTicketsBought(doc.getList("ticketsBought", Ticket.class));
+        List<Document> ticketDocs = doc.getList("ticketsBought", Document.class);
+        if (ticketDocs != null) {
+            List<Ticket> tickets = new ArrayList<>();
+            for (Document ticketDoc : ticketDocs) {
+                tickets.add(TicketDAOImpl.documentToTicket(ticketDoc));
+            }
+            player.setTicketsBought(tickets);
+        }
         return player;
     }
 }

@@ -8,6 +8,7 @@ import database.MongoDBConnection;
 import entities.Ticket;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -40,5 +41,12 @@ public class TicketDAOImpl implements TicketDAO {
 
     public static Document ticketToDocument(Ticket ticket) {
         return new Document("_id", ticket.getId()).append("price", ticket.getPrice());
+    }
+
+    public static Ticket documentToTicket(Document doc) {
+        ObjectId id = doc.getObjectId("_id");
+        int price = doc.getInteger("price");
+
+        return new Ticket(id, price);
     }
 }

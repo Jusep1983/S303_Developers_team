@@ -15,4 +15,8 @@ public class Ticket {
         this.id = new ObjectId();
         this.price = price;
     }
+    public Ticket(ObjectId id, int price) {
+        this.id = id;
+        this.price = price;
+    }
 }
