@@ -95,7 +95,7 @@ public class RoomManager {
         } else {
             return rooms.get(roomChoice - 1);
         }
-        return getRoomDTO();
+        return getRoomDTO(action);
     }
 
     public List<RoomDTO> getAllRoomsDTO() {

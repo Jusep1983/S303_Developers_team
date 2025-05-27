@@ -44,8 +44,11 @@ public class CertificatePrinter {
 
     private void saveCertificateToFile(Player player, RoomDTO room, String content) {
         String filename = "certificate_" + player.getName().replaceAll(" ", "_") + "_" + room.getName().replaceAll(" ", "_") + ".txt";
+        Path directory = Path.of("certificates");
+        Path filePath = directory.resolve(filename);
         try {
-            Files.writeString(Path.of("certificates/" + filename), content);
+            Files.createDirectories(directory);
+            Files.writeString(filePath, content);
             System.out.println("Certificate saved as " + filename);
         } catch (IOException e) {
             System.err.println("Failed to save certificate: " + e.getMessage());
