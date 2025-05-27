@@ -7,9 +7,9 @@ import database.MongoDBConnection;
 import dtos.RoomDTO;
 import entities.Player;
 import entities.Room;
+import exceptions.PlayerNotFoundException;
 import managers.*;
 import managers.NewsletterManager;
-
 
 
 public class MainMenu {
@@ -93,9 +93,14 @@ public class MainMenu {
                     break;
                 case 10:
                     CertificatePrinter printer = new CertificatePrinter();
-                    player = businessManager.selectPlayer();
-                    RoomDTO room = roomManager.getRoomDTO("print certification for");
-                    printer.printCertificate(player, room);
+
+                    try {
+                        player = businessManager.selectPlayer();
+                        RoomDTO room = roomManager.getRoomDTO("print certification for");
+                        printer.printCertificate(player, room);
+                    } catch (PlayerNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 0:
                     exit = true;

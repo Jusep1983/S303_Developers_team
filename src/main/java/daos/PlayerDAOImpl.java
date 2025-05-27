@@ -39,10 +39,15 @@ public class PlayerDAOImpl implements PlayerDAO {
     @Override
     public List<Player> findAll() {
         List<Player> players = new ArrayList<>();
-        for (Document doc : playersCollection.find()) {
-            players.add(documentToPlayer(doc));
+            for (Document doc : playersCollection.find()) {
+                players.add(documentToPlayer(doc));
+            }
+        if (!players.isEmpty()) {
+            return players;
+        }else{
+            System.out.println("the list is empty");
+            return players;
         }
-        return players;
     }
 
     @Override
