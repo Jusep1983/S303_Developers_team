@@ -60,6 +60,8 @@ public class PlayerDAOImpl implements PlayerDAO {
         playersCollection.deleteOne(new Document("_id", player.getId()));
     }
 
+
+
     private Player documentToPlayer(Document doc) {
         Player player = new Player(
                 doc.getObjectId("_id"),
@@ -67,6 +69,7 @@ public class PlayerDAOImpl implements PlayerDAO {
                 doc.getString("email")
         );
         player.setSubscribed(doc.getBoolean("isSubscribed"));
+
         player.setTicketsBought(doc.getList("ticketsBought", Ticket.class));
         return player;
     }

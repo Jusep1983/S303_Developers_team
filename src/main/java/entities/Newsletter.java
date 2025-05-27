@@ -40,26 +40,26 @@ public class Newsletter implements Observable {
         }
     }
 
-    public void notifyObservers(String lastNews) {
-        for(Observer observer : observers){
-            observer.update(lastNews);
-        }
-    }
+//    public void notifyObservers(String lastNews) {
+//        for(Observer observer : observers){
+//            observer.update(lastNews);
+//        }
+//    }
 
-    public void notifyAllPlayers(){
+//    public void notifyAllPlayers(){
+//
+//        for (Player player :allPlayers){
+//            player.update(this.lastNews);
+//        }
+//    }
 
-        for (Player player :allPlayers){
-            player.update(this.lastNews);
-        }
-    }
-
-    public void notifySubscribed(){
-        for(Player player : allPlayers ){
-            if (player.isSubscribed()){
-                player.update(this.lastNews);
-            }
-        }
-    }
+//    public void notifySubscribed(){
+//        for(Player player : allPlayers ){
+//            if (player.isSubscribed()){
+//                player.update(this.lastNews);
+//            }
+//        }
+//    }
 
 
 }

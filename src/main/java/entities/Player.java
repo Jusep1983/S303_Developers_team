@@ -42,6 +42,13 @@ public class Player implements Observer {
         this.ticketsBought = new ArrayList<>();
     }
 
+    public List<Ticket> getTicketsBought(){
+        if (ticketsBought == null) {
+            ticketsBought = new ArrayList<>();
+        }
+        return ticketsBought;
+    }
+
     public void addTicket(Ticket ticket) {
         ticketsBought.add(ticket);
     }

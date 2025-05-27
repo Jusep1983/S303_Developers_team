@@ -48,7 +48,7 @@ public class Menus {
 
     public static void mainMenuManager(EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl, BusinessManager businessManager, Newsletter newsletter) {
         boolean exit = false;
-
+        NewsletterManager newsletterManager = new NewsletterManager();
         while (!exit) {
             switch (Menus.mainMenuOptions()) {
                 case 1:
@@ -81,13 +81,11 @@ public class Menus {
                     System.out.println(">> Total sales: " + businessManager.getTotalSales());
                     break;
                 case 8:
-                    // TODO: mostrar/gestionar notificaciones
-                    NewsletterManager newsletterManager = new NewsletterManager();
-                    newsletterManager.notificationMenuManager();
 
+                    newsletterManager.notificationMenuManager();
                     break;
                 case 9:
-                    // TODO: eliminar jugadores
+                    newsletterManager.unsubscribePlayer();
                     System.out.println(">> Unsubscribing players...");
                     break;
                 case 10:
@@ -143,6 +141,7 @@ public class Menus {
             
             """, 0, 2);
     }
+
 
 
 }
