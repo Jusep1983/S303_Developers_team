@@ -94,7 +94,7 @@ public class MainMenu {
                 case 10:
                     CertificatePrinter printer = new CertificatePrinter();
                     player = businessManager.selectPlayer();
-                    RoomDTO room = roomManager.getRoomDTO();
+                    RoomDTO room = roomManager.getRoomDTO("print certification for");
                     printer.printCertificate(player, room);
                     break;
                 case 0:
