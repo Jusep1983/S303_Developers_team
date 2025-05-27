@@ -31,7 +31,7 @@ public class BusinessManager {
 
     public void processSale(Player player) {
         List<RoomDTO> rooms = roomManager.getAllRoomsDTO();
-        int roomChoice = roomManager.ChosenDTORoom("play");
+        int roomChoice = roomManager.chooseRoom("play");
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {
@@ -41,7 +41,7 @@ public class BusinessManager {
         }
     }
 
-    public Player selectPlayer() {
+    public Player selectOrCreatePlayer() {
         PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
         List<Player> players = playerDAOImpl.findAll();
         String name = ValidateInputs.validateString("Enter the name of the player: ");
@@ -49,5 +49,18 @@ public class BusinessManager {
             if (name.equals(player.getName())) {return player;}
         }
         return createPlayer(name);
+    }
+
+    public Player selectPlayer() {
+        PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
+        List<Player> players = playerDAOImpl.findAll();
+        String name = ValidateInputs.validateString("Enter the name of the player: ");
+        for (Player player : players) {
+            if (name.equals(player.getName())) {
+                return player;
+            }
+        }
+        System.out.println("Player does not exist.");
+        return selectPlayer();
     }
 }

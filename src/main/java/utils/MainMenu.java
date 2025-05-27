@@ -4,6 +4,7 @@ import daos.ClueDAOImpl;
 import daos.RoomDAOImpl;
 import daos.TicketDAOImpl;
 import database.MongoDBConnection;
+import dtos.RoomDTO;
 import entities.Player;
 import entities.Room;
 import managers.*;
@@ -77,7 +78,7 @@ public class MainMenu {
                     RoomMenu.subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
-                    Player player = businessManager.selectPlayer();
+                    Player player = businessManager.selectOrCreatePlayer();
                     businessManager.processSale(player);
                     break;
                 case 7:
@@ -91,9 +92,10 @@ public class MainMenu {
                     System.out.println(">> Unsubscribing players...");
                     break;
                 case 10:
-                    // TODO: decidir cómo se da certificado
-                    // CertificatePrinter printer = new CertificatePrinter();
-                    // printer.printCertificate(player, room);
+                    CertificatePrinter printer = new CertificatePrinter();
+                    player = businessManager.selectPlayer();
+                    RoomDTO room = roomManager.getRoomDTO();
+                    printer.printCertificate(player, room);
                     break;
                 case 0:
                     exit = true;
