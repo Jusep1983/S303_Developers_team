@@ -23,10 +23,10 @@ public class TicketDAOImpl implements TicketDAO {
     @Override
     public int getTotalSales() {
         int totalSales = 0;
-        Bson filter = Filters.exists("boughtTickets");
+        Bson filter = Filters.exists("ticketsBought");
         FindIterable<Document> players = playersCollection.find(filter);
         for (Document player : players) {
-            List<Document> boughtTickets = (List<Document>) player.get("boughtTickets");
+            List<Document> boughtTickets = (List<Document>) player.get("ticketsBought");
 
             if (boughtTickets != null) {
                 for (Document ticket : boughtTickets) {
