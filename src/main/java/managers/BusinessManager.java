@@ -5,6 +5,7 @@ import dtos.RoomDTO;
 import entities.Player;
 import entities.Ticket;
 import entities.enums.Difficulty;
+import exceptions.PlayerNotFoundException;
 import utils.ValidateInputs;
 
 import java.util.List;
@@ -40,21 +41,24 @@ public class BusinessManager {
         List<Player> players = playerDAOImpl.findAll();
         String name = ValidateInputs.validateString("Enter the name of the player: ");
         for (Player player : players) {
-            if (name.equals(player.getName())) {return player;}
-        }
-        return createPlayer(name);
-    }
-
-    public Player selectPlayer() {
-        PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
-        List<Player> players = playerDAOImpl.findAll();
-        String name = ValidateInputs.validateString("Enter the name of the player: ");
-        for (Player player : players) {
             if (name.equals(player.getName())) {
                 return player;
             }
         }
-        System.out.println("Player does not exist.");
-        return selectPlayer();
+        return createPlayer(name);
+    }
+
+    public Player selectPlayer() throws PlayerNotFoundException {
+        PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
+        List<Player> players = playerDAOImpl.findAll();
+        if (!players.isEmpty()) {
+            String name = ValidateInputs.validateString("Enter the name of the player: ");
+            for (Player player : players) {
+                if (name.equals(player.getName())) {
+                    return player;
+                }
+            }
+        }
+        throw new PlayerNotFoundException("this player never played");
     }
 }
