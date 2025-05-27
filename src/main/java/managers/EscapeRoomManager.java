@@ -14,10 +14,6 @@ import java.util.Map;
 public class EscapeRoomManager {
     MongoCollection<Document> escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
 
-    public MongoCollection<Document> getEscapeRoomCollection() {
-        return escapeRoomCollection;
-    }
-
     public Map<String, Integer> getInventoryCount() {
         return Map.of(
                 "Rooms", getRoomCount(),
