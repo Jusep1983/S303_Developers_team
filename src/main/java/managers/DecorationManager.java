@@ -3,6 +3,7 @@ package managers;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
+import daos.DecorationDAOImpl;
 import dtos.DecorationDTO;
 import dtos.RoomDTO;
 import entities.Decoration;
@@ -15,9 +16,10 @@ import java.util.List;
 
 public class DecorationManager {
     private final RoomManager roomManager;
-
-    public DecorationManager(RoomManager roomManager) {
+    private final DecorationDAOImpl decorationDAOImpl;
+    public DecorationManager(RoomManager roomManager, DecorationDAOImpl decorationDAOImpl) {
         this.roomManager = roomManager;
+        this.decorationDAOImpl = decorationDAOImpl;
     }
 
     public static Decoration createDecoration() {
@@ -45,16 +47,10 @@ public class DecorationManager {
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Decoration decoration = createDecoration();
-            Document decorationDoc = new Document("_id", decoration.getId())
-                    .append("price", decoration.getPrice())
-                    .append("name", decoration.getName())
-                    .append("material", decoration.getMaterial().toString());
-            this.roomManager.getEscapeRoomCollection().updateOne(
-                    Filters.eq("_id", room.getId()),
-                    new Document("$push", new Document("decorations", decorationDoc))
-            );
+            decorationDAOImpl.save(decoration, room.getId());
 
             System.out.println(">> Decoration '" + decoration.getName() + "' added to room '" + room.getName() + "'");
+
         }
     }
 
@@ -73,12 +69,9 @@ public class DecorationManager {
             } else {
                 List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
                 DecorationDTO decorationDTO = decorationsDTO.get(decorationChoice - 1);
-
-                this.roomManager.getEscapeRoomCollection().updateOne(
-                        Filters.eq("_id", roomId),
-                        new Document("$pull", new Document("decorations", new Document("_id", decorationDTO.getId())))
-                );
+                this.decorationDAOImpl.delete(decorationDTO.getId(),roomId);
                 System.out.println(">> Decoration '" + decorationDTO.getName() + "' successfully deleted.");
+
             }
         }
     }

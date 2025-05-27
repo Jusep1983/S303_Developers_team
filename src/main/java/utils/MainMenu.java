@@ -1,6 +1,7 @@
 package utils;
 
 import daos.ClueDAOImpl;
+import daos.DecorationDAOImpl;
 import daos.RoomDAOImpl;
 import daos.TicketDAOImpl;
 import database.MongoDBConnection;
@@ -22,7 +23,8 @@ public class MainMenu {
     private final BusinessManager businessManager = new BusinessManager();
     private final ClueDAOImpl clueDao = new ClueDAOImpl();
     private final ClueManager clueManager = new ClueManager(roomManager, clueDao);
-    private final DecorationManager decorationManager = new DecorationManager(roomManager);
+    private final DecorationDAOImpl decorationDAOImpl = new DecorationDAOImpl();
+    private final DecorationManager decorationManager = new DecorationManager(roomManager, decorationDAOImpl);
 
 
     public static int mainMenuOptions() {
