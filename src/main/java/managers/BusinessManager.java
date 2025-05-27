@@ -30,15 +30,9 @@ public class BusinessManager {
     }
 
     public void processSale(Player player) {
-        List<RoomDTO> rooms = roomManager.getAllRoomsDTO();
-        int roomChoice = roomManager.chooseRoom("play");
-        if (roomChoice == 0) {
-            System.out.println("Going back...");
-        } else {
-            RoomDTO room = rooms.get(roomChoice - 1);
-            sellTicket(room, player);
-            TicketPrinter.printTicket(player, room);
-        }
+        RoomDTO room = roomManager.getRoomDTO("play");
+        sellTicket(room, player);
+        TicketPrinter.printTicket(player, room);
     }
 
     public Player selectOrCreatePlayer() {
