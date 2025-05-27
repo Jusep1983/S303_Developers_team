@@ -10,7 +10,7 @@ import entities.Clue;
 import entities.enums.Theme;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import utils.ValidateInputs;
+import validation.ValidateInputs;
 
 import java.util.ArrayList;
 import java.util.List;

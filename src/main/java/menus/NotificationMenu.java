@@ -1,8 +1,9 @@
-package utils;
+package menus;
 
 import daos.PlayerDAOImpl;
 import entities.Newsletter;
 import entities.Player;
+import validation.ValidateInputs;
 
 import java.util.List;
 

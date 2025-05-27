@@ -50,12 +50,14 @@ public class DecorationDAOImpl implements DecorationDAO {
     }
 
 
-//    void save(Clue clue, ObjectId roomId){}
-//
-//    void delete(ObjectId clueId, ObjectId roomId);
-//
-//    Clue findById(ObjectId id, ObjectId roomId);
-//
-//    List<Clue> findAll(ObjectId roomId);
+    public void save(Clue clue, ObjectId roomId){}
+
+    public void delete(ObjectId clueId, ObjectId roomId){}
+
+    public Decoration findById(ObjectId id, ObjectId roomId){}
+
+    public List<Decoration> findAll(ObjectId roomId){
+        return
+    }
 
 }

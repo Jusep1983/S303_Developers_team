@@ -4,7 +4,7 @@ import com.mongodb.client.MongoDatabase;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
 
-import utils.MainMenu;
+import menus.MainMenu;
 
 public class ApplicationLauncher {
 

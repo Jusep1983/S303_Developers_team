@@ -5,7 +5,7 @@ import dtos.RoomDTO;
 import entities.Player;
 import entities.Ticket;
 import entities.enums.Difficulty;
-import utils.ValidateInputs;
+import validation.ValidateInputs;
 
 import java.util.List;
 

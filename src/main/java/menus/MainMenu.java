@@ -1,4 +1,4 @@
-package utils;
+package menus;
 
 import daos.ClueDAOImpl;
 import daos.RoomDAOImpl;
@@ -9,7 +9,7 @@ import entities.Player;
 import entities.Room;
 import managers.*;
 import managers.NewsletterManager;
-
+import validation.ValidateInputs;
 
 
 public class MainMenu {
