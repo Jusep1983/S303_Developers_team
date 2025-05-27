@@ -2,7 +2,6 @@ package managers;
 
 import dtos.RoomDTO;
 import entities.Player;
-import entities.Room;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +17,6 @@ public class CertificatePrinter {
 
         System.out.println(certificate);
 
-        // Optionally: Save to file
         saveCertificateToFile(player, room, certificate);
     }
 
