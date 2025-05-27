@@ -91,7 +91,6 @@ public class ClueDAOImpl implements ClueDAO {
             }
             return clues;
 
-
         }
 
 

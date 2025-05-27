@@ -3,9 +3,12 @@ package daos;
 import com.mongodb.client.MongoCollection;
 import daos.interfaces.DecorationDAO;
 import database.MongoDBConnection;
+import entities.Clue;
 import entities.Decoration;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import java.util.List;
 
 public class DecorationDAOImpl implements DecorationDAO {
     private final MongoCollection<Document> escapeRoomCollection;
@@ -13,6 +16,11 @@ public class DecorationDAOImpl implements DecorationDAO {
     public DecorationDAOImpl() {
         escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
     }
+
+
+
+
+
 
     @Override
     public void addDecoration(ObjectId roomId, Decoration decoration) {
@@ -40,5 +48,14 @@ public class DecorationDAOImpl implements DecorationDAO {
                         new Document("_id", decoration.getId())))
         );
     }
+
+
+//    void save(Clue clue, ObjectId roomId){}
+//
+//    void delete(ObjectId clueId, ObjectId roomId);
+//
+//    Clue findById(ObjectId id, ObjectId roomId);
+//
+//    List<Clue> findAll(ObjectId roomId);
 
 }
