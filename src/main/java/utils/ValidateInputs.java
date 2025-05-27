@@ -21,21 +21,6 @@ public class ValidateInputs {
         return SC.nextLine().trim();
     }
 
-    public static int validateInteger(String message) {
-        while (true) {
-            System.out.print(message);
-            try {
-                String input = readInput();
-                validateFieldNotEmpty(input);
-                return Integer.parseInt(input);
-            } catch (NullPointerException | NumberFormatException e) {
-                System.err.println("Format error");
-            } catch (EmptyInputException | NoSuchElementException | IllegalStateException e) {
-                System.err.println("Error, " + e.getMessage());
-            }
-        }
-    }
-
     public static String checkString() throws EmptyInputException {
         String inputStr = readInput();
         if (inputStr.isEmpty()) {
