@@ -87,9 +87,9 @@ public class RoomManager {
         }
     }
 
-    public RoomDTO getRoomDTO() {
+    public RoomDTO getRoomDTO(String action) {
         List<RoomDTO> rooms = getAllRoomsDTO();
-        int roomChoice = chooseRoom("play");
+        int roomChoice = chooseRoom(action);
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {
