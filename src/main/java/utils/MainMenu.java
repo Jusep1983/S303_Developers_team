@@ -1,5 +1,6 @@
 package utils;
 
+import daos.ClueDAOImpl;
 import daos.RoomDAOImpl;
 import database.MongoDBConnection;
 import entities.Player;
@@ -15,7 +16,8 @@ public class MainMenu {
     private final RoomManager roomManager = new RoomManager();
     private final RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
     private final BusinessManager businessManager = new BusinessManager();
-    private final ClueManager clueManager = new ClueManager(roomManager);
+    private final ClueDAOImpl clueDao = new ClueDAOImpl();
+    private final ClueManager clueManager = new ClueManager(roomManager, clueDao);
     private final DecorationManager decorationManager = new DecorationManager(roomManager);
 
 

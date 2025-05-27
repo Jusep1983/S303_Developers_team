@@ -5,6 +5,7 @@ import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import daos.interfaces.ClueDAO;
+import database.MongoDBConnection;
 import entities.Clue;
 import entities.enums.Theme;
 import org.bson.Document;
@@ -14,12 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClueDAOImpl implements ClueDAO {
-    private final MongoCollection<Document> roomsMongoCollection;
+    private final MongoCollection<Document> roomsMongoCollection = MongoDBConnection.getEscapeRoomCollection();
 
-    public ClueDAOImpl(MongoDatabase database) {
-        roomsMongoCollection = database.getCollection("rooms");
 
-    }
 
     @Override
     public void save(Clue clue, ObjectId roomId) {
@@ -28,8 +26,10 @@ public class ClueDAOImpl implements ClueDAO {
                 .append("name", clue.getName())
                 .append("theme", clue.getTheme());
 
-        roomsMongoCollection.insertOne(doc);
-
+        roomsMongoCollection.updateOne(
+                new Document("_id", roomId),
+                new Document("$push", new Document("clues", doc))
+        );
 
     }
 
