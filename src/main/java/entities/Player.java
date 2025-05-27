@@ -17,21 +17,21 @@ public class Player implements Observer {
     private String name;
     private String email;
     private boolean isSubscribed;
-    private List<Ticket> ticketsBought;
+    private List<Ticket> ticketsBought = new ArrayList<>();
 
     public Player(String name, String email) {
         this.id = new ObjectId();
         this.name = name;
         this.email = email;
         this.isSubscribed = true;
-        this.ticketsBought = new ArrayList<>();
+
     }
     public Player(String name, String email, boolean isSubscribed) {
         this.id = new ObjectId();
         this.name = name;
         this.email = email;
         this.isSubscribed = isSubscribed;
-        this.ticketsBought = new ArrayList<>();
+
     }
 
     public Player(ObjectId id, String name, String email) {
@@ -50,6 +50,9 @@ public class Player implements Observer {
     }
 
     public void addTicket(Ticket ticket) {
+        if (ticketsBought == null) {
+            ticketsBought = new ArrayList<>();
+        }
         ticketsBought.add(ticket);
     }
 
