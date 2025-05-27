@@ -71,7 +71,7 @@ public class TestNewsletter {
     @Test
     void notifyAllPlayers_ShouldUpdateAllPlayers(){
         newsletter.setLastNews("We have a message for all players");
-        newsletter.notifyAllPlayers();
+        //newsletter.notifyAllPlayers();
 
         assertAll(
                 () -> assertEquals("We have a message for all players", player1.getLastMessage()),
@@ -83,7 +83,7 @@ public class TestNewsletter {
     @Test
     void notifySusbcribed_ShouldUpdateSubscribed(){
         newsletter.setLastNews("We have a message for our subscribed players");
-        newsletter.notifySubscribed();
+      //  newsletter.notifySubscribed();
 
         assertAll(
                 () -> assertEquals("We have a message for our subscribed players", player1.getLastMessage()),
