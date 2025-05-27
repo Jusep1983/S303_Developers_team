@@ -43,6 +43,7 @@ public class ClueManager {
         int roomChoice = this.roomManager.ChosenDTORoom("add clue");
         if (roomChoice == 0) {
             System.out.println("Going back...");
+            return;
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Clue clue = createClue();
@@ -56,6 +57,7 @@ public class ClueManager {
         int roomChoice = this.roomManager.ChosenDTORoom("delete clue");
         if (roomChoice == 0) {
             System.out.println("Going back...");
+            return;
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             ObjectId roomId = room.getId();
@@ -63,6 +65,7 @@ public class ClueManager {
             int clueChoice = ChosenDTOClue("delete", roomId);
             if (clueChoice == 0) {
                 System.out.println("Going back...");
+
             } else {
                 List<ClueDTO> clues = getAllCluesDTO(roomId);
                 ClueDTO clue = clues.get(clueChoice - 1);
@@ -74,24 +77,30 @@ public class ClueManager {
 
 
     public List<ClueDTO> getAllCluesDTO(ObjectId roomId) {
+        List<Clue> clues = clueDao.findAll(roomId);
         List<ClueDTO> clueDTOS = new ArrayList<>();
-        try {
-            Document roomDoc = this.roomManager.getEscapeRoomCollection().find(Filters.eq("_id", roomId))
-                    .projection(Projections.include("clues"))
-                    .first();
 
-            if (roomDoc != null && roomDoc.containsKey("clues")) {
-                List<Document> clues = roomDoc.getList("clues", Document.class);
-                for (Document clue : clues) {
-                    clueDTOS.add(new ClueDTO(
-                            clue.getObjectId("_id"),
-                            clue.getString("name")
-                    ));
-                }
+            for(Clue clue :clues){
+                clueDTOS.add(new ClueDTO(clue.getId(), clue.getName()));
             }
-        } catch (MongoException e) {
-            System.out.println("Database error: " + e.getMessage());
-        }
+
+//        try {
+//            Document roomDoc = this.roomManager.getEscapeRoomCollection().find(Filters.eq("_id", roomId))
+//                    .projection(Projections.include("clues"))
+//                    .first();
+//
+//            if (roomDoc != null && roomDoc.containsKey("clues")) {
+//                List<Document> clues = roomDoc.getList("clues", Document.class);
+//                for (Document clue : clues) {
+//                    clueDTOS.add(new ClueDTO(
+//                            clue.getObjectId("_id"),
+//                            clue.getString("name")
+//                    ));
+//                }
+//            }
+//        } catch (MongoException e) {
+//            System.out.println("Database error: " + e.getMessage());
+//        }
         return clueDTOS;
     }
 
