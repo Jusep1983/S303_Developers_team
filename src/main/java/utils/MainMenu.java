@@ -1,17 +1,28 @@
 package utils;
 
+import daos.ClueDAOImpl;
 import daos.RoomDAOImpl;
+import daos.TicketDAOImpl;
 import database.MongoDBConnection;
 import entities.Player;
 import entities.Room;
 import managers.*;
 import managers.NewsletterManager;
-import entities.Newsletter;
 
 
 
-public class Menus {
-    // Menu provisional
+public class MainMenu {
+
+    private final EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
+    private final RoomManager roomManager = new RoomManager();
+    private final RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
+    private final TicketDAOImpl ticketDAOImpl = new TicketDAOImpl();
+    private final BusinessManager businessManager = new BusinessManager();
+    private final ClueDAOImpl clueDao = new ClueDAOImpl();
+    private final ClueManager clueManager = new ClueManager(roomManager, clueDao);
+    private final DecorationManager decorationManager = new DecorationManager(roomManager);
+
+
     public static int mainMenuOptions() {
         return ValidateInputs.validateIntegerBetweenOnRange(""" 
                 
@@ -34,30 +45,16 @@ public class Menus {
                 """, 0, 10);
     }
 
-    public static int subMenuEditOptions() {
-        return ValidateInputs.validateIntegerBetweenOnRange("""
-                
-                EDITOR SUBMENU
-                1. Add Clue
-                2. Delete Clue
-                3. Add Decoration
-                4. Delete Decoration
-                0. Return to the Main Menú
-                Please enter a valid option number (0–4):
-                """, 0, 4);
-    }
+    public void mainMenuManager() {
 
-
-    public static void mainMenuManager(
-            EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl,
-            BusinessManager businessManager,Newsletter newsletter, ClueManager clueManager, DecorationManager decorationManager
-    ) {
-
+        RoomMenu roomMenu = new RoomMenu();
+        NewsletterManager newsletterManager = new NewsletterManager();
+        NotificationMenu notificationMenu = new NotificationMenu();
 
         boolean exit = false;
-        NewsletterManager newsletterManager = new NewsletterManager();
+
         while (!exit) {
-            switch (Menus.mainMenuOptions()) {
+            switch (MainMenu.mainMenuOptions()) {
                 case 1:
                     System.out.println(">> Total inventory: ");
                     escapeRoomManager.showAllAssets();
@@ -77,19 +74,17 @@ public class Menus {
                     roomManager.deleteRoomByUserSelection();
                     break;
                 case 5:
-                    subMenuEditManager(clueManager, decorationManager);
+                    roomMenu.subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
-                    // TODO: decidir flujo de creación jugador/venta ticket ¿?
                     Player player = businessManager.selectPlayer();
                     businessManager.processSale(player);
                     break;
                 case 7:
-                    System.out.println(">> Total sales: " + businessManager.getTotalSales());
+                    System.out.println(">> Total sales: " + ticketDAOImpl.getTotalSales());
                     break;
                 case 8:
-
-                    newsletterManager.notificationMenuManager();
+                    notificationMenu.notificationMenuManager();
                     break;
                 case 9:
                     newsletterManager.unsubscribePlayer();
@@ -110,45 +105,4 @@ public class Menus {
             }
         }
     }
-
-    public static void subMenuEditManager(ClueManager clueManager, DecorationManager decorationManager) {
-        boolean exit = false;
-        do {
-            switch (subMenuEditOptions()) {
-                case 1:
-                    clueManager.addClueToRoom();
-                    break;
-                case 2:
-                    clueManager.deleteClueFromRoom();
-                    break;
-                case 3:
-                    decorationManager.addDecorationToRoom();
-                    break;
-                case 4:
-                    decorationManager.deleteDecorationFromRoom();
-                    break;
-                case 0:
-                    exit = true;
-                    System.out.println("Going back...");
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-                    break;
-            }
-        } while (!exit);
-    }
-
-    public static int notificationMenuOptions() {
-        return ValidateInputs.validateIntegerBetweenOnRange("""
-           
-           Choose an option :
-            1. Send notification to all players
-            2. Send notification to subscribed players
-            0. Back
-            
-            """, 0, 2);
-    }
-
-
-
 }

@@ -1,53 +1,41 @@
 package daos;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import daos.interfaces.TicketDAO;
 import database.MongoDBConnection;
 import entities.Ticket;
 import org.bson.Document;
-import org.bson.types.ObjectId;
+import org.bson.conversions.Bson;
+
+import java.util.List;
 
 public class TicketDAOImpl implements TicketDAO {
 
-    private final MongoCollection<Document> escapeRoomCollection;
+    private final MongoCollection<Document> playersCollection;
 
     public TicketDAOImpl() {
-        escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+        playersCollection = MongoDBConnection.getPlayersCollection();
     }
 
     @Override
-    public void save(Ticket ticket) {
-        Document doc = new Document("_id", ticket.getId())
-                .append("price", ticket.getPrice());
-        escapeRoomCollection.insertOne(doc);
-    }
+    public int getTotalSales() {
+        int totalSales = 0;
+        Bson filter = Filters.exists("boughtTickets");
+        FindIterable<Document> players = playersCollection.find(filter);
+        for (Document player : players) {
+            List<Document> boughtTickets = (List<Document>) player.get("boughtTickets");
 
-    @Override
-    public Ticket findById(ObjectId id) {
-        Document doc = escapeRoomCollection.find(new Document("_id", id)).first();
-        return doc != null ? documentToTicket(doc) : null;
-    }
-
-    @Override
-    public void deleteById(ObjectId id) {
-        escapeRoomCollection.deleteOne(new Document("_id", id));
-    }
-
-    @Override
-    public int count() {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public int getPrice(Document doc) {
-        return doc.getInteger("price");
-    }
-
-    public Ticket documentToTicket(Document doc) {
-        return new Ticket(
-                doc.getInteger("price")
-        );
+            if (boughtTickets != null) {
+                for (Document ticket : boughtTickets) {
+                    if (ticket.containsKey("price")) {
+                        totalSales += ticket.getInteger("price");
+                    }
+                }
+            }
+        }
+        return totalSales;
     }
 
     public static Document ticketToDocument(Ticket ticket) {
