@@ -3,6 +3,7 @@ package managers;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
+import daos.interfaces.ClueDAO;
 import dtos.ClueDTO;
 import dtos.RoomDTO;
 import entities.Clue;
@@ -16,9 +17,11 @@ import java.util.List;
 
 public class ClueManager {
     private final RoomManager roomManager;
+    private final ClueDAO clueDao;
 
-    public ClueManager(RoomManager roomManager) {
+    public ClueManager(RoomManager roomManager, ClueDAO clueDao) {
         this.roomManager = roomManager;
+        this.clueDao = clueDao;
     }
 
     public static Clue createClue() {
@@ -43,14 +46,7 @@ public class ClueManager {
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Clue clue = createClue();
-            Document clueDoc = new Document("_id", clue.getId())
-                    .append("price", clue.getPrice())
-                    .append("name", clue.getName())
-                    .append("theme", clue.getTheme().toString());
-            this.roomManager.getEscapeRoomCollection().updateOne(
-                    Filters.eq("_id", room.getId()),
-                    new Document("$push", new Document("clues", clueDoc))
-            );
+            clueDao.save(clue, room.getId());
             System.out.println(">> Clue '" + clue.getName() + "' added to room '" + room.getName() + "'");
         }
     }
@@ -70,15 +66,12 @@ public class ClueManager {
             } else {
                 List<ClueDTO> clues = getAllCluesDTO(roomId);
                 ClueDTO clue = clues.get(clueChoice - 1);
-
-                this.roomManager.getEscapeRoomCollection().updateOne(
-                        Filters.eq("_id", roomId),
-                        new Document("$pull", new Document("clues", new Document("_id", clue.getId())))
-                );
+            clueDao.delete(clue.getId(), roomId);
                 System.out.println(">> Clue '" + clue.getName() + "' successfully deleted.");
             }
         }
     }
+
 
     public List<ClueDTO> getAllCluesDTO(ObjectId roomId) {
         List<ClueDTO> clueDTOS = new ArrayList<>();

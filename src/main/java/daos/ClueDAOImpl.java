@@ -17,7 +17,7 @@ public class ClueDAOImpl implements ClueDAO {
     private final MongoCollection<Document> roomsMongoCollection;
 
     public ClueDAOImpl(MongoDatabase database) {
-        roomsMongoCollection = database.getCollection("rooms");
+        roomsMongoCollection = database.getCollection("escapeRoom");
 
     }
 
@@ -28,8 +28,10 @@ public class ClueDAOImpl implements ClueDAO {
                 .append("name", clue.getName())
                 .append("theme", clue.getTheme());
 
-        roomsMongoCollection.insertOne(doc);
-
+        roomsMongoCollection.updateOne(
+                new Document("_id", roomId),
+                new Document("$push", new Document("clues", doc))
+        );
 
     }
 
