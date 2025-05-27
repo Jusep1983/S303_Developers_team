@@ -1,11 +1,22 @@
 package application;
 
 import com.mongodb.client.MongoDatabase;
+import daos.PlayerDAOImpl;
 import daos.RoomDAOImpl;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
+import entities.Newsletter;
+import entities.Player;
+import managers.BusinessManager;
+import managers.EscapeRoomManager;
+import managers.RoomManager;
+import managers.TicketPrinter;
+
 import managers.*;
+
 import utils.Menus;
+
+import java.util.List;
 
 public class ApplicationLauncher {
 
@@ -20,8 +31,16 @@ public class ApplicationLauncher {
         RoomManager roomManager = new RoomManager();
         RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
         BusinessManager businessManager = new BusinessManager();
+
+        PlayerDAOImpl playerDAO = new PlayerDAOImpl();
+        List<Player> players = playerDAO.findAll();
+        Newsletter newsletter = new Newsletter(players);
+
+        
+
         ClueManager clueManager = new ClueManager(roomManager);
         DecorationManager decorationManager = new DecorationManager(roomManager);
-        Menus.mainMenuManager(escapeRoomManager, roomManager, roomDAOImpl, businessManager, clueManager, decorationManager);
+        Menus.mainMenuManager(escapeRoomManager, roomManager, roomDAOImpl, businessManager, newsletter, clueManager, decorationManager);
+
     }
 }

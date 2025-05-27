@@ -5,6 +5,10 @@ import database.MongoDBConnection;
 import entities.Player;
 import entities.Room;
 import managers.*;
+import managers.NewsletterManager;
+import entities.Newsletter;
+
+
 
 public class Menus {
     // Menu provisional
@@ -43,13 +47,15 @@ public class Menus {
                 """, 0, 4);
     }
 
+
     public static void mainMenuManager(
             EscapeRoomManager escapeRoomManager, RoomManager roomManager, RoomDAOImpl roomDAOImpl,
-            BusinessManager businessManager, ClueManager clueManager, DecorationManager decorationManager
+            BusinessManager businessManager,Newsletter newsletter, ClueManager clueManager, DecorationManager decorationManager
     ) {
 
-        boolean exit = false;
 
+        boolean exit = false;
+        NewsletterManager newsletterManager = new NewsletterManager();
         while (!exit) {
             switch (Menus.mainMenuOptions()) {
                 case 1:
@@ -82,11 +88,11 @@ public class Menus {
                     System.out.println(">> Total sales: " + businessManager.getTotalSales());
                     break;
                 case 8:
-                    // TODO: mostrar/gestionar notificaciones
-                    System.out.println(">> Opening notifications panel...");
+
+                    newsletterManager.notificationMenuManager();
                     break;
                 case 9:
-                    // TODO: eliminar jugadores
+                    newsletterManager.unsubscribePlayer();
                     System.out.println(">> Unsubscribing players...");
                     break;
                 case 10:
@@ -131,6 +137,18 @@ public class Menus {
             }
         } while (!exit);
     }
+
+    public static int notificationMenuOptions() {
+        return ValidateInputs.validateIntegerBetweenOnRange("""
+           
+           Choose an option :
+            1. Send notification to all players
+            2. Send notification to subscribed players
+            0. Back
+            
+            """, 0, 2);
+    }
+
 
 
 }

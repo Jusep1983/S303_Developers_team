@@ -1,5 +1,6 @@
 package entities;
 
+import daos.PlayerDAOImpl;
 import lombok.Getter;
 import lombok.Setter;
 import observer.Observable;
@@ -11,12 +12,14 @@ import java.util.List;
 @Getter@Setter
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
-
+    List<Player> allPlayers = new ArrayList<>();
+    PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
     private String lastNews;
-    private List<Player> allPlayers;  //EscapeRoom.getInstance.getAllPlayers();
 
-    public Newsletter(){}
+
+
     public Newsletter(List<Player> allPlayers){
+
         this.allPlayers = allPlayers;
     }
 
@@ -37,20 +40,26 @@ public class Newsletter implements Observable {
         }
     }
 
-    public void notifyAllPlayers(){
+//    public void notifyObservers(String lastNews) {
+//        for(Observer observer : observers){
+//            observer.update(lastNews);
+//        }
+//    }
 
-        for (Player player :allPlayers){
-            player.update(this.lastNews);
-        }
-    }
+//    public void notifyAllPlayers(){
+//
+//        for (Player player :allPlayers){
+//            player.update(this.lastNews);
+//        }
+//    }
 
-    public void notifySubscribed(){
-        for(Player player : allPlayers ){
-            if (player.isSubscribed()){
-                player.update(this.lastNews);
-            }
-        }
-    }
+//    public void notifySubscribed(){
+//        for(Player player : allPlayers ){
+//            if (player.isSubscribed()){
+//                player.update(this.lastNews);
+//            }
+//        }
+//    }
 
 
 }
