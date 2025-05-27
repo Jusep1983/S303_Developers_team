@@ -16,6 +16,7 @@ public class MainMenu {
 
     private final EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
     private final RoomManager roomManager = new RoomManager();
+    private final PlayerManager playerManager = new PlayerManager();
     private final RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
     private final TicketDAOImpl ticketDAOImpl = new TicketDAOImpl();
     private final BusinessManager businessManager = new BusinessManager();
@@ -78,7 +79,7 @@ public class MainMenu {
                     RoomMenu.subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
-                    Player player = businessManager.selectOrCreatePlayer();
+                    Player player = playerManager.selectOrCreatePlayer();
                     businessManager.processSale(player);
                     break;
                 case 7:
@@ -95,7 +96,7 @@ public class MainMenu {
                     CertificatePrinter printer = new CertificatePrinter();
 
                     try {
-                        player = businessManager.selectPlayer();
+                        player = playerManager.selectPlayer();
                         RoomDTO room = roomManager.getRoomDTO("print certification for");
                         printer.printCertificate(player, room);
                     } catch (PlayerNotFoundException e) {

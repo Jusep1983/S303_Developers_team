@@ -3,11 +3,9 @@ package daos;
 import com.mongodb.client.MongoCollection;
 import daos.interfaces.PlayerDAO;
 import database.MongoDBConnection;
-import dtos.PlayerDTO;
 import entities.Player;
 import entities.Ticket;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,23 +29,15 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public Player findById(ObjectId id) {
-        Document doc = playersCollection.find(new Document("_id", id)).first();
-        return doc != null ? documentToPlayer(doc) : null;
-    }
-
-    @Override
     public List<Player> findAll() {
         List<Player> players = new ArrayList<>();
             for (Document doc : playersCollection.find()) {
                 players.add(documentToPlayer(doc));
             }
-        if (!players.isEmpty()) {
-            return players;
-        }else{
+        if (players.isEmpty()) {
             System.out.println("the list is empty");
-            return players;
         }
+        return players;
     }
 
     @Override
@@ -59,13 +49,6 @@ public class PlayerDAOImpl implements PlayerDAO {
                 .append("boughtTickets", ticketDocs));
         playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
-
-    @Override
-    public void delete(Player player) {
-        playersCollection.deleteOne(new Document("_id", player.getId()));
-    }
-
-
 
     private Player documentToPlayer(Document doc) {
         Player player = new Player(
