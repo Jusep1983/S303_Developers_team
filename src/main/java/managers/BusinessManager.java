@@ -1,14 +1,11 @@
 package managers;
 
-import com.mongodb.client.MongoCollection;
 import daos.PlayerDAOImpl;
-import database.MongoDBConnection;
 import dtos.RoomDTO;
 import entities.Player;
 import entities.Ticket;
 import entities.enums.Difficulty;
 import lombok.Getter;
-import org.bson.Document;
 import utils.ValidateInputs;
 
 import java.util.List;
