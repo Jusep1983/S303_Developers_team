@@ -47,7 +47,7 @@ public class MainMenu {
 
     public void mainMenuManager() {
 
-        RoomMenu roomMenu = new RoomMenu();
+
         NewsletterManager newsletterManager = new NewsletterManager();
         NotificationMenu notificationMenu = new NotificationMenu();
 
@@ -74,7 +74,7 @@ public class MainMenu {
                     roomManager.deleteRoomByUserSelection();
                     break;
                 case 5:
-                    roomMenu.subMenuEditManager(clueManager, decorationManager);
+                    RoomMenu.subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
                     Player player = businessManager.selectPlayer();
