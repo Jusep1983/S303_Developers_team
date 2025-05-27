@@ -2,6 +2,7 @@ package utils;
 
 import daos.ClueDAOImpl;
 import daos.RoomDAOImpl;
+import daos.TicketDAOImpl;
 import database.MongoDBConnection;
 import entities.Player;
 import entities.Room;
@@ -15,6 +16,7 @@ public class MainMenu {
     private final EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
     private final RoomManager roomManager = new RoomManager();
     private final RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
+    private final TicketDAOImpl ticketDAOImpl = new TicketDAOImpl();
     private final BusinessManager businessManager = new BusinessManager();
     private final ClueDAOImpl clueDao = new ClueDAOImpl();
     private final ClueManager clueManager = new ClueManager(roomManager, clueDao);
@@ -79,7 +81,7 @@ public class MainMenu {
                     businessManager.processSale(player);
                     break;
                 case 7:
-                    System.out.println(">> Total sales: " + businessManager.getTotalSales());
+                    System.out.println(">> Total sales: " + ticketDAOImpl.getTotalSales());
                     break;
                 case 8:
                     notificationMenu.notificationMenuManager();
