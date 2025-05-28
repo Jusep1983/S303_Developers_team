@@ -1,7 +1,7 @@
 package managers;
 
+import dtos.PlayerDTO;
 import dtos.RoomDTO;
-import entities.Player;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CertificatePrinter {
 
-    public void printCertificate(Player player, RoomDTO room) {
+    public void printCertificate(PlayerDTO player, RoomDTO room) {
         LocalDateTime completionTime = LocalDateTime.now();
         String certificate = generateCertificateText(player, room, completionTime);
 
@@ -20,7 +20,7 @@ public class CertificatePrinter {
         saveCertificateToFile(player, room, certificate);
     }
 
-    private String generateCertificateText(Player player, RoomDTO room, LocalDateTime completionTime) {
+    private String generateCertificateText(PlayerDTO player, RoomDTO room, LocalDateTime completionTime) {
         return """
                 ----------------------------------------
                       ESCAPE ROOM COMPLETION CERTIFICATE
@@ -36,14 +36,14 @@ public class CertificatePrinter {
 
                 ----------------------------------------
                 """.formatted(
-                player.getName(),
-                room.getName(),
+                player.name(),
+                room.name(),
                 completionTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
         );
     }
 
-    private void saveCertificateToFile(Player player, RoomDTO room, String content) {
-        String filename = "certificate_" + player.getName().replaceAll(" ", "_") + "_" + room.getName().replaceAll(" ", "_") + ".txt";
+    private void saveCertificateToFile(PlayerDTO player, RoomDTO room, String content) {
+        String filename = "certificate_" + player.name().replaceAll(" ", "_") + "_" + room.name().replaceAll(" ", "_") + ".txt";
         Path directory = Path.of("certificates");
         Path filePath = directory.resolve(filename);
         try {

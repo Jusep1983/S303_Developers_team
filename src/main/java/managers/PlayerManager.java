@@ -1,8 +1,7 @@
 package managers;
 
 import daos.PlayerDAOImpl;
-import daos.RoomDAOImpl;
-import daos.interfaces.RoomDAO;
+import dtos.PlayerDTO;
 import entities.Player;
 import exceptions.PlayerNotFoundException;
 import utils.ValidateInputs;
@@ -12,8 +11,6 @@ import java.util.List;
 public class PlayerManager {
 
     PlayerDAOImpl playerDAO = new PlayerDAOImpl();
-    private final RoomDAOImpl roomDAO = new RoomDAOImpl();
-
 
     public Player createPlayer(String name) {
         String email = ValidateInputs.validateEmail("Enter a valid email: ");
@@ -34,12 +31,12 @@ public class PlayerManager {
         return createPlayer(name);
     }
 
-    public Player selectPlayer() throws PlayerNotFoundException {
-        List<Player> players = playerDAO.findAll();
+    public PlayerDTO selectPlayer() throws PlayerNotFoundException {
+        List<PlayerDTO> players = playerDAO.findAllDTO();
         if (!players.isEmpty()) {
             String name = ValidateInputs.validateString("Enter the name of the player: ");
-            for (Player player : players) {
-                if (name.equals(player.getName())) {
+            for (PlayerDTO player : players) {
+                if (name.equals(player.name())) {
                     return player;
                 }
             }

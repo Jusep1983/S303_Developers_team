@@ -1,15 +1,5 @@
 package dtos;
 
-import lombok.Data;
 import org.bson.types.ObjectId;
 
-@Data
-public class ClueDTO {
-    private final ObjectId id;
-    private final String name;
-
-    public ClueDTO(ObjectId id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-}
+public record ClueDTO(ObjectId id, String name) {}

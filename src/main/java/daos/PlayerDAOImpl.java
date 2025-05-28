@@ -3,6 +3,7 @@ package daos;
 import com.mongodb.client.MongoCollection;
 import daos.interfaces.PlayerDAO;
 import database.MongoDBConnection;
+import dtos.PlayerDTO;
 import entities.Player;
 import entities.Ticket;
 import org.bson.Document;
@@ -29,11 +30,23 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
+    public List<PlayerDTO> findAllDTO() {
+        List<PlayerDTO> players = new ArrayList<>();
+            for (Document doc : playersCollection.find()) {
+                players.add(documentToPlayerDTO(doc));
+            }
+        if (players.isEmpty()) {
+            System.out.println("the list is empty");
+        }
+        return players;
+    }
+
+    @Override
     public List<Player> findAll() {
         List<Player> players = new ArrayList<>();
-            for (Document doc : playersCollection.find()) {
-                players.add(documentToPlayer(doc));
-            }
+        for (Document doc : playersCollection.find()) {
+            players.add(documentToPlayer(doc));
+        }
         if (players.isEmpty()) {
             System.out.println("the list is empty");
         }
@@ -48,6 +61,13 @@ public class PlayerDAOImpl implements PlayerDAO {
                 .append("isSubscribed", player.isSubscribed())
                 .append("ticketsBought", ticketDocs));
         playersCollection.updateOne(new Document("_id", player.getId()), updated);
+    }
+
+    private PlayerDTO documentToPlayerDTO(Document doc) {
+        return new PlayerDTO(
+                doc.getObjectId("_id"),
+                doc.getString("name")
+        );
     }
 
     private Player documentToPlayer(Document doc) {
