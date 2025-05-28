@@ -38,6 +38,11 @@ public class Newsletter implements Observable {
         }
     }
 
+//    public void sendNews(String lastNews){
+//        this.lastNews = lastNews;
+//        notifyObservers();
+//    }
+
 
 
 }
