@@ -30,7 +30,6 @@ public class RoomNotifier {
             newsletter.addObserver(player);
         }
         newsletter.notifyObservers();
-        //newsletter.notifyAllPlayers();
         System.out.println("Notification sent to all players!");
     }
 
@@ -43,7 +42,6 @@ public class RoomNotifier {
                 newsletter.addObserver(player);
         }
         newsletter.notifyObservers();
-        //newsletter.notifySubscribed();
         System.out.println("Notification sent to subscribed players!");
     }
 }
