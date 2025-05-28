@@ -1,17 +1,33 @@
 package managers;
 
-import dtos.PlayerDTO;
 import dtos.RoomDTO;
+import entities.Player;
+import entities.Ticket;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class CertificatePrinter {
 
-    public void printCertificate(PlayerDTO player, RoomDTO room) {
+    private boolean playerCompletedRoom(Player player, RoomDTO room) {
+        List<Ticket> tickets = player.getTicketsBought();
+        for (Ticket ticket : tickets) {
+            if (ticket.getRoom().equals(room.name())) {
+                return true;
+            }
+        }
+        System.out.println("This player did not play this room.");
+        return false;
+    }
+
+    public void printCertificate(Player player, RoomDTO room) {
+        if (!playerCompletedRoom(player, room)) {
+            return;
+        }
         LocalDateTime completionTime = LocalDateTime.now();
         String certificate = generateCertificateText(player, room, completionTime);
 
@@ -20,7 +36,7 @@ public class CertificatePrinter {
         saveCertificateToFile(player, room, certificate);
     }
 
-    private String generateCertificateText(PlayerDTO player, RoomDTO room, LocalDateTime completionTime) {
+    private String generateCertificateText(Player player, RoomDTO room, LocalDateTime completionTime) {
         return """
                 ----------------------------------------
                       ESCAPE ROOM COMPLETION CERTIFICATE
@@ -36,14 +52,14 @@ public class CertificatePrinter {
 
                 ----------------------------------------
                 """.formatted(
-                player.name(),
+                player.getName(),
                 room.name(),
                 completionTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
         );
     }
 
-    private void saveCertificateToFile(PlayerDTO player, RoomDTO room, String content) {
-        String filename = "certificate_" + player.name().replaceAll(" ", "_") + "_" + room.name().replaceAll(" ", "_") + ".txt";
+    private void saveCertificateToFile(Player player, RoomDTO room, String content) {
+        String filename = "certificate_" + player.getName().replaceAll(" ", "_") + "_" + room.name().replaceAll(" ", "_") + ".txt";
         Path directory = Path.of("certificates");
         Path filePath = directory.resolve(filename);
         try {

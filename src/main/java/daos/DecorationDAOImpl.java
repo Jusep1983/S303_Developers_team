@@ -13,16 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DecorationDAOImpl implements DecorationDAO {
+
     private final MongoCollection<Document> escapeRoomCollection;
 
     public DecorationDAOImpl() {
         escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
     }
-
-
-
-
-
 
     @Override
     public void addDecoration(ObjectId roomId, Decoration decoration) {
@@ -49,7 +45,6 @@ public class DecorationDAOImpl implements DecorationDAO {
                         new Document("_id", decoration.getId())))
         );
     }
-
 
     @Override
     public void save(Decoration decoration, ObjectId roomId) {
@@ -91,11 +86,8 @@ public class DecorationDAOImpl implements DecorationDAO {
                         decorationDoc.getString("name"),
                         Decoration.Material.valueOf(decorationDoc.getString("material"))
                 );
-
-
         }
         return null;
-
     }
 
     @Override
@@ -108,7 +100,6 @@ public class DecorationDAOImpl implements DecorationDAO {
         }
         List<Document> decorationsDocList = (List<Document>) roomDoc.get("decorations");
 
-
         for (Document decorationDoc : decorationsDocList) {
             decorations.add(new Decoration(
                     decorationDoc.getObjectId("_id"),
@@ -116,9 +107,7 @@ public class DecorationDAOImpl implements DecorationDAO {
                     decorationDoc.getString("name"),
                     Decoration.Material.valueOf(decorationDoc.getString("material"))
             ));
-
         }
         return decorations;
-
     }
 }

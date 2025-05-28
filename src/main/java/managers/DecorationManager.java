@@ -17,6 +17,7 @@ import java.util.List;
 public class DecorationManager {
     private final RoomManager roomManager;
     private final DecorationDAOImpl decorationDAOImpl;
+
     public DecorationManager(RoomManager roomManager, DecorationDAOImpl decorationDAOImpl) {
         this.roomManager = roomManager;
         this.decorationDAOImpl = decorationDAOImpl;
