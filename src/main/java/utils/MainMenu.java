@@ -5,7 +5,6 @@ import daos.DecorationDAOImpl;
 import daos.RoomDAOImpl;
 import daos.TicketDAOImpl;
 import database.MongoDBConnection;
-import dtos.PlayerDTO;
 import dtos.RoomDTO;
 import entities.Player;
 import entities.Room;
@@ -52,10 +51,9 @@ public class MainMenu {
 
     public void mainMenuManager() {
 
-
         NewsletterManager newsletterManager = new NewsletterManager();
         NotificationMenu notificationMenu = new NotificationMenu();
-
+        Player player;
         boolean exit = false;
 
         while (!exit) {
@@ -86,7 +84,7 @@ public class MainMenu {
                     RoomMenu.subMenuEditManager(clueManager, decorationManager);
                     break;
                 case 6:
-                    Player player = playerManager.selectOrCreatePlayer();
+                    player = playerManager.selectOrCreatePlayer();
                     businessManager.processSale(player);
                     break;
                 case 7:
@@ -103,9 +101,9 @@ public class MainMenu {
                     CertificatePrinter printer = new CertificatePrinter();
 
                     try {
-                        PlayerDTO playerDTO = playerManager.selectPlayer();
+                        player = playerManager.selectPlayer();
                         RoomDTO room = roomManager.getRoomDTO("print certification for");
-                        printer.printCertificate(playerDTO, room);
+                        printer.printCertificate(player, room);
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
