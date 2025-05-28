@@ -1,17 +1,24 @@
-🧩 Virtual Escape Room - Level 3
+
+<p align="center"><h1 align="center">Virtual Escape Room - Level 3</h1></p>
+
+<br>
+
+---
+
 Welcome to the Virtual Escape Room Project – Level 3, where we enhance our immersive puzzle-solving experience using MongoDB as the data persistence layer.
 
-📌 Project Overview
+## 📌 Project Overview
 This application simulates a Virtual Escape Room, where users can enjoy themed rooms, follow clues, and interact with unique decorative items. Level 3 builds upon previous levels but replaces MySQL with MongoDB for data management.
 
-🛠️ Technologies Used
+## 🛠️ Technologies Used
 Java 17+
 MongoDB
 MongoDB Java Driver
 Lombok
 JUnit (for testing)
+Mockit
 
-🧱 Core Entities
+## 🧱 Core Entities
 Escape Room: The main entity containing rooms, clues, and decorations.
 Room: Each with a name, difficulty, and collections of clues and decorations.
 Clue: Includes a name, price, and theme (e.g., PUZZLE, PASSWORD).
@@ -20,7 +27,7 @@ Ticket: Represents a user's entry with a recorded value.
 Certificate: Issued to users who complete the rooms successfully.
 Player : has an name, an email and isSubscribed (or needs to unsubscribe) and has ticketsBought list.
 
-🧩 Features
+## 🧩 Features
 ✅ Create a new Virtual Escape Room
 ✅ Add rooms with difficulty levels
 ✅ Add themed clues to rooms
@@ -34,11 +41,14 @@ Player : has an name, an email and isSubscribed (or needs to unsubscribe) and ha
 
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-🧪 Testing (from Level 2)
-At least two core functionalities are tested using JUnit:
+## 🧪 Testing (from Level 2) 
+(at least two core functionalities are tested using JUnit)
+- Creating a room (RoomTest)
+- Sending Newsletter to all players in database, sending Newletter to susbcribed players, according to Oberver Pattern (NotificationServiceTest).
+- Inserting a new room into MongoDB database and notifying all subscribed players (RoomDAOImplTest)
 
-Adding clues to a room
-Calculating total inventory value
+_Adding clues to a room
+Calculating total inventory value_
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 💾 MongoDB Integration (Level 3)
@@ -46,24 +56,25 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - escape_rooms: Stores all data about rooms, clues, and decorations. Each room document embeds sub-documents for clues and decorations
 - players : stores all about players tickets
 
+✅ Singleton Pattern
+✅ Observer Pattern
+✅ DAO Pattern: The app uses the DAO pattern to separate data access logic. Interfaces are defined for each domain (e.g., ClueDAO, RoomDAO), and implementations like ClueDAOImpl use the MongoDB Java driver.
 
-✅ DAO Pattern:
-The app uses the DAO pattern to separate data access logic. Interfaces are defined for each domain (e.g., ClueDAO, RoomDAO), and implementations like ClueDAOImpl use the MongoDB Java driver.
 
 
 ▶️ Getting Started
 Install MongoDB and ensure it's running on localhost:27017.
 
 Clone the project:
-git clone https://github.com/your-username/escape-room-mongodb.git
+git clone https://github.com/Jusep1983/S303_Developers_team
 cd escape-room-mongodb
 Run the application (Main class).
 
 Interact via console-based menu.
 
-📬 Notifications
-/////////////////////////////////////////////////////////////////Users can register to receive notifications when:
-//////////////////////////////////////////////////////////New clues or decorations are added  / A room is completed
+📬 Notifications : 
+- A new room is created
+- Newsletter to susbcribed player and to all players.
 
 📈 Future Improvements
 GUI interface with JavaFX or Spring Boot REST API
