@@ -87,8 +87,8 @@ public class MainMenu {
                 case 10:
                     CertificatePrinter printer = new CertificatePrinter();
                     try {
-                        player = playerManager.selectPlayer();
-                        RoomDTO room = roomManager.getRoomDTO("print certification for");
+                        player = escapeRoom.getPlayerManager().selectPlayer();
+                        RoomDTO room = escapeRoom.getRoomManager().getRoomDTO("print certification for");
                         printer.printCertificate(player, room);
 
                     } catch (PlayerNotFoundException e) {
