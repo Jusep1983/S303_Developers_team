@@ -56,6 +56,8 @@ public class Player implements Observer {
         ticketsBought.add(ticket);
     }
 
+
+
     @Override
     public void update(String message) {
         System.out.println("Hello " + this.getName() + ". You have a new message :" + message);

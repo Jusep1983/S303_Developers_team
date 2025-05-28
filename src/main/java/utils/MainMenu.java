@@ -72,7 +72,11 @@ public class MainMenu {
                 case 3:
                     Room newRoom = RoomManager.createRoom();
                     roomDAOImpl.save(newRoom);
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+
                     break;
                 case 4:
                     roomManager.deleteRoomByUserSelection();
