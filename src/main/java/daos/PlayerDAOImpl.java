@@ -36,7 +36,7 @@ public class PlayerDAOImpl implements PlayerDAO {
                 players.add(documentToPlayerDTO(doc));
             }
         if (players.isEmpty()) {
-            System.out.println("the list is empty");
+            System.out.println("Players list is empty");
         }
         return players;
     }
@@ -48,7 +48,7 @@ public class PlayerDAOImpl implements PlayerDAO {
             players.add(documentToPlayer(doc));
         }
         if (players.isEmpty()) {
-            System.out.println("the list is empty");
+            System.out.println("Players list is empty");
         }
         return players;
     }
@@ -76,7 +76,7 @@ public class PlayerDAOImpl implements PlayerDAO {
                 doc.getString("name"),
                 doc.getString("email")
         );
-        player.setSubscribed(doc.getBoolean("isSubscribed"));
+        player.setSubscribed(doc.getBoolean("isSubscribed", true));
 
         List<Document> ticketDocs = doc.getList("ticketsBought", Document.class);
         if (ticketDocs != null) {

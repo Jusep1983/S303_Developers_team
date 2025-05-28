@@ -1,0 +1,30 @@
+[
+  {
+    "_id": { "$oid": "6650b0000000000000000001" },
+    "name": "Carla",
+    "email": "carla@gmail.com",
+    "isSubscribed": true,
+    "ticketsBought": []
+  },
+  {
+    "_id": { "$oid": "6650b0000000000000000002" },
+    "name": "Paola",
+    "email": "paola@gmail.com",
+    "isSubscribed": true,
+    "ticketsBought": []
+  },
+  {
+    "_id": { "$oid": "6650b0000000000000000003" },
+    "name": "Montse",
+    "email": "montse@gmail.com",
+    "isSubscribed": false,
+    "ticketsBought": []
+  },
+  {
+    "_id": { "$oid": "6650b0000000000000000004" },
+    "name": "Neus",
+    "email": "neus@gmail.com",
+    "isSubscribed": false,
+    "ticketsBought": []
+  }
+]
