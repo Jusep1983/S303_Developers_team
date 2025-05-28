@@ -1,19 +1,19 @@
 package utils;
 
 import daos.PlayerDAOImpl;
-import entities.Newsletter;
 import entities.Player;
+import managers.NewsletterManager;
 
 import java.util.List;
 
 public class NotificationMenu {
 
     List<Player> players;
-    private Newsletter newsletter;
+    private final NewsletterManager newsletterManager;
 
     public NotificationMenu() {
         players = new PlayerDAOImpl().findAll();
-        this.newsletter = new Newsletter(players);
+        this.newsletterManager = new NewsletterManager();
     }
 
 
@@ -34,27 +34,10 @@ public class NotificationMenu {
         do {
             switch (notificationMenuOptions()) {
                 case 1:
-                    String lastNewsToAll = ValidateInputs.validateString("Enter the message you want to send to all players : ");
-                    newsletter.setLastNews(lastNewsToAll);
-                    newsletter.getObservers().clear();
-                    for (Player player : players) {
-                        newsletter.addObserver(player);
-                    }
-                    newsletter.notifyObservers();
-                    //newsletter.notifyAllPlayers();
-                    System.out.println("Notification sent to all players!");
+                    newsletterManager.notifyAllPlayers();
                     break;
                 case 2:
-                    String lastNewsToSubscribed = ValidateInputs.validateString("Enter the message you want to send to your subscribers : ");
-                    newsletter.setLastNews(lastNewsToSubscribed);
-                    newsletter.getObservers().clear();
-                    for (Player player : players) {
-                        if (player.isSubscribed())
-                            newsletter.addObserver(player);
-                    }
-                    newsletter.notifyObservers();
-                    //newsletter.notifySubscribed();
-                    System.out.println("Notification sent to subscribed players!");
+                    newsletterManager.notifySubscribedPlayers();
                     break;
                 case 0:
                     exit = true;
