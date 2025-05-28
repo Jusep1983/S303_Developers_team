@@ -1,13 +1,12 @@
 package daos;
 
 import com.mongodb.client.MongoCollection;
+import daos.interfaces.PlayerDAO;
 import daos.interfaces.RoomDAO;
 import database.MongoDBConnection;
-import entities.Clue;
-import entities.Decoration;
-import entities.Room;
+import entities.*;
 import entities.enums.Difficulty;
-import observer.RoomNotifier;
+import observer.NotificationService;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -17,10 +16,14 @@ import org.bson.Document;
 public class RoomDAOImpl implements RoomDAO {
 
     private final MongoCollection<Document> escapeRoomCollection;
-    private final RoomNotifier roomNotifier = new RoomNotifier();
+    private final NotificationService notificationService;
 
     public RoomDAOImpl() {
         escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+        PlayerDAOImpl playerDAO = new PlayerDAOImpl();
+        List<Player> players = playerDAO.findAll();  // Récupère tous les joueurs
+        Newsletter newsletter = new Newsletter(players);
+        this.notificationService = new NotificationService(playerDAO, newsletter);
     }
 
 
@@ -32,7 +35,8 @@ public class RoomDAOImpl implements RoomDAO {
                 .append("price", room.getPrice())
                 .append("difficulty", room.getDifficulty());
         escapeRoomCollection.insertOne(doc);
-        roomNotifier.notifyAllSubscribedPlayers(room);
+
+        notificationService.notifyNewRoomToAllSubscribedPlayers(room);
     }
 
     @Override
