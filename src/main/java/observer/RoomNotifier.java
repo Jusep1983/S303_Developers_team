@@ -4,7 +4,7 @@ import daos.PlayerDAOImpl;
 import entities.Newsletter;
 import entities.Player;
 import entities.Room;
-import utils.ValidateInputs;
+import validation.ValidateInputs;
 
 import java.util.List;
 
@@ -23,10 +23,11 @@ public class RoomNotifier {
     }
 
     public void notifyAllPlayers() {
+        List<Player> updatedPlayers = playerDAO.findAll();
         String lastNewsToAll = ValidateInputs.validateString("Enter the message you want to send to all players : ");
         newsletter.setLastNews(lastNewsToAll);
         newsletter.getObservers().clear();
-        for (Player player : players) {
+        for (Player player : updatedPlayers) {
             newsletter.addObserver(player);
         }
         newsletter.notifyObservers();
@@ -34,10 +35,11 @@ public class RoomNotifier {
     }
 
     public void notifySubscribedPlayers() {
+        List<Player> updatedPlayers = playerDAO.findAll();
         String lastNewsToSubscribed = ValidateInputs.validateString("Enter the message you want to send to your subscribers : ");
         newsletter.setLastNews(lastNewsToSubscribed);
         newsletter.getObservers().clear();
-        for (Player player : players) {
+        for (Player player : updatedPlayers) {
             if (player.isSubscribed())
                 newsletter.addObserver(player);
         }

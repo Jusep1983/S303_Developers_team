@@ -1,8 +1,9 @@
-package utils;
+package menus;
 
 import daos.PlayerDAOImpl;
 import entities.Player;
 import observer.RoomNotifier;
+import validation.ValidateInputs;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package managers;
 import daos.PlayerDAOImpl;
 import entities.Player;
 import exceptions.PlayerNotFoundException;
-import utils.ValidateInputs;
+import validation.ValidateInputs;
 
 import java.util.List;
 
