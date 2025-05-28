@@ -70,24 +70,6 @@ public class EscapeRoomManager {
         return totalDecorations;
     }
 
-    // Quizás los metodos addRoom() y editRoom() debería ir en RoomDAO o RoomManager
-    public void addRoom(Document roomDoc) {
-        this.escapeRoomCollection.insertOne(roomDoc);
-    }
-
-    public void editRoom(Document roomDoc) {
-        ObjectId roomId = roomDoc.getObjectId("_id");
-        Document updateFields = new Document()
-                .append("name", roomDoc.getString("name"))
-                .append("price", roomDoc.getInteger("price"))
-                .append("difficulty", roomDoc.getString("difficulty"));
-
-        escapeRoomCollection.updateOne(
-                new Document("_id", roomId),
-                new Document("$set", updateFields)
-        );
-    }
-
     public void showAllAssets() {
         try (MongoCursor<Document> cursor = escapeRoomCollection.find().iterator()) {
             while (cursor.hasNext()) {
@@ -187,5 +169,4 @@ public class EscapeRoomManager {
         }
         return decorationsPrice;
     }
-
 }
