@@ -47,9 +47,9 @@ public class DecorationManager {
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Decoration decoration = createDecoration();
-            decorationDAOImpl.save(decoration, room.getId());
+            decorationDAOImpl.save(decoration, room.id());
 
-            System.out.println(">> Decoration '" + decoration.getName() + "' added to room '" + room.getName() + "'");
+            System.out.println(">> Decoration '" + decoration.getName() + "' added to room '" + room.name() + "'");
 
         }
     }
@@ -61,16 +61,16 @@ public class DecorationManager {
             System.out.println("Going back...");
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
-            ObjectId roomId = room.getId();
+            ObjectId roomId = room.id();
 
-            int decorationChoice = ChosenDTODecoration("delete", roomId);
+            int decorationChoice = chosenDTODecoration("delete", roomId);
             if (decorationChoice == 0) {
                 System.out.println("Going back...");
             } else {
                 List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
                 DecorationDTO decorationDTO = decorationsDTO.get(decorationChoice - 1);
-                this.decorationDAOImpl.delete(decorationDTO.getId(),roomId);
-                System.out.println(">> Decoration '" + decorationDTO.getName() + "' successfully deleted.");
+                this.decorationDAOImpl.delete(decorationDTO.id(),roomId);
+                System.out.println(">> Decoration '" + decorationDTO.name() + "' successfully deleted.");
 
             }
         }
@@ -98,14 +98,14 @@ public class DecorationManager {
         return decorationsDAO;
     }
 
-    public int ChosenDTODecoration(String action, ObjectId roomId) {
+    public int chosenDTODecoration(String action, ObjectId roomId) {
         List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
         if (decorationsDTO.isEmpty()) {
             System.out.println("No decorations to " + action + " in this room.");
             return 0;
         } else {
             for (int i = 0; i < decorationsDTO.size(); i++) {
-                System.out.println((i + 1) + ". " + decorationsDTO.get(i).getName());
+                System.out.println((i + 1) + ". " + decorationsDTO.get(i).name());
             }
             System.out.println("0. Go back");
             return ValidateInputs.validateIntegerBetweenOnRange(

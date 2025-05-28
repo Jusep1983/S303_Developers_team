@@ -12,7 +12,7 @@ public class TicketPrinter {
 
     public static void printTicket(Player player, RoomDTO room) {
 
-        Difficulty difficulty = room.getDifficulty();
+        Difficulty difficulty = room.difficulty();
         int durationMinutes = difficulty.getDurationMinutes();
         int price = difficulty.getPriceByDifficulty();
         LocalDate date = LocalDate.now();
@@ -26,7 +26,7 @@ public class TicketPrinter {
         System.out.println(title);
         System.out.println(border);
         System.out.printf(lineFormat + "%n", "Player Name", player.getName());
-        System.out.printf(lineFormat + "%n", "Room Name", room.getName());
+        System.out.printf(lineFormat + "%n", "Room Name", room.name());
         System.out.printf(lineFormat + "%n", "Date", date);
         System.out.printf(lineFormat + "%n", "Start Time", startTime.format(DateTimeFormatter.ofPattern("HH:mm")));
         System.out.printf(lineFormat + "%n", "Duration", durationMinutes + " minutes");

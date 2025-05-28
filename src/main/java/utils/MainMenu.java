@@ -5,6 +5,7 @@ import daos.DecorationDAOImpl;
 import daos.RoomDAOImpl;
 import daos.TicketDAOImpl;
 import database.MongoDBConnection;
+import dtos.PlayerDTO;
 import dtos.RoomDTO;
 import entities.Player;
 import entities.Room;
@@ -102,9 +103,9 @@ public class MainMenu {
                     CertificatePrinter printer = new CertificatePrinter();
 
                     try {
-                        player = playerManager.selectPlayer();
+                        PlayerDTO playerDTO = playerManager.selectPlayer();
                         RoomDTO room = roomManager.getRoomDTO("print certification for");
-                        printer.printCertificate(player, room);
+                        printer.printCertificate(playerDTO, room);
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }

@@ -46,8 +46,8 @@ public class ClueManager {
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Clue clue = createClue();
-            clueDao.save(clue, room.getId());
-            System.out.println(">> Clue '" + clue.getName() + "' added to room '" + room.getName() + "'");
+            clueDao.save(clue, room.id());
+            System.out.println(">> Clue '" + clue.getName() + "' added to room '" + room.name() + "'");
         }
     }
 
@@ -58,16 +58,16 @@ public class ClueManager {
             System.out.println("Going back...");
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
-            ObjectId roomId = room.getId();
+            ObjectId roomId = room.id();
 
-            int clueChoice = ChosenDTOClue("delete", roomId);
+            int clueChoice = chosenDTOClue("delete", roomId);
             if (clueChoice == 0) {
                 System.out.println("Going back...");
             } else {
                 List<ClueDTO> clues = getAllCluesDTO(roomId);
                 ClueDTO clue = clues.get(clueChoice - 1);
-            clueDao.delete(clue.getId(), roomId);
-                System.out.println(">> Clue '" + clue.getName() + "' successfully deleted.");
+            clueDao.delete(clue.id(), roomId);
+                System.out.println(">> Clue '" + clue.name() + "' successfully deleted.");
             }
         }
     }
@@ -95,14 +95,14 @@ public class ClueManager {
         return clueDTOS;
     }
 
-    public int ChosenDTOClue(String action, ObjectId roomId) {
+    public int chosenDTOClue(String action, ObjectId roomId) {
         List<ClueDTO> clues = getAllCluesDTO(roomId);
         if (clues.isEmpty()) {
             System.out.println("No clues to " + action + " in this room.");
             return 0;
         } else {
             for (int i = 0; i < clues.size(); i++) {
-                System.out.println((i + 1) + ". " + clues.get(i).getName());
+                System.out.println((i + 1) + ". " + clues.get(i).name());
             }
             System.out.println("0. Go back");
             return ValidateInputs.validateIntegerBetweenOnRange(

@@ -12,7 +12,7 @@ public class BusinessManager {
     RoomManager roomManager = new RoomManager();
 
     private void sellTicket(RoomDTO room, Player player) {
-        Difficulty difficulty = room.getDifficulty();
+        Difficulty difficulty = room.difficulty();
         Ticket ticket = new Ticket(difficulty.getPriceByDifficulty());
         player.addTicket(ticket);
         playerDAO.update(player);

@@ -10,7 +10,6 @@ import dtos.RoomDTO;
 import entities.Room;
 import entities.enums.Difficulty;
 import lombok.Getter;
-import observer.Observer;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import utils.ValidateInputs;
@@ -57,8 +56,8 @@ public class RoomManager {
         if (choice == 0) {
             System.out.println("Going back...");
         } else {
-            ObjectId idToDelete = rooms.get(choice - 1).getId();
-            String nameRoom = rooms.get(choice - 1).getName();
+            ObjectId idToDelete = rooms.get(choice - 1).id();
+            String nameRoom = rooms.get(choice - 1).name();
             deleteById(idToDelete, nameRoom);
         }
     }
@@ -84,7 +83,7 @@ public class RoomManager {
             return 0;
         } else {
             for (int i = 0; i < rooms.size(); i++) {
-                System.out.println((i + 1) + ". " + rooms.get(i).getName());
+                System.out.println((i + 1) + ". " + rooms.get(i).name());
             }
             System.out.println("0. Go back");
             return ValidateInputs.validateIntegerBetweenOnRange(
