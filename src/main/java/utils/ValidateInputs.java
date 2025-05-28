@@ -79,4 +79,27 @@ public class ValidateInputs {
         }
     }
 
+    public static String validateEmail(String message) {
+        while (true) {
+            try {
+                System.out.print(message);
+                String email = checkString();
+
+                if (!isValidEmail(email)) {
+                    throw new IllegalArgumentException("Invalid email format.");
+                }
+
+                return email;
+            } catch (EmptyInputException | NoSuchElementException | IllegalStateException | IllegalArgumentException e) {
+                System.out.println("Error, " + e.getMessage());
+            }
+        }
+    }
+
+    private static boolean isValidEmail(String email) {
+        String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+        return email.matches(regex);
+    }
+
+
 }

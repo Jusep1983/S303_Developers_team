@@ -12,7 +12,7 @@ public class PlayerManager {
     PlayerDAOImpl playerDAO = new PlayerDAOImpl();
 
     public Player createPlayer(String name) {
-        String email = ValidateInputs.validateString("Enter a valid email: ");
+        String email = ValidateInputs.validateEmail("Enter a valid email: ");
         Player player = new Player(name, email);
 
         playerDAO.save(player);
