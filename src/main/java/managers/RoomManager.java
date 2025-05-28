@@ -12,7 +12,7 @@ import entities.enums.Difficulty;
 import lombok.Getter;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import utils.ValidateInputs;
+import validation.ValidateInputs;
 
 import java.util.ArrayList;
 import java.util.List;

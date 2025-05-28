@@ -1,7 +1,8 @@
-package utils;
+package menus;
 
 import managers.ClueManager;
 import managers.DecorationManager;
+import validation.ValidateInputs;
 
 public class RoomMenu {
 

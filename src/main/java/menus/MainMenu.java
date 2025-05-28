@@ -1,4 +1,4 @@
-package utils;
+package menus;
 
 import database.MongoDBConnection;
 import dtos.RoomDTO;
@@ -8,6 +8,7 @@ import entities.Room;
 import exceptions.PlayerNotFoundException;
 import managers.*;
 import managers.NewsletterManager;
+import validation.ValidateInputs;
 
 
 public class MainMenu {

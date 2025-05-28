@@ -4,7 +4,7 @@ import daos.PlayerDAOImpl;
 import entities.Newsletter;
 import entities.Player;
 import entities.Room;
-import utils.ValidateInputs;
+import validation.ValidateInputs;
 
 import java.util.List;
 
