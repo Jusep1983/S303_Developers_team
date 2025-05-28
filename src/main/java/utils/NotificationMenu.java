@@ -2,18 +2,18 @@ package utils;
 
 import daos.PlayerDAOImpl;
 import entities.Player;
-import managers.NewsletterManager;
+import observer.RoomNotifier;
 
 import java.util.List;
 
 public class NotificationMenu {
 
     List<Player> players;
-    private final NewsletterManager newsletterManager;
+    private final RoomNotifier roomNotifier;
 
     public NotificationMenu() {
         players = new PlayerDAOImpl().findAll();
-        this.newsletterManager = new NewsletterManager();
+        this.roomNotifier = new RoomNotifier();
     }
 
 
@@ -34,10 +34,10 @@ public class NotificationMenu {
         do {
             switch (notificationMenuOptions()) {
                 case 1:
-                    newsletterManager.notifyAllPlayers();
+                    roomNotifier.notifyAllPlayers();
                     break;
                 case 2:
-                    newsletterManager.notifySubscribedPlayers();
+                    roomNotifier.notifySubscribedPlayers();
                     break;
                 case 0:
                     exit = true;
