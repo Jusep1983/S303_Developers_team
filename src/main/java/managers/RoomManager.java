@@ -19,8 +19,11 @@ import java.util.List;
 
 @Getter
 public class RoomManager {
-    private final MongoCollection<Document> escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+    private final MongoCollection<Document> escapeRoomCollection;
 
+    public RoomManager() {
+        this.escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+    }
 
     public static Room createRoom() {
         String name = ValidateInputs.validateString("Enter the name of the room to create: ");

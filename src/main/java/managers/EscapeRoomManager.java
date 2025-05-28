@@ -12,7 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 public class EscapeRoomManager {
-    MongoCollection<Document> escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+    MongoCollection<Document> escapeRoomCollection;
+
+    public EscapeRoomManager() {
+        this.escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+    }
 
     public Map<String, Integer> getInventoryCount() {
         return Map.of(

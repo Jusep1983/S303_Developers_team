@@ -14,9 +14,7 @@ public class CertificatePrinter {
     public void printCertificate(PlayerDTO player, RoomDTO room) {
         LocalDateTime completionTime = LocalDateTime.now();
         String certificate = generateCertificateText(player, room, completionTime);
-
         System.out.println(certificate);
-
         saveCertificateToFile(player, room, certificate);
     }
 

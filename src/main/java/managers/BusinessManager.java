@@ -8,8 +8,13 @@ import entities.enums.Difficulty;
 
 public class BusinessManager {
 
-    PlayerDAOImpl playerDAO = new PlayerDAOImpl();
-    RoomManager roomManager = new RoomManager();
+    PlayerDAOImpl playerDAO;
+    RoomManager roomManager;
+
+    public BusinessManager() {
+        this.playerDAO = new PlayerDAOImpl();
+        this.roomManager = new RoomManager();
+    }
 
     private void sellTicket(RoomDTO room, Player player) {
         Difficulty difficulty = room.difficulty();

@@ -10,7 +10,11 @@ import java.util.List;
 
 public class PlayerManager {
 
-    PlayerDAOImpl playerDAO = new PlayerDAOImpl();
+    PlayerDAOImpl playerDAO;
+
+    public PlayerManager() {
+        this.playerDAO = new PlayerDAOImpl();
+    }
 
     public Player createPlayer(String name) {
         String email = ValidateInputs.validateEmail("Enter a valid email: ");
