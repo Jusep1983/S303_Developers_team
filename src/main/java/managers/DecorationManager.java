@@ -43,7 +43,7 @@ public class DecorationManager {
 
     public void addDecorationToRoom() {
         List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoom("add decoration");
+        int roomChoice = this.roomManager.chooseRoomDTO("add decoration");
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {
@@ -58,7 +58,7 @@ public class DecorationManager {
 
     public void deleteDecorationFromRoom() {
         List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoom("delete decoration");
+        int roomChoice = this.roomManager.chooseRoomDTO("delete decoration");
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {

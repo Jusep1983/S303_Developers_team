@@ -1,7 +1,6 @@
 package utils;
 
 import database.MongoDBConnection;
-import dtos.PlayerDTO;
 import dtos.RoomDTO;
 import entities.EscapeRoom;
 import entities.Player;
@@ -39,10 +38,9 @@ public class MainMenu {
 
     public void mainMenuManager() {
 
-
         NewsletterManager newsletterManager = new NewsletterManager();
         NotificationMenu notificationMenu = new NotificationMenu();
-
+        Player player;
         boolean exit = false;
 
         while (!exit) {
@@ -73,7 +71,7 @@ public class MainMenu {
                     RoomMenu.subMenuEditManager(escapeRoom.getClueManager(), escapeRoom.getDecorationManager());
                     break;
                 case 6:
-                    Player player = escapeRoom.getPlayerManager().selectOrCreatePlayer();
+                    player = escapeRoom.getPlayerManager().selectOrCreatePlayer();
                     escapeRoom.getBusinessManager().processSale(player);
                     break;
                 case 7:
@@ -88,11 +86,11 @@ public class MainMenu {
                     break;
                 case 10:
                     CertificatePrinter printer = new CertificatePrinter();
-
                     try {
-                        PlayerDTO playerDTO = escapeRoom.getPlayerManager().selectPlayer();
-                        RoomDTO room = escapeRoom.getRoomManager().getRoomDTO("print certification for");
-                        printer.printCertificate(playerDTO, room);
+                        player = playerManager.selectPlayer();
+                        RoomDTO room = roomManager.getRoomDTO("print certification for");
+                        printer.printCertificate(player, room);
+
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }

@@ -1,9 +1,6 @@
 package daos;
 
-import com.mongodb.MongoException;
-import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import daos.interfaces.ClueDAO;
 import database.MongoDBConnection;
 import entities.Clue;
@@ -15,11 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClueDAOImpl implements ClueDAO {
+
     private final MongoCollection<Document> roomsMongoCollection;
 
     public ClueDAOImpl() {
         this.roomsMongoCollection = MongoDBConnection.getEscapeRoomCollection();
     }
+
 
     @Override
     public void save(Clue clue, ObjectId roomId) {
@@ -32,7 +31,6 @@ public class ClueDAOImpl implements ClueDAO {
                 new Document("_id", roomId),
                 new Document("$push", new Document("clues", doc))
         );
-
     }
 
     @Override
@@ -41,12 +39,10 @@ public class ClueDAOImpl implements ClueDAO {
                 new Document("_id", roomId),
                 new Document("$pull", new Document("clues", new Document("_id", clueId)))
         );
-
     }
 
     @Override
     public Clue findById(ObjectId clueId, ObjectId roomId) {
-
         Document roomDoc = roomsMongoCollection
                 .find(new Document("_id", roomId)).first();
         if (roomDoc == null) {
@@ -63,12 +59,8 @@ public class ClueDAOImpl implements ClueDAO {
                         clueDoc.getString("name"),
                         Theme.valueOf(clueDoc.getString("theme"))
                 );
-
-
         }
         return null;
-
-
     }
 
     @Override
@@ -81,7 +73,6 @@ public class ClueDAOImpl implements ClueDAO {
         }
             List<Document> cluesdocList = (List<Document>) roomDoc.get("clues");
 
-
             for (Document clueDoc : cluesdocList) {
                 clues.add(new Clue(
                         clueDoc.getObjectId("_id"),
@@ -89,11 +80,7 @@ public class ClueDAOImpl implements ClueDAO {
                         clueDoc.getString("name"),
                         Theme.valueOf(clueDoc.getString("theme"))
                 ));
-
             }
             return clues;
-
         }
-
-
     }

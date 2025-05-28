@@ -18,7 +18,7 @@ public class BusinessManager {
 
     private void sellTicket(RoomDTO room, Player player) {
         Difficulty difficulty = room.difficulty();
-        Ticket ticket = new Ticket(difficulty.getPriceByDifficulty());
+        Ticket ticket = new Ticket(difficulty.getPriceByDifficulty(), room.name());
         player.addTicket(ticket);
         playerDAO.update(player);
     }

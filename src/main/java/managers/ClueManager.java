@@ -40,7 +40,7 @@ public class ClueManager {
 
     public void addClueToRoom() {
         List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoom("add clue");
+        int roomChoice = this.roomManager.chooseRoomDTO("add clue");
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {
@@ -53,7 +53,7 @@ public class ClueManager {
 
     public void deleteClueFromRoom() {
         List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoom("delete clue");
+        int roomChoice = this.roomManager.chooseRoomDTO("delete clue");
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {

@@ -1,7 +1,6 @@
 package managers;
 
 import daos.PlayerDAOImpl;
-import dtos.PlayerDTO;
 import entities.Player;
 import exceptions.PlayerNotFoundException;
 import utils.ValidateInputs;
@@ -35,12 +34,12 @@ public class PlayerManager {
         return createPlayer(name);
     }
 
-    public PlayerDTO selectPlayer() throws PlayerNotFoundException {
-        List<PlayerDTO> players = playerDAO.findAllDTO();
+    public Player selectPlayer() throws PlayerNotFoundException {
+        List<Player> players = playerDAO.findAll();
         if (!players.isEmpty()) {
             String name = ValidateInputs.validateString("Enter the name of the player: ");
-            for (PlayerDTO player : players) {
-                if (name.equals(player.name())) {
+            for (Player player : players) {
+                if (name.equals(player.getName())) {
                     return player;
                 }
             }

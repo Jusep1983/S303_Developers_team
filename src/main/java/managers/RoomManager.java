@@ -19,11 +19,13 @@ import java.util.List;
 
 @Getter
 public class RoomManager {
+
     private final MongoCollection<Document> escapeRoomCollection;
 
     public RoomManager() {
         this.escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
     }
+
 
     public static Room createRoom() {
         String name = ValidateInputs.validateString("Enter the name of the room to create: ");
@@ -42,11 +44,7 @@ public class RoomManager {
                 .decorations(new ArrayList<>())
                 .clues(new ArrayList<>())
                 .build();
-
-
     }
-
-
 
     private void deleteById(ObjectId id, String name) {
         this.escapeRoomCollection.deleteOne(Filters.eq("_id", id));
@@ -55,7 +53,7 @@ public class RoomManager {
 
     public void deleteRoomByUserSelection() {
         List<RoomDTO> rooms = getAllRoomsDTO();
-        int choice = chooseRoom("delete");
+        int choice = chooseRoomDTO("delete");
         if (choice == 0) {
             System.out.println("Going back...");
         } else {
@@ -79,7 +77,7 @@ public class RoomManager {
         }
     }
 
-    public int chooseRoom(String action) {
+    public int chooseRoomDTO(String action) {
         List<RoomDTO> rooms = getAllRoomsDTO();
         if (rooms.isEmpty()) {
             System.out.println("There are no registered rooms");
@@ -97,7 +95,7 @@ public class RoomManager {
 
     public RoomDTO getRoomDTO(String action) {
         List<RoomDTO> rooms = getAllRoomsDTO();
-        int roomChoice = chooseRoom(action);
+        int roomChoice = chooseRoomDTO(action);
         if (roomChoice == 0) {
             System.out.println("Going back...");
         } else {
@@ -128,5 +126,4 @@ public class RoomManager {
         }
         return rooms;
     }
-
 }

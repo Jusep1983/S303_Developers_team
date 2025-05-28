@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import daos.interfaces.TicketDAO;
 import database.MongoDBConnection;
+import dtos.RoomDTO;
 import entities.Ticket;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -46,7 +47,8 @@ public class TicketDAOImpl implements TicketDAO {
     public static Ticket documentToTicket(Document doc) {
         ObjectId id = doc.getObjectId("_id");
         int price = doc.getInteger("price");
+        String room = doc.getString("room");
 
-        return new Ticket(id, price);
+        return new Ticket(id, price, room);
     }
 }
