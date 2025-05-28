@@ -10,6 +10,7 @@ import dtos.RoomDTO;
 import entities.Room;
 import entities.enums.Difficulty;
 import lombok.Getter;
+import observer.Observer;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import utils.ValidateInputs;
@@ -20,6 +21,7 @@ import java.util.List;
 @Getter
 public class RoomManager {
     private final MongoCollection<Document> escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
+
 
     public static Room createRoom() {
         String name = ValidateInputs.validateString("Enter the name of the room to create: ");
@@ -38,7 +40,11 @@ public class RoomManager {
                 .decorations(new ArrayList<>())
                 .clues(new ArrayList<>())
                 .build();
+
+
     }
+
+
 
     private void deleteById(ObjectId id, String name) {
         this.escapeRoomCollection.deleteOne(Filters.eq("_id", id));
