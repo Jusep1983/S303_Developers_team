@@ -1,12 +1,9 @@
 package utils;
 
-import daos.ClueDAOImpl;
-import daos.DecorationDAOImpl;
-import daos.RoomDAOImpl;
-import daos.TicketDAOImpl;
 import database.MongoDBConnection;
 import dtos.PlayerDTO;
 import dtos.RoomDTO;
+import entities.EscapeRoom;
 import entities.Player;
 import entities.Room;
 import exceptions.PlayerNotFoundException;
@@ -16,17 +13,7 @@ import managers.NewsletterManager;
 
 public class MainMenu {
 
-    private final EscapeRoomManager escapeRoomManager = new EscapeRoomManager();
-    private final RoomManager roomManager = new RoomManager();
-    private final PlayerManager playerManager = new PlayerManager();
-    private final RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
-    private final TicketDAOImpl ticketDAOImpl = new TicketDAOImpl();
-    private final BusinessManager businessManager = new BusinessManager();
-    private final ClueDAOImpl clueDao = new ClueDAOImpl();
-    private final ClueManager clueManager = new ClueManager(roomManager, clueDao);
-    private final DecorationDAOImpl decorationDAOImpl = new DecorationDAOImpl();
-    private final DecorationManager decorationManager = new DecorationManager(roomManager, decorationDAOImpl);
-
+    private final EscapeRoom escaperoom = EscapeRoom.getEscapeRoom();
 
     public static int mainMenuOptions() {
         return ValidateInputs.validateIntegerBetweenOnRange(""" 
@@ -62,17 +49,17 @@ public class MainMenu {
             switch (MainMenu.mainMenuOptions()) {
                 case 1:
                     System.out.println(">> Total inventory: ");
-                    escapeRoomManager.showAllAssets();
-                    System.out.println(escapeRoomManager.getInventoryCount());
+                    escaperoom.getEscapeRoomManager().showAllAssets();
+                    System.out.println(escaperoom.getEscapeRoomManager().getInventoryCount());
                     break;
                 case 2:
                     System.out.println(">> The total value of all escape room assets is €"
-                                       + escapeRoomManager.getInventoryValue()
+                                       + escaperoom.getEscapeRoomManager().getInventoryValue()
                     );
                     break;
                 case 3:
                     Room newRoom = RoomManager.createRoom();
-                    roomDAOImpl.save(newRoom);
+                    escaperoom.getRoomDAOImpl().save(newRoom);
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -80,17 +67,17 @@ public class MainMenu {
 
                     break;
                 case 4:
-                    roomManager.deleteRoomByUserSelection();
+                    escaperoom.getRoomManager().deleteRoomByUserSelection();
                     break;
                 case 5:
-                    RoomMenu.subMenuEditManager(clueManager, decorationManager);
+                    RoomMenu.subMenuEditManager(escaperoom.getClueManager(), escaperoom.getDecorationManager());
                     break;
                 case 6:
-                    Player player = playerManager.selectOrCreatePlayer();
-                    businessManager.processSale(player);
+                    Player player = escaperoom.getPlayerManager().selectOrCreatePlayer();
+                    escaperoom.getBusinessManager().processSale(player);
                     break;
                 case 7:
-                    System.out.println(">> Total sales: " + ticketDAOImpl.getTotalSales());
+                    System.out.println(">> Total sales: " + escaperoom.getTicketDAOImpl().getTotalSales());
                     break;
                 case 8:
                     notificationMenu.notificationMenuManager();
@@ -103,8 +90,8 @@ public class MainMenu {
                     CertificatePrinter printer = new CertificatePrinter();
 
                     try {
-                        PlayerDTO playerDTO = playerManager.selectPlayer();
-                        RoomDTO room = roomManager.getRoomDTO("print certification for");
+                        PlayerDTO playerDTO = escaperoom.getPlayerManager().selectPlayer();
+                        RoomDTO room = escaperoom.getRoomManager().getRoomDTO("print certification for");
                         printer.printCertificate(playerDTO, room);
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
