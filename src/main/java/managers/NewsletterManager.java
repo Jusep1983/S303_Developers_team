@@ -35,7 +35,30 @@ public class NewsletterManager {
         } else {
             System.out.println("Player not found.");
         }
+    }
 
+    public void notifyAllPlayers() {
+        String lastNewsToAll = ValidateInputs.validateString("Enter the message you want to send to all players : ");
+        newsletter.setLastNews(lastNewsToAll);
+        newsletter.getObservers().clear();
+        for (Player player : players) {
+            newsletter.addObserver(player);
+        }
+        newsletter.notifyObservers();
+        //newsletter.notifyAllPlayers();
+        System.out.println("Notification sent to all players!");
+    }
 
+    public void notifySubscribedPlayers() {
+        String lastNewsToSubscribed = ValidateInputs.validateString("Enter the message you want to send to your subscribers : ");
+        newsletter.setLastNews(lastNewsToSubscribed);
+        newsletter.getObservers().clear();
+        for (Player player : players) {
+            if (player.isSubscribed())
+                newsletter.addObserver(player);
+        }
+        newsletter.notifyObservers();
+        //newsletter.notifySubscribed();
+        System.out.println("Notification sent to subscribed players!");
     }
 }
