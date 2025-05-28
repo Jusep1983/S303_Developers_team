@@ -13,7 +13,12 @@ import java.util.List;
 
 public class ClueDAOImpl implements ClueDAO {
 
-    private final MongoCollection<Document> roomsMongoCollection = MongoDBConnection.getEscapeRoomCollection();
+    private final MongoCollection<Document> roomsMongoCollection;
+
+    public ClueDAOImpl() {
+        this.roomsMongoCollection = MongoDBConnection.getEscapeRoomCollection();
+    }
+
 
     @Override
     public void save(Clue clue, ObjectId roomId) {

@@ -30,9 +30,7 @@ public class CertificatePrinter {
         }
         LocalDateTime completionTime = LocalDateTime.now();
         String certificate = generateCertificateText(player, room, completionTime);
-
         System.out.println(certificate);
-
         saveCertificateToFile(player, room, certificate);
     }
 
