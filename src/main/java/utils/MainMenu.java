@@ -81,7 +81,6 @@ public class MainMenu {
                     notificationMenu.notificationMenuManager();
                     break;
                 case 9:
-                    System.out.println(">> Unsubscribing players...");
                     newsletterManager.unsubscribePlayer();
                     break;
                 case 10:
