@@ -5,6 +5,7 @@ import daos.interfaces.DecorationDAO;
 import database.MongoDBConnection;
 import entities.Clue;
 import entities.Decoration;
+import entities.enums.Material;
 import entities.enums.Theme;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -84,7 +85,7 @@ public class DecorationDAOImpl implements DecorationDAO {
                         decorationDocId,
                         decorationDoc.getInteger("price"),
                         decorationDoc.getString("name"),
-                        Decoration.Material.valueOf(decorationDoc.getString("material"))
+                        Material.valueOf(decorationDoc.getString("material"))
                 );
         }
         return null;
@@ -105,7 +106,7 @@ public class DecorationDAOImpl implements DecorationDAO {
                     decorationDoc.getObjectId("_id"),
                     decorationDoc.getInteger("price"),
                     decorationDoc.getString("name"),
-                    Decoration.Material.valueOf(decorationDoc.getString("material"))
+                    Material.valueOf(decorationDoc.getString("material"))
             ));
         }
         return decorations;

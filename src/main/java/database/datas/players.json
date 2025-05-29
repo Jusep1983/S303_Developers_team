@@ -4,7 +4,7 @@
     "name": "Carla",
     "email": "carla@gmail.com",
     "isSubscribed": true,
-    "ticketsBought": []
+    "ticketsBought": [{}]
   },
   {
     "_id": { "$oid": "6650b0000000000000000002" },
