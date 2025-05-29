@@ -30,30 +30,6 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public List<PlayerDTO> findAllDTO() {
-        List<PlayerDTO> players = new ArrayList<>();
-            for (Document doc : playersCollection.find()) {
-                players.add(documentToPlayerDTO(doc));
-            }
-        if (players.isEmpty()) {
-            System.out.println("Players list is empty");
-        }
-        return players;
-    }
-
-    @Override
-    public List<Player> findAll() {
-        List<Player> players = new ArrayList<>();
-        for (Document doc : playersCollection.find()) {
-            players.add(documentToPlayer(doc));
-        }
-        if (players.isEmpty()) {
-            System.out.println("Players list is empty");
-        }
-        return players;
-    }
-
-    @Override
     public void update(Player player) {
         List<Document> ticketDocs = player.getTicketsBought().stream().map(TicketDAOImpl::ticketToDocument).toList();
         Document updated = new Document("$set", new Document("name", player.getName())
@@ -63,11 +39,13 @@ public class PlayerDAOImpl implements PlayerDAO {
         playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
 
-    private PlayerDTO documentToPlayerDTO(Document doc) {
-        return new PlayerDTO(
-                doc.getObjectId("_id"),
-                doc.getString("name")
-        );
+    @Override
+    public List<Player> findAll() {
+        List<Player> players = new ArrayList<>();
+        for (Document doc : playersCollection.find()) {
+            players.add(documentToPlayer(doc));
+        }
+        return checkEmptyList(players);
     }
 
     private Player documentToPlayer(Document doc) {
@@ -87,5 +65,12 @@ public class PlayerDAOImpl implements PlayerDAO {
             player.setTicketsBought(tickets);
         }
         return player;
+    }
+
+    private <T> List<T> checkEmptyList(List<T> list) {
+        if (list.isEmpty()) {
+            System.out.println("Players list is empty");
+        }
+        return list;
     }
 }
