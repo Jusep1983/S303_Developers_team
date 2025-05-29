@@ -1,6 +1,5 @@
 package entities;
 
-import daos.PlayerDAOImpl;
 import lombok.Getter;
 import lombok.Setter;
 import observer.Observable;
@@ -14,7 +13,6 @@ import java.util.List;
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
     List<Player> allPlayers;
-    PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
     private String lastNews;
 
     public Newsletter(List<Player> allPlayers) {
