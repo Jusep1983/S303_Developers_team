@@ -1,8 +1,10 @@
 package managers;
 
 import dtos.RoomDTO;
+import entities.EscapeRoom;
 import entities.Player;
 import entities.Ticket;
+import exceptions.PlayerNotFoundException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,6 +12,7 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 public class CertificatePrinter {
 
@@ -22,6 +25,22 @@ public class CertificatePrinter {
         }
         System.out.println("This player did not play this room.");
         return false;
+    }
+
+    public void processCertificate(EscapeRoom escapeRoom) {
+        CertificatePrinter printer = new CertificatePrinter();
+        try {
+            Player player = escapeRoom.playerManager().selectPlayer();
+            Optional<RoomDTO> roomOpt = escapeRoom.roomManager().selectRoom("print certification for");
+            if (roomOpt.isEmpty()){
+                System.out.println("No room selected. Cannot print ticket.");
+                return;
+            }
+            RoomDTO room = roomOpt.get();
+            printer.printCertificate(player, room);
+        } catch (PlayerNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void printCertificate(Player player, RoomDTO room) {

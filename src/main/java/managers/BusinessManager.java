@@ -6,6 +6,8 @@ import entities.Player;
 import entities.Ticket;
 import entities.enums.Difficulty;
 
+import java.util.Optional;
+
 public class BusinessManager {
 
     PlayerDAO playerDAO;
@@ -16,15 +18,17 @@ public class BusinessManager {
         this.roomManager = roomManager;
     }
 
-    private void sellTicket(RoomDTO room, Player player) {
-        Difficulty difficulty = room.difficulty();
-        Ticket ticket = new Ticket(difficulty.getPriceByDifficulty(), room.name());
-        player.addTicket(ticket);
-        playerDAO.update(player);
+    private void sellTicket(Optional<RoomDTO> roomOpt, Player player) {
+        roomOpt.ifPresent(room -> {
+            Difficulty difficulty = room.difficulty();
+            Ticket ticket = new Ticket(difficulty.getPriceByDifficulty(), room.name());
+            player.addTicket(ticket);
+            playerDAO.update(player);
+        });
     }
 
     public void processSale(Player player) {
-        RoomDTO room = roomManager.getRoomDTO("play");
+        Optional<RoomDTO> room = roomManager.selectRoom("play");
         sellTicket(room, player);
         TicketPrinter.printTicket(player, room);
     }

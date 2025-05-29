@@ -10,6 +10,8 @@ import managers.*;
 import managers.NewsletterManager;
 import validation.ValidateInputs;
 
+import java.util.Optional;
+
 
 public class MainMenu {
 
@@ -43,8 +45,6 @@ public class MainMenu {
 
     public void mainMenuManager() {
 
-        NewsletterManager newsletterManager = new NewsletterManager();
-        NotificationMenu notificationMenu = new NotificationMenu();
         Player player;
         boolean exit = false;
 
@@ -81,20 +81,13 @@ public class MainMenu {
                     System.out.println(">> Total sales: " + escapeRoom.ticketDAO().getTotalSales());
                     break;
                 case 8:
-                    notificationMenu.notificationMenuManager();
+                    escapeRoom.notificationMenu().notificationMenuManager();
                     break;
                 case 9:
-                    newsletterManager.unsubscribePlayer();
+                    escapeRoom.newsletterManager().unsubscribePlayer();
                     break;
                 case 10:
-                    CertificatePrinter printer = new CertificatePrinter();
-                    try {
-                        player = escapeRoom.playerManager().selectPlayer();
-                        RoomDTO room = escapeRoom.roomManager().getRoomDTO("print certification for");
-                        printer.printCertificate(player, room);
-                    } catch (PlayerNotFoundException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    escapeRoom.certificatePrinter().processCertificate(escapeRoom);
                     break;
                 case 0:
                     exit = true;
