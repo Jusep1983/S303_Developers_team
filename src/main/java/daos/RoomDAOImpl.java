@@ -25,7 +25,10 @@ public class RoomDAOImpl implements RoomDAO {
         Newsletter newsletter = new Newsletter(players);
         this.notificationService = new NotificationService(playerDAO, newsletter);
     }
-
+    public RoomDAOImpl(MongoCollection<Document> escapeRoomCollection, NotificationService notificationService) {
+        this.escapeRoomCollection = escapeRoomCollection;
+        this.notificationService = notificationService;
+    }
 
     @Override
     public void save(Room room) {

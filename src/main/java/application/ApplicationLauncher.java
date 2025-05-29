@@ -10,8 +10,10 @@ public class ApplicationLauncher {
 
     public static void run() {
         MongoDatabase database = MongoDBConnection.getInstance();
-        String jsonFilePath = "src/main/java/database/datas/rooms.json";
-        InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, jsonFilePath);
+
+        String roomsJsonPath = "src/main/java/database/datas/rooms.json";
+        String playersJsonPath = "src/main/java/database/datas/players.json";
+        InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, roomsJsonPath, playersJsonPath);
 
         MainMenu menu = new MainMenu();
         menu.mainMenuManager();
