@@ -26,7 +26,7 @@ public class MainMenu {
                 4.  Delete room
                 5.  Edit room (add/del clue or decoration)
                 ---Business options-----
-                6.  Venta tickets (elegir sala, ++€ totalSales)
+                6.  Venta tickets
                 7.  Show total sales
                 ---Users options--------
                 8.  Notifications
@@ -62,8 +62,6 @@ public class MainMenu {
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-
                     break;
                 case 4:
                     escapeRoom.getRoomManager().deleteRoomByUserSelection();
