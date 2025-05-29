@@ -17,9 +17,11 @@ public class Ticket {
         this.price = price;
         this.room = room;
     }
+
     public Ticket(ObjectId id, int price, String room) {
         this.id = id;
         this.price = price;
         this.room = room;
     }
+
 }

@@ -38,7 +38,9 @@ public class RoomDAOImpl implements RoomDAO {
                 .append("price", room.getPrice())
                 .append("difficulty", room.getDifficulty());
         escapeRoomCollection.insertOne(doc);
-
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(">> New room '" + room.getName() + "' successfully added");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         notificationService.notifyNewRoomToAllSubscribedPlayers(room);
     }
 

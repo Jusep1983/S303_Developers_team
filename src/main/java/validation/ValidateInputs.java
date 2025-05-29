@@ -90,7 +90,8 @@ public class ValidateInputs {
                 }
 
                 return email;
-            } catch (EmptyInputException | NoSuchElementException | IllegalStateException | IllegalArgumentException e) {
+            } catch (EmptyInputException | NoSuchElementException | IllegalStateException |
+                     IllegalArgumentException e) {
                 System.out.println("Error, " + e.getMessage());
             }
         }
@@ -100,6 +101,5 @@ public class ValidateInputs {
         String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
         return email.matches(regex);
     }
-
 
 }

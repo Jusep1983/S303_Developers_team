@@ -8,15 +8,15 @@ import validation.ValidateInputs;
 import java.util.List;
 
 public class NewsletterManager {
-    private List<Player> players;
+
     private final Newsletter newsletter;
 
     public NewsletterManager() {
-        this.players = new PlayerDAOImpl().findAll();
+        List<Player> players = new PlayerDAOImpl().findAll();
         this.newsletter = new Newsletter(players);
     }
 
-    public void unsubscribePlayer(){
+    public void unsubscribePlayer() {
         List<Player> playersUpdated = new PlayerDAOImpl().findAll();
         String emailToUnsubscribe = ValidateInputs.validateString("Enter the email of the player to unsubscribe: ");
         Player playerToUnsubscribe = playersUpdated.stream()

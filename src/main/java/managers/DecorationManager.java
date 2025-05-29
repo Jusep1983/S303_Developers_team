@@ -3,10 +3,12 @@ package managers;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
+import daos.DecorationDAOImpl;
 import daos.interfaces.DecorationDAO;
 import dtos.DecorationDTO;
 import dtos.RoomDTO;
 import entities.Decoration;
+import entities.enums.Material;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import validation.ValidateInputs;
@@ -30,8 +32,8 @@ public class DecorationManager {
                 "Enter the decoration price in €: ", 1, 999999
         );
 
-        Decoration.Material material = ValidateInputs.validateEnum(
-                Decoration.Material.class, "Enter material (PLASTIC, METAL, GLASS, WOOD): "
+        Material material = ValidateInputs.validateEnum(
+                Material.class, "Enter material (PLASTIC, METAL, GLASS, WOOD): "
         );
         return Decoration.builder()
                 .id(new ObjectId())

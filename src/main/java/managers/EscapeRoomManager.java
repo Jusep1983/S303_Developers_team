@@ -6,12 +6,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import database.MongoDBConnection;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Map;
 
 public class EscapeRoomManager {
+
     MongoCollection<Document> escapeRoomCollection;
 
     public EscapeRoomManager() {

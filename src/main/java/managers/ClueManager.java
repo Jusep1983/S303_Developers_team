@@ -3,6 +3,7 @@ package managers;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
+import daos.ClueDAOImpl;
 import daos.interfaces.ClueDAO;
 import dtos.ClueDTO;
 import dtos.RoomDTO;
@@ -17,12 +18,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class ClueManager {
-    private final RoomManager roomManager;
-    private final ClueDAO clueDao;
+    RoomManager roomManager;
+    ClueDAO clueDao;
 
-    public ClueManager(RoomManager roomManager, ClueDAO clueDao) {
+public ClueManager(RoomManager roomManager, ClueDAO clueDAO) {
         this.roomManager = roomManager;
-        this.clueDao = clueDao;
+        this.clueDao = clueDAO;
     }
 
     public static Clue createClue() {
@@ -86,7 +87,7 @@ public class ClueManager {
         }
         System.out.println("0. Go back");
     }
-
+  
     public List<ClueDTO> getAllCluesDTO(ObjectId roomId) {
         List<ClueDTO> clueDTOS = new ArrayList<>();
         try {
@@ -142,8 +143,6 @@ public class ClueManager {
 //            }
 //        }
 //    }
-//
-//
 //
 //    public int chosenDTOClue(String action, ObjectId roomId) {
 //        List<ClueDTO> clues = getAllCluesDTO(roomId);

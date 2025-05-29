@@ -9,10 +9,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class InitialDataLoader {
-    public static void loadInitialRoomsIfDatabaseIsEmpty(MongoDatabase database, String roomsJsonPath, String playersJsonPath ) {
+    public static void loadInitialRoomsIfDatabaseIsEmpty(MongoDatabase database, String roomsJsonPath, String playersJsonPath) {
         MongoCollection<Document> escapeRoomCollection = database.getCollection("escapeRoom");
         MongoCollection<Document> playersCollection = database.getCollection("players");
-
 
         if (escapeRoomCollection.countDocuments() != 0 && playersCollection.countDocuments() != 0) {
             System.out.println("Skipping initial data load.");
@@ -28,13 +27,11 @@ public class InitialDataLoader {
                 playersCollection.insertMany(playersDocuments);
                 System.out.println("Initial data inserted into 'players' collection.");
 
-
             } catch (Exception e) {
                 System.out.println("Error loading initial data: " + e.getMessage());
             }
         }
     }
 
-
-    }
+}
 

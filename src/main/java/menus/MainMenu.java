@@ -26,7 +26,7 @@ public class MainMenu {
                 4.  Delete room
                 5.  Edit room (add/del clue or decoration)
                 ---Business options-----
-                6.  Venta tickets (elegir sala, ++€ totalSales)
+                6.  Venta tickets
                 7.  Show total sales
                 ---Users options--------
                 8.  Notifications
@@ -58,12 +58,10 @@ public class MainMenu {
                     break;
                 case 3:
                     Room newRoom = RoomManager.createRoom();
-                    escapeRoom.getRoomDAOImpl().save(newRoom);
+                    escapeRoom.getRoomDAO().save(newRoom);
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-
                     break;
                 case 4:
                     escapeRoom.getRoomManager().deleteRoomByUserSelection();
@@ -76,7 +74,7 @@ public class MainMenu {
                     escapeRoom.getBusinessManager().processSale(player);
                     break;
                 case 7:
-                    System.out.println(">> Total sales: " + escapeRoom.getTicketDAOImpl().getTotalSales());
+                    System.out.println(">> Total sales: " + escapeRoom.getTicketDAO().getTotalSales());
                     break;
                 case 8:
                     notificationMenu.notificationMenuManager();
@@ -90,7 +88,6 @@ public class MainMenu {
                         player = escapeRoom.getPlayerManager().selectPlayer();
                         RoomDTO room = escapeRoom.getRoomManager().getRoomDTO("print certification for");
                         printer.printCertificate(player, room);
-
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }

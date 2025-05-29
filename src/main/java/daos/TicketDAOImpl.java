@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import daos.interfaces.TicketDAO;
 import database.MongoDBConnection;
-import dtos.RoomDTO;
 import entities.Ticket;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -41,7 +40,9 @@ public class TicketDAOImpl implements TicketDAO {
     }
 
     public static Document ticketToDocument(Ticket ticket) {
-        return new Document("_id", ticket.getId()).append("price", ticket.getPrice());
+        return new Document("_id", ticket.getId())
+                .append("price", ticket.getPrice())
+                .append("room", ticket.getRoom());
     }
 
     public static Ticket documentToTicket(Document doc) {
