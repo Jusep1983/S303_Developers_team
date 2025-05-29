@@ -9,6 +9,5 @@ public interface PlayerDAO {
 
     void save(Player player);
     List<Player> findAll();
-    List<PlayerDTO> findAllDTO();
     void update(Player player);
 }

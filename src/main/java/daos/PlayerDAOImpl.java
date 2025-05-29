@@ -48,22 +48,6 @@ public class PlayerDAOImpl implements PlayerDAO {
         return checkEmptyList(players);
     }
 
-    @Override
-    public List<PlayerDTO> findAllDTO() {
-        List<PlayerDTO> players = new ArrayList<>();
-        for (Document doc : playersCollection.find()) {
-            players.add(documentToPlayerDTO(doc));
-        }
-        return checkEmptyList(players);
-    }
-
-    private PlayerDTO documentToPlayerDTO(Document doc) {
-        return new PlayerDTO(
-                doc.getObjectId("_id"),
-                doc.getString("name")
-        );
-    }
-
     private Player documentToPlayer(Document doc) {
         Player player = new Player(
                 doc.getObjectId("_id"),
