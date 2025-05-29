@@ -1,4 +1,5 @@
 package entities;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import observer.Observer;
@@ -24,8 +25,8 @@ public class Player implements Observer {
         this.name = name;
         this.email = email;
         this.isSubscribed = true;
-
     }
+
     public Player(String name, String email, boolean isSubscribed) {
         this.id = new ObjectId();
         this.name = name;
@@ -42,7 +43,7 @@ public class Player implements Observer {
         this.ticketsBought = new ArrayList<>();
     }
 
-    public List<Ticket> getTicketsBought(){
+    public List<Ticket> getTicketsBought() {
         if (ticketsBought == null) {
             ticketsBought = new ArrayList<>();
         }
@@ -55,7 +56,6 @@ public class Player implements Observer {
         }
         ticketsBought.add(ticket);
     }
-
 
 
     @Override
