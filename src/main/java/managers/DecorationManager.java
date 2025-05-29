@@ -26,7 +26,7 @@ public class DecorationManager {
         this.decorationDAO = decorationDAO;
     }
 
-    public static Decoration createDecoration() {
+    public Decoration createDecoration() {
         String name = ValidateInputs.validateString("Enter the name of the decoration to create: ");
         int price = ValidateInputs.validateIntegerBetweenOnRange(
                 "Enter the decoration price in €: ", 1, 999999
@@ -55,7 +55,7 @@ public class DecorationManager {
 
     public Optional<DecorationDTO> selectDecoration(String action, RoomDTO room) {
         List<DecorationDTO> decorations = getAllDecorationsDTO(room.id());
-        int choice = chosenDTODecoration(action, decorations);
+        int choice = chooseDecoration(action, decorations);
         if (choice == 0) {
             System.out.println("Going back...");
             return Optional.empty();
@@ -78,7 +78,7 @@ public class DecorationManager {
     public List<DecorationDTO> getAllDecorationsDTO(ObjectId roomId) {
         List<DecorationDTO> decorationsDAO = new ArrayList<>();
         try {
-            Document roomDoc = this.roomManager.getEscapeRoomCollection().find(Filters.eq("_id", roomId))
+            Document roomDoc = roomManager.getEscapeRoomCollection().find(Filters.eq("_id", roomId))
                     .projection(Projections.include("decorations"))
                     .first();
 
@@ -97,7 +97,7 @@ public class DecorationManager {
         return decorationsDAO;
     }
 
-    public int chosenDTODecoration(String action, List<DecorationDTO> decorations) {
+    public int chooseDecoration(String action, List<DecorationDTO> decorations) {
         if (decorations.isEmpty()) {
             System.out.println("No decorations to " + action + " in this room.");
             return 0;
