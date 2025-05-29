@@ -18,12 +18,12 @@ import java.util.List;
 
 public class DecorationManager {
 
-    RoomManager roomManager;
-    DecorationDAO decorationDAOImpl;
+    private final RoomManager roomManager;
+    private final DecorationDAO decorationDAO;
 
     public DecorationManager(RoomManager roomManager, DecorationDAO decorationDAO) {
         this.roomManager = roomManager;
-        this.decorationDAOImpl = decorationDAO;
+        this.decorationDAO = decorationDAO;
     }
 
     public static Decoration createDecoration() {
@@ -51,7 +51,7 @@ public class DecorationManager {
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Decoration decoration = createDecoration();
-            decorationDAOImpl.save(decoration, room.id());
+            decorationDAO.save(decoration, room.id());
 
             System.out.println(">> Decoration '" + decoration.getName() + "' added to room '" + room.name() + "'");
 
@@ -73,7 +73,7 @@ public class DecorationManager {
             } else {
                 List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
                 DecorationDTO decorationDTO = decorationsDTO.get(decorationChoice - 1);
-                this.decorationDAOImpl.delete(decorationDTO.id(),roomId);
+                this.decorationDAO.delete(decorationDTO.id(),roomId);
                 System.out.println(">> Decoration '" + decorationDTO.name() + "' successfully deleted.");
 
             }

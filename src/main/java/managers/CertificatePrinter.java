@@ -34,7 +34,6 @@ public class CertificatePrinter {
     }
 
     private String generateCertificateText(Player player, RoomDTO room) {
-
         LocalDateTime completionTime = LocalDateTime.now();
         return """
                 ----------------------------------------
