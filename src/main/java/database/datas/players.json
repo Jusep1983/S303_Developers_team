@@ -4,27 +4,47 @@
     "name": "Carla",
     "email": "carla@gmail.com",
     "isSubscribed": true,
-    "ticketsBought": [{}]
+    "ticketsBought": [{
+      "_id": {
+        "$oid": "68381b27efea5f4cccbab9df"
+      },
+      "price": 15
+    }]
   },
   {
     "_id": { "$oid": "6650b0000000000000000002" },
     "name": "Paola",
     "email": "paola@gmail.com",
     "isSubscribed": true,
-    "ticketsBought": []
+    "ticketsBought": [{
+      "_id": {
+        "$oid": "68381b38efea5f4cccbab9e0"
+      },
+      "price": 20
+    }]
   },
   {
     "_id": { "$oid": "6650b0000000000000000003" },
     "name": "Montse",
     "email": "montse@gmail.com",
     "isSubscribed": false,
-    "ticketsBought": []
+    "ticketsBought": [{
+      "_id": {
+        "$oid": "68381b47efea5f4cccbab9e1"
+      },
+      "price": 25
+    }]
   },
   {
     "_id": { "$oid": "6650b0000000000000000004" },
     "name": "Neus",
     "email": "neus@gmail.com",
     "isSubscribed": false,
-    "ticketsBought": []
+    "ticketsBought": [{
+      "_id": {
+        "$oid": "68381b54efea5f4cccbab9e2"
+      },
+      "price": 25
+    }]
   }
 ]
