@@ -1,6 +1,6 @@
 package managers;
 
-import daos.PlayerDAOImpl;
+import daos.interfaces.PlayerDAO;
 import dtos.RoomDTO;
 import entities.Player;
 import entities.Ticket;
@@ -8,12 +8,12 @@ import entities.enums.Difficulty;
 
 public class BusinessManager {
 
-    PlayerDAOImpl playerDAO;
+    PlayerDAO playerDAO;
     RoomManager roomManager;
 
-    public BusinessManager() {
-        this.playerDAO = new PlayerDAOImpl();
-        this.roomManager = new RoomManager();
+    public BusinessManager(PlayerDAO playerDAO, RoomManager roomManager) {
+        this.playerDAO = playerDAO;
+        this.roomManager = roomManager;
     }
 
     private void sellTicket(RoomDTO room, Player player) {

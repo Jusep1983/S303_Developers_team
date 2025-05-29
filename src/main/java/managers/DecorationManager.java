@@ -4,6 +4,7 @@ import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import daos.DecorationDAOImpl;
+import daos.interfaces.DecorationDAO;
 import dtos.DecorationDTO;
 import dtos.RoomDTO;
 import entities.Decoration;
@@ -16,12 +17,12 @@ import java.util.List;
 
 public class DecorationManager {
 
-    private final RoomManager roomManager;
-    private final DecorationDAOImpl decorationDAOImpl;
+    RoomManager roomManager;
+    DecorationDAO decorationDAOImpl;
 
-    public DecorationManager(RoomManager roomManager, DecorationDAOImpl decorationDAOImpl) {
+    public DecorationManager(RoomManager roomManager, DecorationDAO decorationDAO) {
         this.roomManager = roomManager;
-        this.decorationDAOImpl = decorationDAOImpl;
+        this.decorationDAOImpl = decorationDAO;
     }
 
     public static Decoration createDecoration() {

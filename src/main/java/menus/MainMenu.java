@@ -58,7 +58,7 @@ public class MainMenu {
                     break;
                 case 3:
                     Room newRoom = RoomManager.createRoom();
-                    escapeRoom.getRoomDAOImpl().save(newRoom);
+                    escapeRoom.getRoomDAO().save(newRoom);
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -76,7 +76,7 @@ public class MainMenu {
                     escapeRoom.getBusinessManager().processSale(player);
                     break;
                 case 7:
-                    System.out.println(">> Total sales: " + escapeRoom.getTicketDAOImpl().getTotalSales());
+                    System.out.println(">> Total sales: " + escapeRoom.getTicketDAO().getTotalSales());
                     break;
                 case 8:
                     notificationMenu.notificationMenuManager();

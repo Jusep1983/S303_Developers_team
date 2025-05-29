@@ -8,11 +8,11 @@ import validation.ValidateInputs;
 import java.util.List;
 
 public class NewsletterManager {
-    private List<Player> players;
+
     private final Newsletter newsletter;
 
     public NewsletterManager() {
-        this.players = new PlayerDAOImpl().findAll();
+        List<Player> players = new PlayerDAOImpl().findAll();
         this.newsletter = new Newsletter(players);
     }
 
