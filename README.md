@@ -22,6 +22,7 @@ Mockit
 ✅ Singleton Pattern  
 ✅ Factory Pattern  
 ✅ Observer Pattern  
+✅ Record Pattern  
 ✅ DAO Pattern: The app uses the DAO pattern to separate data access logic. Interfaces are defined for each domain (e.g., ClueDAO, RoomDAO), and implementations like ClueDAOImpl use the MongoDB Java driver.  
 
 
