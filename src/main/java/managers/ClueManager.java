@@ -14,6 +14,7 @@ import validation.ValidateInputs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ClueManager {
     private final RoomManager roomManager;
@@ -38,40 +39,53 @@ public class ClueManager {
                 .build();
     }
 
-    public void addClueToRoom() {
-        List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoomDTO("add clue");
-        if (roomChoice == 0) {
+    private Optional<RoomDTO> selectRoom(String action) {
+        List<RoomDTO> rooms = roomManager.getAllRoomsDTO();
+        int choice = roomManager.chooseRoomDTO(action);
+        if (choice == 0) {
             System.out.println("Going back...");
-        } else {
-            RoomDTO room = rooms.get(roomChoice - 1);
+            return Optional.empty();
+        }
+        return Optional.of(rooms.get(choice - 1));
+    }
+
+    public void addClueToRoom() {
+        selectRoom("add clue").ifPresent(room -> {
             Clue clue = createClue();
             clueDao.save(clue, room.id());
             System.out.println(">> Clue '" + clue.getName() + "' added to room '" + room.name() + "'");
-        }
+        });
     }
 
     public void deleteClueFromRoom() {
-        List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoomDTO("delete clue");
-        if (roomChoice == 0) {
-            System.out.println("Going back...");
-        } else {
-            RoomDTO room = rooms.get(roomChoice - 1);
+        selectRoom("delete clue").ifPresent(room -> {
             ObjectId roomId = room.id();
+            List<ClueDTO> clues = getAllCluesDTO(roomId);
+            if (clues.isEmpty()) {
+                System.out.println("No clues to delete in this room.");
+                return;
+            }
 
-            int clueChoice = chosenDTOClue("delete", roomId);
+            displayClues(clues);
+            int clueChoice = ValidateInputs.validateIntegerBetweenOnRange(
+                    "Choose the clue you want to delete: ", 0, clues.size());
+
             if (clueChoice == 0) {
                 System.out.println("Going back...");
             } else {
-                List<ClueDTO> clues = getAllCluesDTO(roomId);
                 ClueDTO clue = clues.get(clueChoice - 1);
-            clueDao.delete(clue.id(), roomId);
+                clueDao.delete(clue.id(), roomId);
                 System.out.println(">> Clue '" + clue.name() + "' successfully deleted.");
             }
-        }
+        });
     }
 
+    private void displayClues(List<ClueDTO> clues) {
+        for (int i = 0; i < clues.size(); i++) {
+            System.out.println((i + 1) + ". " + clues.get(i).name());
+        }
+        System.out.println("0. Go back");
+    }
 
     public List<ClueDTO> getAllCluesDTO(ObjectId roomId) {
         List<ClueDTO> clueDTOS = new ArrayList<>();
@@ -95,19 +109,55 @@ public class ClueManager {
         return clueDTOS;
     }
 
-    public int chosenDTOClue(String action, ObjectId roomId) {
-        List<ClueDTO> clues = getAllCluesDTO(roomId);
-        if (clues.isEmpty()) {
-            System.out.println("No clues to " + action + " in this room.");
-            return 0;
-        } else {
-            for (int i = 0; i < clues.size(); i++) {
-                System.out.println((i + 1) + ". " + clues.get(i).name());
-            }
-            System.out.println("0. Go back");
-            return ValidateInputs.validateIntegerBetweenOnRange(
-                    "Choose the clue you want to " + action + ": ", 0, clues.size());
-        }
-    }
+//    public void addClueToRoom() {
+//        List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
+//        int roomChoice = this.roomManager.chooseRoomDTO("add clue");
+//        if (roomChoice == 0) {
+//            System.out.println("Going back...");
+//        } else {
+//            RoomDTO room = rooms.get(roomChoice - 1);
+//            Clue clue = createClue();
+//            clueDao.save(clue, room.id());
+//            System.out.println(">> Clue '" + clue.getName() + "' added to room '" + room.name() + "'");
+//        }
+//    }
+//
+//    public void deleteClueFromRoom() {
+//        List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
+//        int roomChoice = this.roomManager.chooseRoomDTO("delete clue");
+//        if (roomChoice == 0) {
+//            System.out.println("Going back...");
+//        } else {
+//            RoomDTO room = rooms.get(roomChoice - 1);
+//            ObjectId roomId = room.id();
+//
+//            int clueChoice = chosenDTOClue("delete", roomId);
+//            if (clueChoice == 0) {
+//                System.out.println("Going back...");
+//            } else {
+//                List<ClueDTO> clues = getAllCluesDTO(roomId);
+//                ClueDTO clue = clues.get(clueChoice - 1);
+//            clueDao.delete(clue.id(), roomId);
+//                System.out.println(">> Clue '" + clue.name() + "' successfully deleted.");
+//            }
+//        }
+//    }
+//
+//
+//
+//    public int chosenDTOClue(String action, ObjectId roomId) {
+//        List<ClueDTO> clues = getAllCluesDTO(roomId);
+//        if (clues.isEmpty()) {
+//            System.out.println("No clues to " + action + " in this room.");
+//            return 0;
+//        } else {
+//            for (int i = 0; i < clues.size(); i++) {
+//                System.out.println((i + 1) + ". " + clues.get(i).name());
+//            }
+//            System.out.println("0. Go back");
+//            return ValidateInputs.validateIntegerBetweenOnRange(
+//                    "Choose the clue you want to " + action + ": ", 0, clues.size());
+//        }
+//    }
 
 }
