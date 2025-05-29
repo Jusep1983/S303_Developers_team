@@ -1,6 +1,7 @@
 package managers;
 
 import daos.PlayerDAOImpl;
+import daos.interfaces.PlayerDAO;
 import entities.Player;
 import exceptions.PlayerNotFoundException;
 import validation.ValidateInputs;
@@ -9,10 +10,10 @@ import java.util.List;
 
 public class PlayerManager {
 
-    PlayerDAOImpl playerDAO;
+    PlayerDAO playerDAO;
 
-    public PlayerManager() {
-        this.playerDAO = new PlayerDAOImpl();
+    public PlayerManager(PlayerDAO playerDAO) {
+        this.playerDAO = playerDAO;
     }
 
     public Player createPlayer(String name) {

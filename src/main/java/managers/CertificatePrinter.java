@@ -28,13 +28,14 @@ public class CertificatePrinter {
         if (!playerCompletedRoom(player, room)) {
             return;
         }
-        LocalDateTime completionTime = LocalDateTime.now();
-        String certificate = generateCertificateText(player, room, completionTime);
+        String certificate = generateCertificateText(player, room);
         System.out.println(certificate);
         saveCertificateToFile(player, room, certificate);
     }
 
-    private String generateCertificateText(Player player, RoomDTO room, LocalDateTime completionTime) {
+    private String generateCertificateText(Player player, RoomDTO room) {
+
+        LocalDateTime completionTime = LocalDateTime.now();
         return """
                 ----------------------------------------
                       ESCAPE ROOM COMPLETION CERTIFICATE
