@@ -18,6 +18,13 @@ Lombok
 JUnit (for testing)
 Mockit
 
+## 👾 Patterns
+✅ Singleton Pattern
+✅ Factory Pattern
+✅ Observer Pattern
+✅ DAO Pattern: The app uses the DAO pattern to separate data access logic. Interfaces are defined for each domain (e.g., ClueDAO, RoomDAO), and implementations like ClueDAOImpl use the MongoDB Java driver.
+
+
 ## 🧱 Core Entities
 Escape Room: The main entity containing rooms, clues, and decorations.
 Room: Each with a name, difficulty, and collections of clues and decorations.
@@ -52,10 +59,6 @@ Player : has an name, an email and isSubscribed (or needs to unsubscribe) and ha
 ✅ Collections:
 - escape_rooms: Stores all data about rooms, clues, and decorations. Each room document embeds sub-documents for clues and decorations
 - players : stores all about players tickets
-
-✅ Singleton Pattern
-✅ Observer Pattern
-✅ DAO Pattern: The app uses the DAO pattern to separate data access logic. Interfaces are defined for each domain (e.g., ClueDAO, RoomDAO), and implementations like ClueDAOImpl use the MongoDB Java driver.
 
 
 
