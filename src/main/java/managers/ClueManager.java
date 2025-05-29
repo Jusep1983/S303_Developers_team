@@ -66,12 +66,11 @@ public class ClueManager {
             } else {
                 List<ClueDTO> clues = getAllCluesDTO(roomId);
                 ClueDTO clue = clues.get(clueChoice - 1);
-            clueDao.delete(clue.id(), roomId);
+                clueDao.delete(clue.id(), roomId);
                 System.out.println(">> Clue '" + clue.name() + "' successfully deleted.");
             }
         }
     }
-
 
     public List<ClueDTO> getAllCluesDTO(ObjectId roomId) {
         List<ClueDTO> clueDTOS = new ArrayList<>();

@@ -16,7 +16,7 @@ public class NewsletterManager {
         this.newsletter = new Newsletter(players);
     }
 
-    public void unsubscribePlayer(){
+    public void unsubscribePlayer() {
         List<Player> playersUpdated = new PlayerDAOImpl().findAll();
         String emailToUnsubscribe = ValidateInputs.validateString("Enter the email of the player to unsubscribe: ");
         Player playerToUnsubscribe = playersUpdated.stream()

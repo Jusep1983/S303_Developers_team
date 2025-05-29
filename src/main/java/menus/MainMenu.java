@@ -59,9 +59,6 @@ public class MainMenu {
                 case 3:
                     Room newRoom = RoomManager.createRoom();
                     escapeRoom.getRoomDAOImpl().save(newRoom);
-
-
-
                     break;
                 case 4:
                     escapeRoom.getRoomManager().deleteRoomByUserSelection();
@@ -88,7 +85,6 @@ public class MainMenu {
                         player = escapeRoom.getPlayerManager().selectPlayer();
                         RoomDTO room = escapeRoom.getRoomManager().getRoomDTO("print certification for");
                         printer.printCertificate(player, room);
-
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }

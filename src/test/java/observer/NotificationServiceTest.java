@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class NotificationServiceTest {
 
-
     private Newsletter newsletter;
     private TestObserver observer1;
     private TestPlayer zohra;
@@ -26,9 +25,8 @@ public class NotificationServiceTest {
     private PlayerDAOImpl playerDAO;
     private RoomDAOImpl roomDAO;
 
-
     @BeforeEach
-    void setUp(){
+    void setUp() {
         List<Player> players = new ArrayList<>();
         zohra = new TestPlayer("Zohra", "zohra@gmail.com", true);
         jose = new TestPlayer("Jose", "jose@gmail.com", true);
@@ -40,38 +38,40 @@ public class NotificationServiceTest {
         newsletter = new Newsletter(players);
         observer1 = new TestObserver();
 
-        playerDAO = new PlayerDAOImpl(){
+        playerDAO = new PlayerDAOImpl() {
             @Override
             public List<Player> findAll() {
                 return players;
             }
         };
         notificationService = new NotificationService(playerDAO, newsletter);
-        }
+    }
+
     @Test
-    void constructor_ShouldInstantiateAllPlayersList(){
+    void constructor_ShouldInstantiateAllPlayersList() {
         assertTrue(newsletter.getAllPlayers().contains(zohra));
     }
 
     @Test
-    void constructor_ShouldNotAddPlayersToObserversList(){
+    void constructor_ShouldNotAddPlayersToObserversList() {
         assertTrue(newsletter.getObservers().isEmpty());
     }
+
     @Test
-    void addObserver_ShouldAddAnObserverToObserversList(){
+    void addObserver_ShouldAddAnObserverToObserversList() {
         newsletter.addObserver(observer1);
         assertTrue(newsletter.getObservers().contains(observer1));
     }
 
     @Test
-    void removeObserver_ShouldRemoveAnObserverFromObserversList(){
+    void removeObserver_ShouldRemoveAnObserverFromObserversList() {
         newsletter.addObserver(observer1);
         newsletter.removeObserver(observer1);
         assertTrue(newsletter.getObservers().isEmpty());
     }
 
     @Test
-    void notifyObservers_ShouldUpdateObservers(){
+    void notifyObservers_ShouldUpdateObservers() {
         newsletter.addObserver(observer1);
         newsletter.setLastNews("you have a new message");
         newsletter.notifyObservers();
@@ -80,7 +80,7 @@ public class NotificationServiceTest {
     }
 
     @Test
-    void notifyAllPlayers_ShouldUpdateAllPlayers(){
+    void notifyAllPlayers_ShouldUpdateAllPlayers() {
         String lastNews = "We have a message for all players";
         notificationService.notifyAllPlayers(lastNews);
 
@@ -93,7 +93,7 @@ public class NotificationServiceTest {
     }
 
     @Test
-    void notifySusbcribed_ShouldUpdateSubscribed(){
+    void notifySusbcribed_ShouldUpdateSubscribed() {
         String lastNews = "We have a message for our subscribed players";
         notificationService.notifySubscribedPlayers(lastNews);
 
@@ -104,24 +104,22 @@ public class NotificationServiceTest {
         );
     }
 
-
-
-
-
-    static class TestObserver implements Observer{
+    static class TestObserver implements Observer {
         private String lastNews;
 
         @Override
         public void update(String message) {
             this.lastNews = message;
         }
+
         public String getLastMessage() {
             return lastNews;
         }
     }
 
-    @Getter @Setter
-    static class TestPlayer extends Player{
+    @Getter
+    @Setter
+    static class TestPlayer extends Player {
         private String lastMessage;
 
         public TestPlayer(String name, String email, boolean isSubscribed) {

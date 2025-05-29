@@ -5,19 +5,19 @@ import lombok.Getter;
 import lombok.Setter;
 import observer.Observable;
 import observer.Observer;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter@Setter
+@Getter
+@Setter
 public class Newsletter implements Observable {
     List<Observer> observers = new ArrayList<>();
     List<Player> allPlayers;
     PlayerDAOImpl playerDAOImpl = new PlayerDAOImpl();
     private String lastNews;
 
-
-
-    public Newsletter(List<Player> allPlayers){
+    public Newsletter(List<Player> allPlayers) {
         this.allPlayers = allPlayers;
     }
 
@@ -33,16 +33,9 @@ public class Newsletter implements Observable {
 
     @Override
     public void notifyObservers() {
-        for(Observer observer : observers){
+        for (Observer observer : observers) {
             observer.update(this.lastNews);
         }
     }
-
-//    public void sendNews(String lastNews){
-//        this.lastNews = lastNews;
-//        notifyObservers();
-//    }
-
-
 
 }
