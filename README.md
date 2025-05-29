@@ -40,16 +40,13 @@ Player : has an name, an email and isSubscribed (or needs to unsubscribe) and ha
 ✅ Notify registered users about key events
 
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## 🧪 Testing (from Level 2) 
 (at least two core functionalities are tested using JUnit)
 - Creating a room (RoomTest)
 - Sending Newsletter to all players in database, sending Newletter to susbcribed players, according to Oberver Pattern (NotificationServiceTest).
 - Inserting a new room into MongoDB database and notifying all subscribed players (RoomDAOImplTest)
+- getTotalSales() returning the right amount
 
-_Adding clues to a room
-Calculating total inventory value_
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 💾 MongoDB Integration (Level 3)
 ✅ Collections:
