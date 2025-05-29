@@ -13,7 +13,11 @@ import validation.ValidateInputs;
 
 public class MainMenu {
 
-    private final EscapeRoom escapeRoom = EscapeRoom.getEscapeRoom();
+    private static EscapeRoom escapeRoom;
+
+    public MainMenu(EscapeRoom escapeRoom) {
+        MainMenu.escapeRoom = escapeRoom;
+    }
 
     public static int mainMenuOptions() {
         return ValidateInputs.validateIntegerBetweenOnRange(""" 
@@ -48,33 +52,33 @@ public class MainMenu {
             switch (MainMenu.mainMenuOptions()) {
                 case 1:
                     System.out.println(">> Total inventory: ");
-                    escapeRoom.getEscapeRoomManager().showAllAssets();
-                    System.out.println(escapeRoom.getEscapeRoomManager().getInventoryCount());
+                    escapeRoom.escapeRoomManager().showAllAssets();
+                    System.out.println(escapeRoom.escapeRoomManager().getInventoryCount());
                     break;
                 case 2:
                     System.out.println(">> The total value of all escape room assets is €"
-                                       + escapeRoom.getEscapeRoomManager().getInventoryValue()
+                                       + escapeRoom.escapeRoomManager().getInventoryValue()
                     );
                     break;
                 case 3:
                     Room newRoom = RoomManager.createRoom();
-                    escapeRoom.getRoomDAO().save(newRoom);
+                    escapeRoom.roomDAO().save(newRoom);
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println(">> New room '" + newRoom.getName() + "' successfully added");
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     break;
                 case 4:
-                    escapeRoom.getRoomManager().deleteRoomByUserSelection();
+                    escapeRoom.roomManager().deleteRoomByUserSelection();
                     break;
                 case 5:
-                    RoomMenu.subMenuEditManager(escapeRoom.getClueManager(), escapeRoom.getDecorationManager());
+                    RoomMenu.subMenuEditManager(escapeRoom.clueManager(), escapeRoom.decorationManager());
                     break;
                 case 6:
-                    player = escapeRoom.getPlayerManager().selectOrCreatePlayer();
-                    escapeRoom.getBusinessManager().processSale(player);
+                    player = escapeRoom.playerManager().selectOrCreatePlayer();
+                    escapeRoom.businessManager().processSale(player);
                     break;
                 case 7:
-                    System.out.println(">> Total sales: " + escapeRoom.getTicketDAO().getTotalSales());
+                    System.out.println(">> Total sales: " + escapeRoom.ticketDAO().getTotalSales());
                     break;
                 case 8:
                     notificationMenu.notificationMenuManager();
@@ -85,8 +89,8 @@ public class MainMenu {
                 case 10:
                     CertificatePrinter printer = new CertificatePrinter();
                     try {
-                        player = escapeRoom.getPlayerManager().selectPlayer();
-                        RoomDTO room = escapeRoom.getRoomManager().getRoomDTO("print certification for");
+                        player = escapeRoom.playerManager().selectPlayer();
+                        RoomDTO room = escapeRoom.roomManager().getRoomDTO("print certification for");
                         printer.printCertificate(player, room);
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());

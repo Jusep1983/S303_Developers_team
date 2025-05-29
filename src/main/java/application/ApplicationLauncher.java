@@ -4,6 +4,7 @@ import com.mongodb.client.MongoDatabase;
 import database.InitialDataLoader;
 import database.MongoDBConnection;
 
+import entities.EscapeRoom;
 import menus.MainMenu;
 
 public class ApplicationLauncher {
@@ -15,7 +16,8 @@ public class ApplicationLauncher {
         String playersJsonPath = "src/main/java/database/datas/players.json";
         InitialDataLoader.loadInitialRoomsIfDatabaseIsEmpty(database, roomsJsonPath, playersJsonPath);
 
-        MainMenu menu = new MainMenu();
+        EscapeRoom escapeRoom = EscapeRoomFactory.getInstance();
+        MainMenu menu = new MainMenu(escapeRoom);
         menu.mainMenuManager();
     }
 }
