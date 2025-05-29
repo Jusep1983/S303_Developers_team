@@ -3,7 +3,7 @@ package managers;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
-import daos.DecorationDAOImpl;
+import daos.interfaces.DecorationDAO;
 import dtos.DecorationDTO;
 import dtos.RoomDTO;
 import entities.Decoration;
@@ -17,11 +17,11 @@ import java.util.List;
 public class DecorationManager {
 
     private final RoomManager roomManager;
-    private final DecorationDAOImpl decorationDAOImpl;
+    private final DecorationDAO decorationDAO;
 
-    public DecorationManager(RoomManager roomManager, DecorationDAOImpl decorationDAOImpl) {
+    public DecorationManager(RoomManager roomManager, DecorationDAO decorationDAO) {
         this.roomManager = roomManager;
-        this.decorationDAOImpl = decorationDAOImpl;
+        this.decorationDAO = decorationDAO;
     }
 
     public static Decoration createDecoration() {
@@ -49,7 +49,7 @@ public class DecorationManager {
         } else {
             RoomDTO room = rooms.get(roomChoice - 1);
             Decoration decoration = createDecoration();
-            decorationDAOImpl.save(decoration, room.id());
+            decorationDAO.save(decoration, room.id());
 
             System.out.println(">> Decoration '" + decoration.getName() + "' added to room '" + room.name() + "'");
 
@@ -71,7 +71,7 @@ public class DecorationManager {
             } else {
                 List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
                 DecorationDTO decorationDTO = decorationsDTO.get(decorationChoice - 1);
-                this.decorationDAOImpl.delete(decorationDTO.id(),roomId);
+                this.decorationDAO.delete(decorationDTO.id(),roomId);
                 System.out.println(">> Decoration '" + decorationDTO.name() + "' successfully deleted.");
 
             }
