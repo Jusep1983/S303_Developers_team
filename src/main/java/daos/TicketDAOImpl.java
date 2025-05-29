@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import daos.interfaces.TicketDAO;
 import database.MongoDBConnection;
-import dtos.RoomDTO;
 import entities.Ticket;
 import org.bson.Document;
 import org.bson.conversions.Bson;
