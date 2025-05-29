@@ -1,0 +1,48 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "_id",
+      "email",
+      "isSubscribed",
+      "name",
+      "ticketsBought"
+    ],
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "email": {
+        "bsonType": "string"
+      },
+      "isSubscribed": {
+        "bsonType": "bool"
+      },
+      "name": {
+        "bsonType": "string"
+      },
+      "ticketsBought": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "_id": {
+              "bsonType": "objectId"
+            },
+            "price": {
+              "bsonType": "int"
+            },
+            "room": {
+              "bsonType": "string"
+            }
+          },
+          "required": [
+            "_id",
+            "price",
+            "room"
+          ]
+        }
+      }
+    }
+  }
+}
