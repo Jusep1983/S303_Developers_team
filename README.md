@@ -26,39 +26,39 @@ Mockit
 
 
 ## 🧱 Core Entities
-Escape Room: The main entity containing rooms, clues, and decorations.
-Room: Each with a name, difficulty, and collections of clues and decorations.
-Clue: Includes a name, price, and theme (e.g., PUZZLE, PASSWORD).
-Decoration: Has a name, price, and material type (e.g., WOOD, METAL).
-Ticket: Represents a user's entry with a recorded value.
-Certificate: Issued to users who complete the rooms successfully.
-Player : has an name, an email and isSubscribed (or needs to unsubscribe) and has ticketsBought list.
+- Escape Room: The main entity containing rooms, clues, and decorations.  
+- Room: Each with a name, difficulty, and collections of clues and decorations.  
+- Clue: Includes a name, price, and theme (e.g., PUZZLE, PASSWORD).  
+- Decoration: Has a name, price, and material type (e.g., WOOD, METAL).  
+- Ticket: Represents a user's entry with a recorded value.  
+- Certificate: Issued to users who complete the rooms successfully.  
+- Player : has an name, an email and isSubscribed (or needs to unsubscribe) and has ticketsBought list.  
 
 ## 🧩 Features
-✅ Create a new Virtual Escape Room
-✅ Add rooms with difficulty levels
-✅ Add themed clues to rooms
-✅ Add decorative items to enhance room ambiance
-✅ View full inventory (rooms, clues, decorations)
-✅ Display total inventory value in euros
-✅ Remove rooms, clues or decorations
-✅ Issue tickets and view total revenue from ticket sales
-✅ Generate achievement certificates
-✅ Notify registered users about key events
+✅ Create a new Virtual Escape Room  
+✅ Add rooms with difficulty levels  
+✅ Add themed clues to rooms  
+✅ Add decorative items to enhance room ambiance  
+✅ View full inventory (rooms, clues, decorations)  
+✅ Display total inventory value in euros  
+✅ Remove rooms, clues or decorations   
+✅ Issue tickets and view total revenue from ticket sales  
+✅ Generate achievement certificates  
+✅ Notify registered users about key events  
 
 
 ## 🧪 Testing (from Level 2) 
 (at least two core functionalities are tested using JUnit)
-- Creating a room (RoomTest)
-- Sending Newsletter to all players in database, sending Newletter to susbcribed players, according to Oberver Pattern (NotificationServiceTest).
-- Inserting a new room into MongoDB database and notifying all subscribed players (RoomDAOImplTest)
-- getTotalSales() returning the right amount
+- Creating a room (RoomTest)  
+- Sending Newsletter to all players in database, sending Newletter to susbcribed players, according to Oberver Pattern (NotificationServiceTest).  
+- Inserting a new room into MongoDB database and notifying all subscribed players (RoomDAOImplTest)  
+- getTotalSales() returning the right amount  
 
 
 💾 MongoDB Integration (Level 3)
-✅ Collections:
-- escape_rooms: Stores all data about rooms, clues, and decorations. Each room document embeds sub-documents for clues and decorations
-- players : stores all about players tickets
+✅ Collections:  
+- escape_rooms: Stores all data about rooms, clues, and decorations. Each room document embeds sub-documents for clues and decorations  
+- players : stores all about players tickets  
 
 
 
@@ -73,8 +73,8 @@ Run the application (Main class).
 Interact via console-based menu.
 
 📬 Notifications : 
-- A new room is created
-- Newsletter to susbcribed player and to all players.
+- A new room is created  
+- Newsletter to susbcribed player and to all players.  
 
 📈 Future Improvements
 GUI interface with JavaFX or Spring Boot REST API
@@ -82,8 +82,8 @@ User authentication and tracking
 Multiplayer collaboration features
 
 🧠 Authors
-Developed as part of a Java full-stack learning path.
-Jose : https://github.com/Jusep1983
-Luis : https://github.com/Unrotopo
-Zohra : https://github.com/zohra-b
+Developed as part of a Java full-stack learning path.  
+Jose : https://github.com/Jusep1983  
+Luis : https://github.com/Unrotopo  
+Zohra : https://github.com/zohra-b  
 
