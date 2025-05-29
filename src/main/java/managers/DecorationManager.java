@@ -44,8 +44,8 @@ public class DecorationManager {
     }
 
     public void addDecoration() {
-        Decoration decoration = createDecoration();
         Optional<RoomDTO> optionalRoom = roomManager.selectRoom("add decoration");
+        Decoration decoration = createDecoration();
 
         optionalRoom.ifPresent(room -> {
             decorationDAO.save(decoration, room.id());
