@@ -20,16 +20,15 @@ public class NotificationMenu {
         this.notificationService = new NotificationService(playerDAO, newsletter);
     }
 
-
     public static int notificationMenuOptions() {
         return ValidateInputs.validateIntegerBetweenOnRange("""
-           
-           Choose an option :
-            1. Send notification to all players
-            2. Send notification to subscribed players
-            0. Back
-            
-            """, 0, 2);
+                
+                Choose an option :
+                 1. Send notification to all players
+                 2. Send notification to subscribed players
+                 0. Back
+                
+                """, 0, 2);
     }
 
     public void notificationMenuManager() {

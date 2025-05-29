@@ -88,7 +88,6 @@ public class MainMenu {
                         player = escapeRoom.getPlayerManager().selectPlayer();
                         RoomDTO room = escapeRoom.getRoomManager().getRoomDTO("print certification for");
                         printer.printCertificate(player, room);
-
                     } catch (PlayerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }

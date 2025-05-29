@@ -12,7 +12,7 @@ public class NotificationService {
     private final PlayerDAOImpl playerDAO;
     private final Newsletter newsletter;
 
-    public NotificationService(PlayerDAOImpl playerDAO, Newsletter newsletter){
+    public NotificationService(PlayerDAOImpl playerDAO, Newsletter newsletter) {
         this.playerDAO = playerDAO;
         this.newsletter = newsletter;
     }
@@ -46,7 +46,7 @@ public class NotificationService {
         notifySubscribedPlayers(lastNewsToSubscribed);
     }
 
-    public void notifySubscribedPlayers(String lastNewsToSubscribed){
+    public void notifySubscribedPlayers(String lastNewsToSubscribed) {
         List<Player> updatedPlayers = playerDAO.findAll();
         newsletter.setLastNews(lastNewsToSubscribed);
         newsletter.getObservers().clear();
@@ -54,6 +54,7 @@ public class NotificationService {
         newsletter.notifyObservers();
         System.out.println("Notification sent to subscribed players!");
     }
+
     public void notifyNewRoomToAllSubscribedPlayers(Room room) {
         notifySubscribedPlayers("A new room has been created! Try our new " + room.getName());
     }

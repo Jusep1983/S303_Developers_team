@@ -44,11 +44,11 @@ public class CertificatePrinter {
                 
                 You have successfully completed the room:
                 "%s"
-
+                
                 Completion Time: %s
-
+                
                 Thank you for playing!
-
+                
                 ----------------------------------------
                 """.formatted(
                 player.getName(),
