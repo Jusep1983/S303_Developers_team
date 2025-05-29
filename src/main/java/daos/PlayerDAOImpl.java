@@ -30,15 +30,13 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public List<PlayerDTO> findAllDTO() {
-        List<PlayerDTO> players = new ArrayList<>();
-            for (Document doc : playersCollection.find()) {
-                players.add(documentToPlayerDTO(doc));
-            }
-        if (players.isEmpty()) {
-            System.out.println("Players list is empty");
-        }
-        return players;
+    public void update(Player player) {
+        List<Document> ticketDocs = player.getTicketsBought().stream().map(TicketDAOImpl::ticketToDocument).toList();
+        Document updated = new Document("$set", new Document("name", player.getName())
+                .append("email", player.getEmail())
+                .append("isSubscribed", player.isSubscribed())
+                .append("ticketsBought", ticketDocs));
+        playersCollection.updateOne(new Document("_id", player.getId()), updated);
     }
 
     @Override
@@ -47,20 +45,16 @@ public class PlayerDAOImpl implements PlayerDAO {
         for (Document doc : playersCollection.find()) {
             players.add(documentToPlayer(doc));
         }
-        if (players.isEmpty()) {
-            System.out.println("Players list is empty");
-        }
-        return players;
+        return checkEmptyList(players);
     }
 
     @Override
-    public void update(Player player) {
-        List<Document> ticketDocs = player.getTicketsBought().stream().map(TicketDAOImpl::ticketToDocument).toList();
-        Document updated = new Document("$set", new Document("name", player.getName())
-                .append("email", player.getEmail())
-                .append("isSubscribed", player.isSubscribed())
-                .append("ticketsBought", ticketDocs));
-        playersCollection.updateOne(new Document("_id", player.getId()), updated);
+    public List<PlayerDTO> findAllDTO() {
+        List<PlayerDTO> players = new ArrayList<>();
+        for (Document doc : playersCollection.find()) {
+            players.add(documentToPlayerDTO(doc));
+        }
+        return checkEmptyList(players);
     }
 
     private PlayerDTO documentToPlayerDTO(Document doc) {
@@ -87,5 +81,12 @@ public class PlayerDAOImpl implements PlayerDAO {
             player.setTicketsBought(tickets);
         }
         return player;
+    }
+
+    private <T> List<T> checkEmptyList(List<T> list) {
+        if (list.isEmpty()) {
+            System.out.println("Players list is empty");
+        }
+        return list;
     }
 }
