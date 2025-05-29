@@ -30,10 +30,10 @@ public class RoomMenu {
                     clueManager.deleteClueFromRoom();
                     break;
                 case 3:
-                    decorationManager.addDecorationToRoom();
+                    decorationManager.addDecoration();
                     break;
                 case 4:
-                    decorationManager.deleteDecorationFromRoom();
+                    decorationManager.deleteDecoration();
                     break;
                 case 0:
                     exit = true;
