@@ -3,7 +3,6 @@ package managers;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
-import daos.DecorationDAOImpl;
 import daos.interfaces.DecorationDAO;
 import dtos.DecorationDTO;
 import dtos.RoomDTO;
@@ -15,6 +14,7 @@ import validation.ValidateInputs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DecorationManager {
 
@@ -26,7 +26,7 @@ public class DecorationManager {
         this.decorationDAO = decorationDAO;
     }
 
-    public static Decoration createDecoration() {
+    public Decoration createDecoration() {
         String name = ValidateInputs.validateString("Enter the name of the decoration to create: ");
         int price = ValidateInputs.validateIntegerBetweenOnRange(
                 "Enter the decoration price in €: ", 1, 999999
@@ -43,47 +43,42 @@ public class DecorationManager {
                 .build();
     }
 
-    public void addDecorationToRoom() {
-        List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoomDTO("add decoration");
-        if (roomChoice == 0) {
-            System.out.println("Going back...");
-        } else {
-            RoomDTO room = rooms.get(roomChoice - 1);
-            Decoration decoration = createDecoration();
+    public void addDecoration() {
+        Optional<RoomDTO> optionalRoom = roomManager.selectRoom("add decoration");
+        Decoration decoration = createDecoration();
+
+        optionalRoom.ifPresent(room -> {
             decorationDAO.save(decoration, room.id());
-
             System.out.println(">> Decoration '" + decoration.getName() + "' added to room '" + room.name() + "'");
-
-        }
+        });
     }
 
-    public void deleteDecorationFromRoom() {
-        List<RoomDTO> rooms = this.roomManager.getAllRoomsDTO();
-        int roomChoice = this.roomManager.chooseRoomDTO("delete decoration");
-        if (roomChoice == 0) {
+    public Optional<DecorationDTO> selectDecoration(String action, RoomDTO room) {
+        List<DecorationDTO> decorations = getAllDecorationsDTO(room.id());
+        int choice = chooseDecoration(action, decorations);
+        if (choice == 0) {
             System.out.println("Going back...");
-        } else {
-            RoomDTO room = rooms.get(roomChoice - 1);
-            ObjectId roomId = room.id();
-
-            int decorationChoice = chosenDTODecoration("delete", roomId);
-            if (decorationChoice == 0) {
-                System.out.println("Going back...");
-            } else {
-                List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
-                DecorationDTO decorationDTO = decorationsDTO.get(decorationChoice - 1);
-                this.decorationDAO.delete(decorationDTO.id(),roomId);
-                System.out.println(">> Decoration '" + decorationDTO.name() + "' successfully deleted.");
-
-            }
+            return Optional.empty();
         }
+        return Optional.of(decorations.get(choice - 1));
+    }
+
+    public void deleteDecoration() {
+        String action = "delete";
+        roomManager.selectRoom(action).ifPresent(room -> {
+            Optional<DecorationDTO> decorationOpt = selectDecoration(action, room);
+
+            decorationOpt.ifPresent(decoration -> {
+                decorationDAO.delete(decoration.id(), room.id());
+                System.out.println(">> Decoration '" + decoration.name() + "' successfully deleted from room '" + room.name() + "'.");
+            });
+        });
     }
 
     public List<DecorationDTO> getAllDecorationsDTO(ObjectId roomId) {
         List<DecorationDTO> decorationsDAO = new ArrayList<>();
         try {
-            Document roomDoc = this.roomManager.getEscapeRoomCollection().find(Filters.eq("_id", roomId))
+            Document roomDoc = roomManager.getEscapeRoomCollection().find(Filters.eq("_id", roomId))
                     .projection(Projections.include("decorations"))
                     .first();
 
@@ -102,18 +97,17 @@ public class DecorationManager {
         return decorationsDAO;
     }
 
-    public int chosenDTODecoration(String action, ObjectId roomId) {
-        List<DecorationDTO> decorationsDTO = getAllDecorationsDTO(roomId);
-        if (decorationsDTO.isEmpty()) {
+    public int chooseDecoration(String action, List<DecorationDTO> decorations) {
+        if (decorations.isEmpty()) {
             System.out.println("No decorations to " + action + " in this room.");
             return 0;
         } else {
-            for (int i = 0; i < decorationsDTO.size(); i++) {
-                System.out.println((i + 1) + ". " + decorationsDTO.get(i).name());
+            for (int i = 0; i < decorations.size(); i++) {
+                System.out.println((i + 1) + ". " + decorations.get(i).name());
             }
             System.out.println("0. Go back");
             return ValidateInputs.validateIntegerBetweenOnRange(
-                    "Choose the decoration you want to " + action + ": ", 0, decorationsDTO.size());
+                    "Choose the decoration you want to " + action + ": ", 0, decorations.size());
         }
     }
 

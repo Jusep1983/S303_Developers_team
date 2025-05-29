@@ -16,6 +16,7 @@ import validation.ValidateInputs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 public class RoomManager {
@@ -46,21 +47,23 @@ public class RoomManager {
                 .build();
     }
 
+    public Optional<RoomDTO> selectRoom(String action) {
+        List<RoomDTO> rooms = getAllRoomsDTO();
+        int choice = chooseRoomDTO(action);
+        if (choice == 0) {
+            System.out.println("Going back...");
+            return Optional.empty();
+        }
+        return Optional.of(rooms.get(choice - 1));
+    }
+
     private void deleteById(ObjectId id, String name) {
         this.escapeRoomCollection.deleteOne(Filters.eq("_id", id));
         System.out.println(">> Room '" + name + "' successfully deleted.");
     }
 
     public void deleteRoomByUserSelection() {
-        List<RoomDTO> rooms = getAllRoomsDTO();
-        int choice = chooseRoomDTO("delete");
-        if (choice == 0) {
-            System.out.println("Going back...");
-        } else {
-            ObjectId idToDelete = rooms.get(choice - 1).id();
-            String nameRoom = rooms.get(choice - 1).name();
-            deleteById(idToDelete, nameRoom);
-        }
+        selectRoom("delete").ifPresent(room -> deleteById(room.id(), room.name()));
     }
 
     /**
@@ -91,17 +94,6 @@ public class RoomManager {
                     "Choose the room you want to " + action + ": ", 0, rooms.size()
             );
         }
-    }
-
-    public RoomDTO getRoomDTO(String action) {
-        List<RoomDTO> rooms = getAllRoomsDTO();
-        int roomChoice = chooseRoomDTO(action);
-        if (roomChoice == 0) {
-            System.out.println("Going back...");
-        } else {
-            return rooms.get(roomChoice - 1);
-        }
-        return getRoomDTO(action);
     }
 
     public List<RoomDTO> getAllRoomsDTO() {

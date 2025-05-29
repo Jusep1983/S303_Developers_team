@@ -7,11 +7,17 @@ import entities.enums.Difficulty;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class TicketPrinter {
 
-    public static void printTicket(Player player, RoomDTO room) {
+    public static void printTicket(Player player, Optional<RoomDTO> roomOpt) {
+        if (roomOpt.isEmpty()) {
+            System.out.println("No room selected. Cannot print ticket.");
+            return;
+        }
 
+        RoomDTO room = roomOpt.get();
         Difficulty difficulty = room.difficulty();
         int durationMinutes = difficulty.getDurationMinutes();
         int price = difficulty.getPriceByDifficulty();
