@@ -1,6 +1,5 @@
 package daos.interfaces;
 
-import dtos.PlayerDTO;
 import entities.Player;
 
 import java.util.List;

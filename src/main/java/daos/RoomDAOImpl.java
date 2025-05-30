@@ -1,13 +1,11 @@
 package daos;
 
 import com.mongodb.client.MongoCollection;
-import daos.interfaces.PlayerDAO;
 import daos.interfaces.RoomDAO;
 import database.MongoDBConnection;
 import entities.*;
 import entities.enums.Difficulty;
 import observer.NotificationService;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +40,6 @@ public class RoomDAOImpl implements RoomDAO {
         System.out.println(">> New room '" + room.getName() + "' successfully added");
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         notificationService.notifyNewRoomToAllSubscribedPlayers(room);
-    }
-
-    @Override
-    public Room findById(ObjectId id) {
-        Document doc = escapeRoomCollection.find(new Document("_id", id)).first();
-        return doc != null ? documentToRoom(doc) : null;
     }
 
     @Override

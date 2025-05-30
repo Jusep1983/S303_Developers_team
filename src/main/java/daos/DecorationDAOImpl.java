@@ -3,10 +3,8 @@ package daos;
 import com.mongodb.client.MongoCollection;
 import daos.interfaces.DecorationDAO;
 import database.MongoDBConnection;
-import entities.Clue;
 import entities.Decoration;
 import entities.enums.Material;
-import entities.enums.Theme;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -19,32 +17,6 @@ public class DecorationDAOImpl implements DecorationDAO {
 
     public DecorationDAOImpl() {
         escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
-    }
-
-    @Override
-    public void addDecoration(ObjectId roomId, Decoration decoration) {
-        if (decoration.getId() == null) {
-            decoration.setId(new ObjectId());
-        }
-
-        Document decorationDoc = new Document("_id", decoration.getId())
-                .append("name", decoration.getName())
-                .append("price", decoration.getPrice())
-                .append("material", decoration.getMaterial().name());
-
-        escapeRoomCollection.updateOne(
-                new Document("_id", roomId),
-                new Document("$push", new Document("decorations", decorationDoc))
-        );
-    }
-
-    @Override
-    public void deleteDecoration(ObjectId roomId, Decoration decoration) {
-        escapeRoomCollection.updateOne(
-                new Document("_id", roomId),
-                new Document("$pull", new Document("decorations",
-                        new Document("_id", decoration.getId())))
-        );
     }
 
     @Override
@@ -66,29 +38,6 @@ public class DecorationDAOImpl implements DecorationDAO {
                 new Document("_id", roomId),
                 new Document("$pull", new Document("decorations", new Document("_id", decorationId)))
         );
-    }
-
-    @Override
-    public Decoration findById(ObjectId decorationId, ObjectId roomId) {
-
-        Document roomDoc = escapeRoomCollection
-                .find(new Document("_id", roomId)).first();
-        if (roomDoc == null) {
-            return null;
-        }
-        List<Document> decorations = (List<Document>) roomDoc.get("decorations");
-
-        for (Document decorationDoc : decorations) {
-            ObjectId decorationDocId = decorationDoc.getObjectId("_id");
-            if (decorationDocId.equals(decorationId))
-                return new Decoration(
-                        decorationDocId,
-                        decorationDoc.getInteger("price"),
-                        decorationDoc.getString("name"),
-                        Material.valueOf(decorationDoc.getString("material"))
-                );
-        }
-        return null;
     }
 
     @Override

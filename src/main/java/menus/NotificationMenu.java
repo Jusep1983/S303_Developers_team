@@ -12,7 +12,6 @@ public class NotificationMenu {
 
     private final NotificationService notificationService;
 
-
     public NotificationMenu() {
         PlayerDAOImpl playerDAO = new PlayerDAOImpl();
         List<Player> players = playerDAO.findAll();
