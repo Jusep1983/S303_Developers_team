@@ -8,7 +8,6 @@ import java.util.List;
 public interface RoomDAO {
 
     void save(Room room);
-    Room findById(ObjectId id);
     List<Room> findAll();
     void update(Room room);
     void delete(Room room);

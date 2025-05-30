@@ -17,16 +17,6 @@ public class NotificationService {
         this.newsletter = newsletter;
     }
 
-//    public void notifyNewRoomToAllSubscribedPlayers(Room room) {
-//        List<Player> players = playerDAO.findAll();
-//        for (Player p : players) {
-//            if (p.isSubscribed()) {
-//                p.update("A new room has been created! Try our new " + room.getName());
-//            }
-//        }
-//    }
-
-
     public void notifyAllPlayers() {
         String lastNewsToAll = ValidateInputs.validateString("Enter the message you want to send to all players : ");
         notifyAllPlayers(lastNewsToAll);

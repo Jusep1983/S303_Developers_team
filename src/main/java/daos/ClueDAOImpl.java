@@ -42,28 +42,6 @@ public class ClueDAOImpl implements ClueDAO {
     }
 
     @Override
-    public Clue findById(ObjectId clueId, ObjectId roomId) {
-        Document roomDoc = roomsMongoCollection
-                .find(new Document("_id", roomId)).first();
-        if (roomDoc == null) {
-            return null;
-        }
-        List<Document> clues = (List<Document>) roomDoc.get("clues");
-
-        for (Document clueDoc : clues) {
-            ObjectId clueDocId = clueDoc.getObjectId("_id");
-            if (clueDocId.equals(clueId))
-                return new Clue(
-                        clueDocId,
-                        clueDoc.getInteger("price"),
-                        clueDoc.getString("name"),
-                        Theme.valueOf(clueDoc.getString("theme"))
-                );
-        }
-        return null;
-    }
-
-    @Override
     public List<Clue> findAll(ObjectId roomId) {
         List<Clue> clues = new ArrayList<>();
         Document roomDoc = roomsMongoCollection

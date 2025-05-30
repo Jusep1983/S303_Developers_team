@@ -1,17 +1,11 @@
 package menus;
 
 import database.MongoDBConnection;
-import dtos.RoomDTO;
 import entities.EscapeRoom;
 import entities.Player;
 import entities.Room;
-import exceptions.PlayerNotFoundException;
 import managers.*;
-import managers.NewsletterManager;
 import validation.ValidateInputs;
-
-import java.util.Optional;
-
 
 public class MainMenu {
 

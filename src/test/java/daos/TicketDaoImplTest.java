@@ -7,9 +7,6 @@ import entities.Player;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
-import daos.TicketDAOImpl;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class TicketDaoImplTest {
 
@@ -76,8 +72,6 @@ public class TicketDaoImplTest {
         doc.append("ticketsBought", ticketDocs);
         return doc;
     }
-
-
 
     @Getter @Setter
     static class TestTicket extends Ticket {

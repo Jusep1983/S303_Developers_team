@@ -27,7 +27,6 @@ public class RoomManager {
         this.escapeRoomCollection = MongoDBConnection.getEscapeRoomCollection();
     }
 
-
     public static Room createRoom() {
         String name = ValidateInputs.validateString("Enter the name of the room to create: ");
         int price = ValidateInputs.validateIntegerBetweenOnRange(
@@ -36,7 +35,6 @@ public class RoomManager {
         Difficulty difficulty = ValidateInputs.validateEnum(
                 Difficulty.class, "Enter difficulty (EASY, MEDIUM, HARD): "
         );
-
         return Room.builder()
                 .id(new ObjectId())
                 .name(name)

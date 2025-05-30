@@ -1,6 +1,5 @@
 package managers;
 
-import daos.PlayerDAOImpl;
 import daos.interfaces.PlayerDAO;
 import entities.Player;
 import exceptions.PlayerNotFoundException;
