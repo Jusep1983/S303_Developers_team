@@ -31,10 +31,13 @@ public class DecorationManager {
         int price = ValidateInputs.validateIntegerBetweenOnRange(
                 "Enter the decoration price in €: ", 1, 999999
         );
-
         Material material = ValidateInputs.validateEnum(
                 Material.class, "Enter material (PLASTIC, METAL, GLASS, WOOD): "
         );
+        return createDecorationFromData(name, price, material);
+    }
+
+    public Decoration createDecorationFromData(String name, int price, Material material) {
         return Decoration.builder()
                 .id(new ObjectId())
                 .price(price)
