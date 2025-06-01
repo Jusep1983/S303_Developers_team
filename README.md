@@ -3,8 +3,7 @@
 
 <br>
 
----
-link to wiki project: https://deepwiki.com/Jusep1983/S303_Developers_team/1-overview <br>  <br>
+
 Welcome to the Virtual Escape Room Project – Level 3, where we enhance our immersive puzzle-solving experience using MongoDB as the data persistence layer.
 
 ## 📌 Project Overview
@@ -88,3 +87,8 @@ Jose : https://github.com/Jusep1983
 Luis : https://github.com/Unrotopo  
 Zohra : https://github.com/zohra-b  
 
+---
+
+To learn more about the project in detail, click on the following link:
+
+https://deepwiki.com/Jusep1983/S303_Developers_team/1-overview
