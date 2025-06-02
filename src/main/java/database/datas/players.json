@@ -1,0 +1,70 @@
+[
+  {
+    "_id": {
+      "$oid": "6650b0000000000000000001"
+    },
+    "name": "Carla",
+    "email": "carla@gmail.com",
+    "isSubscribed": true,
+    "ticketsBought": [
+      {
+        "_id": {
+          "$oid": "683821d0269c5d7fb538ce61"
+        },
+        "price": 15,
+        "room": "Misterios de Egipto"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6650b0000000000000000002"
+    },
+    "name": "Paola",
+    "email": "paola@gmail.com",
+    "isSubscribed": true,
+    "ticketsBought": [
+      {
+        "_id": {
+          "$oid": "683821e1269c5d7fb538ce62"
+        },
+        "price": 20,
+        "room": "El robo del siglo"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6650b0000000000000000003"
+    },
+    "name": "Montse",
+    "email": "montse@gmail.com",
+    "isSubscribed": false,
+    "ticketsBought": [
+      {
+        "_id": {
+          "$oid": "683821ee269c5d7fb538ce63"
+        },
+        "price": 25,
+        "room": "Misión Estelar"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6650b0000000000000000004"
+    },
+    "name": "Neus",
+    "email": "neus@gmail.com",
+    "isSubscribed": false,
+    "ticketsBought": [
+      {
+        "_id": {
+          "$oid": "683821f4269c5d7fb538ce64"
+        },
+        "price": 25,
+        "room": "Misión Estelar"
+      }
+    ]
+  }
+]

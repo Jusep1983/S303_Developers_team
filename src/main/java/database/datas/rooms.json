@@ -1,0 +1,103 @@
+[
+  {
+    "_id": { "$oid": "664fdc100000000000000001" },
+    "name": "Misterios de Egipto",
+    "price": 2500,
+    "difficulty": "EASY",
+    "decorations": [
+      {
+        "_id": { "$oid": "664fdc100000000000000002" },
+        "price": 25,
+        "name": "Estatua de Anubis",
+        "material": "WOOD"
+      },
+      {
+        "_id": { "$oid": "664fdc100000000000000003" },
+        "price": 25,
+        "name": "Papiro de Ramses"
+      }
+    ],
+    "clues": [
+      {
+        "_id": { "$oid": "664fdc100000000000000004" },
+        "name": "Clave de la vida",
+        "price": 50,
+        "theme": "SYMBOL"
+      },
+      {
+        "_id": { "$oid": "664fdc100000000000000005" },
+        "name": "Puzzle del sarcófago",
+        "price": 150,
+        "theme": "PUZZLE"
+      }
+    ]
+  },
+  {
+    "_id": { "$oid": "664fdc100000000000000006" },
+    "name": "El robo del siglo",
+    "price": 3200,
+    "difficulty": "MEDIUM",
+    "decorations": [
+      {
+        "_id": { "$oid": "664fdc100000000000000007" },
+        "name": "Caja fuerte antigua",
+        "price": 800,
+        "material": "METAL"
+      },
+      {
+        "_id": { "$oid": "664fdc100000000000000008" },
+        "name": "Cuadro con alarma láser",
+        "price": 500,
+        "material": "PLASTIC"
+      }
+    ],
+    "clues": [
+      {
+        "_id": { "$oid": "664fdc100000000000000009" },
+        "name": "Código bancario",
+        "price": 120,
+        "theme": "PASSWORD"
+      },
+      {
+        "_id": { "$oid": "664fdc10000000000000000a" },
+        "name": "Llave escondida en el plano",
+        "price": 140,
+        "theme": "PUZZLE"
+      }
+    ]
+  },
+  {
+    "_id": { "$oid": "664fdc10000000000000000b" },
+    "name": "Misión Estelar",
+    "price": 3700,
+    "difficulty": "HARD",
+    "decorations": [
+      {
+        "_id": { "$oid": "664fdc10000000000000000c" },
+        "name": "Módulo de control con botones LED",
+        "price": 700,
+        "material": "PLASTIC"
+      },
+      {
+        "_id": { "$oid": "664fdc10000000000000000d" },
+        "name": "Ventana con vista a galaxias",
+        "price": 500,
+        "material": "GLASS"
+      }
+    ],
+    "clues": [
+      {
+        "_id": { "$oid": "664fdc10000000000000000e" },
+        "name": "Códigos estelares",
+        "price": 200,
+        "theme": "PASSWORD"
+      },
+      {
+        "_id": { "$oid": "664fdc10000000000000000f" },
+        "name": "Puzzle de alineación de planetas",
+        "price": 180,
+        "theme": "PUZZLE"
+      }
+    ]
+  }
+]
